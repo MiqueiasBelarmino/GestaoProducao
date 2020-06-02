@@ -1,20 +1,20 @@
 <?php
+//$this->group(['middleware' => ['auth']], function(){
+    
+    $this->any('historic-search', 'BalanceController@searchHistoric')->name('historic.search');
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+    $this->get('admin','AdminController@index')->name('admin.home');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Auth::routes();
+    $this->get('cargo', 'CargoController@cargos')->name('cargo.cargos');
+    $this->get('cargo/novo', 'CargoController@novo')->name('cargo.novo');
+    $this->post('cargo/novo', 'CargoController@store')->name('cargo.store');
 
-Route::get('/home', 'HomeController@index')->name('home');
+    $this->get('fornecedor', 'FornecedorController@fornecedores')->name('fornecedor.fornecedores');
+    $this->get('fornecedor/novo', 'FornecedorController@novo')->name('fornecedor.novo');
+    $this->post('fornecedor/novo', 'FornecedorController@store')->name('fornecedor.store');
+
+//});
+
+
+//Auth::routes();

@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     public $timestamps = false;
+    protected $primaryKey = 'cli_codigo';
+    public $incrementing = true;
 
-    public function enderecos()
-    {
-        return $this->hasMany(Endereco::class);
-    }
 }

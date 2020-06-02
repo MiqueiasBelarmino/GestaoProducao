@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Endereco extends Model
+class EnderecoFuncionario extends Model
 {
     public $timestamps = false;
-
 }

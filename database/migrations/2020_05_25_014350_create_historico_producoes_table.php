@@ -35,6 +35,7 @@ class CreateHistoricoProducoesTable extends Migration
         });
         Schema::table('historico_producoes', function($table)
         {
+            $table->increments('his_pro_codigo')->change();
 			$table->foreign('orc_codigo', 'fk_orc')->references('orc_codigo')->on('orcamentos')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('proc_codigo', 'fk_proc')->references('proc_codigo')->on('processos')->onUpdate('NO ACTION')->onDelete('NO ACTION');
             
