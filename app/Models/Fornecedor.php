@@ -11,6 +11,7 @@ class Fornecedor extends Model
     
     protected $table = "fornecedores";
     protected $primaryKey = 'for_codigo';
+    public $incrementing = true;
 
 
     public function salvar()

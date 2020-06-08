@@ -29,7 +29,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="car_salario_base">Salário Base (R$)</label>
-                        <input type="number" step="0.01" min="0" max="20000" name="car_salario_base" id="car_salario_base" class="form-control" placeholder="Escreva...">
+                        <input type="number" step="0.01" min="1" max="20000" name="car_salario_base" id="car_salario_base" class="form-control" placeholder="Escreva...">
                     </div>
                 </div>
             </div>

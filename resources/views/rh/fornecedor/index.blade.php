@@ -12,7 +12,7 @@
         <a href="{{route('fornecedor.novo')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Novo</a>
 
         <div class="">
-            <form action="{{route('fornecedor.fornecedores')}}" method="POST" class="form form-inline">
+            <form action="{{route('fornecedor.todos')}}" method="POST" class="form form-inline">
                 {!! csrf_field()!!}
                 <input type="text" name="id" class="form-control" placeholder="ID">
                 <input type="text" name="nome" class="form-control" placeholder="Nome">

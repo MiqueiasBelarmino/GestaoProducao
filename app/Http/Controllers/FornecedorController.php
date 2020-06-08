@@ -22,7 +22,6 @@ class FornecedorController extends Controller
     {
 
         $fornecedor = new Fornecedor;
-        $fornecedor->for_codigo                 = $request->for_codigo;
         $fornecedor->for_nome_razao_social      = $request->for_nome_razao_social;
         $fornecedor->for_nome_social_fantasia   = $request->for_nome_social_fantasia;
         $fornecedor->for_rg_inscricao_estadual  = $request->for_rg_inscricao_estadual;
@@ -38,7 +37,7 @@ class FornecedorController extends Controller
             return redirect()->back()->with('error',$response['message']);
     }
 
-    public function fornecedores()
+    public function todos()
     {
         $fornecedores = Fornecedor::all();
         return view('rh.fornecedor.index',compact('fornecedores'));

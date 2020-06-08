@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'admin',
+    'dashboard_url' => 'home',
 
     'logout_url' => 'logout',
 
@@ -134,46 +134,49 @@ return [
             'icon'        => 'dashboard',
         ],
         [
-            'text'        => 'Recursos Humanos',
+            'text'        => 'Cadastros',
             // 'url'         => 'admin',
             'icon'        => '',
             'submenu'     => [
                 [
                     'text'    => 'Cargo',
-                    'url'     => '',
+                    'url'     => 'cargo/novo',
                     'icon'    => '',
-                    'submenu' => [
-                        [
-                            'text'  => 'Novo',
-                            'url'   => 'cargo/novo',
-                            'icon'  => ''
-                        ],
-                        [
-                            'text'  => 'Listar',
-                            'url'   => 'cargo',
-                            'icon'  => ''
-                        ]
-                    ]
+                ],
+                [
+                    'text'    => 'Funcionario',
+                    'url'     => 'funcionario/novo',
+                    'icon'    => '',
                 ],
                 [
                     'text'    => 'Fornecedor',
-                    'url'     => '',
+                    'url'     => 'fornecedor/novo',
                     'icon'    => '',
-                    'submenu' => [
-                        [
-                            'text'  => 'Novo',
-                            'url'   => 'fornecedor/novo',
-                            'icon'  => ''
-                        ],
-                        [
-                            'text'  => 'Listar',
-                            'url'   => 'fornecedor',
-                            'icon'  => ''
-                        ]
-                    ]
                 ],
             ]
-        ]
+            ],
+            [
+                'text'        => 'Relatórios',
+                // 'url'         => 'admin',
+                'icon'        => '',
+                'submenu'     => [
+                    [
+                        'text'    => 'Cargo',
+                        'url'     => 'cargo',
+                        'icon'    => '',
+                    ],
+                    [
+                        'text'    => 'Funcionario',
+                        'url'     => 'funcionario',
+                        'icon'    => '',
+                    ],
+                    [
+                        'text'    => 'Fornecedor',
+                        'url'     => 'fornecedor',
+                        'icon'    => '',
+                    ],
+                ]
+            ]
     ],
 
     /*

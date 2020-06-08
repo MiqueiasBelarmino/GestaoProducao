@@ -32,4 +32,10 @@ class Cargo extends Model
             ];
         }
     }
+
+
+    public function funcionarios()
+    {
+        return $this->hasMany('funcionarios','car_codigo');
+    }
 }

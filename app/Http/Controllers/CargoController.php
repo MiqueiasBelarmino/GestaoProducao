@@ -35,7 +35,7 @@ class CargoController extends Controller
             return redirect()->back()->with('error',$response['message']);
     }
 
-    public function cargos()
+    public function todos()
     {
         $cargos = Cargo::all();
         return view('rh.cargos.index',compact('cargos'));
