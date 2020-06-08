@@ -8,6 +8,7 @@ use DB;
 class Cargo extends Model
 {
     public $timestamps = false;
+    protected $table = "cargos";
     protected $primaryKey = 'car_codigo';
     public $incrementing = true;
 
