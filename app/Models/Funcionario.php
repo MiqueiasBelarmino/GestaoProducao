@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Auth\Authenticatable;
 use DB;
 
-class Funcionario extends Model
+class Funcionario extends Model implements AuthenticatableContract
 {
+    use Authenticatable;
     public $timestamps = false;
-    
     protected $table = "funcionarios";
     protected $primaryKey = 'fun_codigo';
     public $incrementing = true;
@@ -40,5 +42,6 @@ class Funcionario extends Model
     {
         return $this->belongsTo(Cargo::class,'car_codigo');
     }
+
 
 }

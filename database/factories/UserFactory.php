@@ -13,7 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Usuario::class, function (Faker $faker) {
+$factory->define(App\User::class, function (Faker $faker) {
     return [
         'usu_nome' => $faker->nome,
         'usu_nivel_acesso' => $faker->nivel_acesso,

@@ -18,8 +18,14 @@
     $this->get('funcionario/novo', 'FuncionarioController@novo')->name('funcionario.novo');
     $this->post('funcionario/novo', 'FuncionarioController@store')->name('funcionario.store');
 
-//});
-Auth::routes();
-Auth::routes();
+    $this->get('login', 'LoginController@index')->name('login');
+    $this->post('login', 'LoginController@logar')->name('login.logar');
+    $this->any('logout', 'LoginController@logout')->name('login.logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
+    $this->get('cargo/{id}/editar', 'CargoController@novo')->name('cargo.editar');
+    $this->post('cargo/{id}/editar', 'CargoController@updatePost')->name('cargo.editar.salvar');
+    $this->get('cargo/{id}/deletar', 'CargoController@delete')->name('cargo.deletar');
+
+//});
+//Auth::routes();
+//Route::get('/home', 'HomeController@index')->name('home');

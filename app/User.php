@@ -5,22 +5,16 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Usuario extends Authenticatable
+class User extends Authenticatable
 {
     use Notifiable;
-
-    public $timestamps = false;
-    protected $table = "usuarios";
-    protected $primaryKey = 'usu_codigo';
-    public $incrementing = true;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'usu_nome', 'usu_nivel_acesso', 'usu_senha',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -29,6 +23,8 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'senha', 'remember_token',
+        'password', 'remember_token',
     ];
+
+    
 }

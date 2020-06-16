@@ -30,6 +30,7 @@
                     <th>Descrição</th>
                     <th>Salário Base</th>
                     <th>Observação</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,11 +41,22 @@
                     <td>{{$cargo->car_descricao}}</td>
                     <td>{{number_format($cargo->car_salario_base,2,'.',',')}}</td>
                     <td>{{$cargo->car_observacao}}</td>
+                    <td>
+                        <a href="{{route('cargo.editar',['id' => $cargo->car_codigo])}}" class="btn btn-primary">
+                            <!-- Editar -->
+                            <i class="fa fa-pen"></i>
+                        </a>
+                        <a href="{{url('cargo/'.$cargo->car_codigo.'/deletar')}}" class="btn btn-danger">
+                            <!-- Deletar -->
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
                 </tr>
                 @empty
                 @endforelse
             </tbody>
         </table>
     </div>
+    
 </div>
 @stop

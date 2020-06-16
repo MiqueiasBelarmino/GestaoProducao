@@ -13,9 +13,10 @@ class CargoController extends Controller
         return view('rh.cargos.index');
     }
 
-    public function novo()
+    public function novo($id=null)
     {
-        return view('rh.cargos.novo');
+        $cargo = Cargo::find($id);
+        return view('rh.cargos.novo',compact('cargo'));
     }
 
     public function store(Request $request, Cargo $cargo)
@@ -39,5 +40,29 @@ class CargoController extends Controller
     {
         $cargos = Cargo::all();
         return view('rh.cargos.index',compact('cargos'));
+    }
+
+    public function updateGet($id)
+    {
+        $cargo = Cargo::find($id);
+        return view('rh.cargos.editar',compact('cargo'));
+    }
+
+    public function updatePost(Request $request, $id)
+    {
+        $cargo = Cargo::findOrFail($id);
+        $cargo->car_nome         = $request->car_nome;
+        $cargo->car_descricao    = $request->car_descricao;
+        $cargo->car_salario_base = $request->car_salario_base;
+        $cargo->car_observacao   = $request->car_observacao;
+        $cargo->save();
+        return redirect()->route('cargo.todos')->with('sucess', 'Cargo Atualizado');
+    }
+  
+    public function delete($id)
+    {
+        $cargo = Cargo::findOrFail($id);
+        $cargo->delete();
+        return redirect()->route('cargo.todos')->with('success','Cargo deletado');
     }
 }

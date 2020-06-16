@@ -11,10 +11,6 @@ class UsuariosTableSeeder extends Seeder
      */
     public function run()
     {
-        Usre::create([
-            'fun_nome'      => 'Miquéias Belarmino',
-            'email'     => 'miqueias@email.com',
-            'password'  => bcrypt('123456'),
-        ]);
+        
     }
 }

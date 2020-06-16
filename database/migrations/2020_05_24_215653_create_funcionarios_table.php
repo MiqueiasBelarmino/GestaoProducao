@@ -27,8 +27,17 @@ class CreateFuncionariosTable extends Migration
             $table->integer('fun_comissao')->unsigned();
             $table->string('fun_telefone',18);
             $table->date('fun_data_admissao');
+            $table->string('fun_senha',250);
             $table->text('fun_observacao');
             //$table->timestamps();
+        });
+
+        Schema::table('usuarios', function($table)
+        {
+           $table->foreign('fun_codigo','fk_fun')
+                ->references('fun_codigo')
+                ->on('funcionarios')
+                ->onDelete('cascade');
         });
     }
 
