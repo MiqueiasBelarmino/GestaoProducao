@@ -35,6 +35,7 @@
                     <th>Telefone</th>
                     <th>Data Admissão</th>
                     <th>Observação</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,6 +51,16 @@
                     <td>{{$funcionario->fun_telefone}}</td>
                     <td>{{$funcionario->fun_data_admissao}}</td>
                     <td>{{$funcionario->fun_observacao}}</td>
+                    <td>
+                        <a href="{{route('funcionario.editar',['id' => $funcionario->fun_codigo])}}" class="btn btn-primary">
+                            <!-- Editar -->
+                            <i class="fa fa-pen"></i>
+                        </a>
+                        <a href="{{url('funcionario/'.$funcionario->fun_codigo.'/deletar')}}" class="btn btn-danger">
+                            <!-- Deletar -->
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
                 </tr>
                 @empty
                 @endforelse

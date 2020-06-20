@@ -29,7 +29,7 @@ class CreateOrcamentosTable extends Migration
             $table->date('orc_data_abertura');
             $table->date('orc_data_entrega');
             $table->string('orc_status',30);
-            $table->text('orc_observacao');
+            $table->text('orc_observacao')->nullable();
             //$table->timestamps();
         });
     }

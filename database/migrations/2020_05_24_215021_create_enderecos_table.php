@@ -26,7 +26,7 @@ class CreateEnderecosTable extends Migration
                 ->references('cli_codigo')
                 ->on('clientes')
                 ->onDelete('cascade');
-            $table->text('end_observacao');
+            $table->text('end_observacao')->nullable();
             //$table->timestamps();
         });
     }

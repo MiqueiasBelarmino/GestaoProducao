@@ -21,9 +21,8 @@
 
     <div class="box-body">
         @include('includes.alerts')
-        
         @if(isset($cargo))
-            <form method="POST" action="{{ route('cargo.editar.salvar',['id' =>$cargo]) }}">
+            <form method="POST" action="{{ route('cargo.editar.salvar',['id' =>$cargo->car_codigo]) }}">
         @else
             <form method="POST" action="{{ route('cargo.store') }}">
         @endif
@@ -41,7 +40,8 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="car_salario_base">Salário Base (R$)</label>
-                        <input type="number" step="0.01" min="1" max="20000" value="1" name="car_salario_base" id="car_salario_base" class="form-control" placeholder="Escreva...">
+                        <!-- <input type="number" step="0.01" min="1" max="20000" value="@if(isset($cargo)) {{$cargo->car_salario_base}} @endif" name="car_salario_base" id="car_salario_base" class="form-control" placeholder="Escreva..."> -->
+                        <input type="text" value="@if(isset($cargo)) {{$cargo->car_salario_base}} @endif" name="car_salario_base" id="car_salario_base" class="form-control" placeholder="Escreva...">
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="car_observacao">Observação:</label>
-                        <textarea class="form-control" name="car_observacao" value="@if(isset($cargo)) {{$cargo->car_observacao}} @endif" id="car_observacao" rows="4" placeholder="Escreva..."></textarea>
+                        <textarea class="form-control" name="car_observacao" id="car_observacao" rows="4" placeholder="Escreva...">@if(isset($cargo)){{trim($cargo->car_observacao)}}@endif</textarea>
                     </div>
                 </div>
             </div>

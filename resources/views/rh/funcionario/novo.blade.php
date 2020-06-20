@@ -1,6 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Novo Funcionário')
+@if(isset($funcionario))
+    @section('title', 'Editar Funcionário')
+@else
+    @section('title', 'Novo Funcionário')
+@endif
 
 @section('content_header')
 @stop
@@ -9,12 +13,20 @@
 
 <div class="box">
     <div class="box-header">
-        <h1>Novo Funcionário</h1>
+        @if(isset($funcionario))
+            <h1>Editar Funcionário</h1>
+        @else
+            <h1>Novo Funcionário</h1>
+        @endif
     </div>
 
     <div class="box-body">
         @include('includes.alerts')
-        <form method="POST" action="{{ route('funcionario.store') }}">
+        @if(isset($funcionario))
+            <form method="POST" action="{{ route('funcionario.editar.salvar',['id' =>$funcionario->fun_codigo]) }}">
+        @else
+            <form method="POST" action="{{ route('funcionario.store') }}">
+        @endif
             {{csrf_field()}}
             <div class="row">
 
@@ -22,7 +34,8 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="fun_nome">Nome:</label>
-                        <input type="text" name="fun_nome" id="fun_nome" class="form-control" placeholder="Escreva..." required>
+                        <input type="text" name="fun_nome" id="fun_nome" class="form-control" placeholder="Escreva..." 
+                        value="@if(isset($funcionario)){{$funcionario->fun_nome}}@endif" required>
                     </div>
                 </div>
 
@@ -30,7 +43,8 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="fun_rg">RG:</label>
-                        <input type="text" name="fun_rg" id="fun_rg" class="form-control" placeholder="Escreva..." required>
+                        <input type="text" name="fun_rg" id="fun_rg" class="form-control" placeholder="Escreva..."
+                        value="@if(isset($funcionario)){{$funcionario->fun_rg}}@endif" required>
                     </div>
                 </div>
 
@@ -38,7 +52,8 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="fun_cpf">CPF:</label>
-                        <input type="text" name="fun_cpf" id="fun_cpf" class="form-control" placeholder="Escreva..." required>
+                        <input type="text" name="fun_cpf" id="fun_cpf" class="form-control" placeholder="Escreva..." 
+                        value="@if(isset($funcionario)){{$funcionario->fun_cpf}}@endif" required>
                     </div>
                 </div>
             </div>
@@ -49,7 +64,8 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="fun_email">E-mail:</label>
-                        <input type="email" name="fun_email" id="fun_email" class="form-control" placeholder="Escreva...">
+                        <input type="email" name="fun_email" id="fun_email" class="form-control" placeholder="Escreva..." 
+                        value="@if(isset($funcionario)){{$funcionario->fun_email}}@endif">
                     </div>
                 </div>
 
@@ -58,7 +74,7 @@
                     <select name="car_codigo" class="form-control">
                         <option value="">-- Selecione --</option>
                         @foreach($cargos as $key => $cargo)
-                            <option value="{{$key}}">{{$cargo}}</option>
+                            <option value="{{$key}}" @if(isset($funcionario)) {{$funcionario->car_codigo == $key ? 'selected' :''}}  @endif >{{$cargo}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -66,7 +82,8 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="fun_comissao">Comissão:</label>
-                        <input type="number" step="0.01" min="1" max="100" name="fun_comissao" id="fun_comissao" class="form-control"  required>
+                        <input type="number" step="0.01" min="1" max="100" name="fun_comissao" id="fun_comissao" class="form-control" 
+                        value="@if(isset($funcionario)){{$funcionario->fun_comissao}}@endif" required>
                     </div>
                 </div>
 
@@ -74,7 +91,8 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="fun_telefone">Telefone:</label>
-                        <input type="text" name="fun_telefone" id="fun_telefone" class="form-control" placeholder="(XX) XXXXXXXX" required>
+                        <input type="text" name="fun_telefone" id="fun_telefone" class="form-control" placeholder="(XX) XXXXXXXX" 
+                        value="@if(isset($funcionario)){{$funcionario->fun_telefone}}@endif" required>
                     </div>
                 </div>
             </div>
@@ -84,13 +102,14 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="fun_data_admissao">Data Admissão:</label>
-                        <input type="date" name="fun_data_admissao" id="fun_data_admissao" class="form-control" placeholder="Escreva..." required>
+                        <input type="date" name="fun_data_admissao" id="fun_data_admissao" class="form-control" placeholder="Escreva..." 
+                        value="@if(isset($funcionario)){{$funcionario->fun_data_admissao}}@endif" required>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="fun_observacao">Observação:</label>
-                        <textarea class="form-control" name="fun_observacao" id="fun_observacao" rows="4" placeholder="Escreva..."></textarea>
+                        <textarea class="form-control" name="fun_observacao" id="fun_observacao" rows="4" placeholder="Escreva...">@if(isset($funcionario)){{$funcionario->fun_observacao}}@endif</textarea>
                     </div>
                 </div>
 

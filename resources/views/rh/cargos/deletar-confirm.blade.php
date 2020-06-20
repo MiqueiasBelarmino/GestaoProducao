@@ -1,15 +1,15 @@
 @extends('adminlte::page')
 
-@section('title', 'Transferência')
+@section('title', 'Cargo')
 
 @section('content_header')
-    <h1>Confirmar Transferência</h1>
+    <h1>Confirmar Exclusão</h1>
 @stop
 
 @section('content')
 <div class="box">
         <div class="box-header">
-            <h1>Confirmar Transferência Saldo</h1>
+            <h1>Confirmar Exclusão</h1>
         </div>
         <div class="box-body">
           @include('admin.includes.alerts')

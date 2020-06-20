@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
 
     'logout_url' => 'logout',
 
@@ -127,6 +127,7 @@ return [
     | layout. The 'can' is a filter on Laravel's built in Gate functionality.
     */
 
+    //https://fortawesome.com/sets?q=money%20bill ÍCONES
     'menu' => [
         [
             'text'        => 'Dashboard',
@@ -136,7 +137,7 @@ return [
         [
             'text'        => 'Cadastros',
             // 'url'         => 'admin',
-            'icon'        => '',
+            'icon'        => 'fa fa-edit',//'fa fa-fw fa-pencil-square-o',
             'submenu'     => [
                 [
                     'text'    => 'Cargo',
@@ -153,30 +154,40 @@ return [
                     'url'     => 'fornecedor/novo',
                     'icon'    => '',
                 ],
+                [
+                    'text'    => 'Cliente',
+                    'url'     => 'cliente/novo',
+                    'icon'    => '',
+                ],
             ]
-            ],
-            [
-                'text'        => 'Relatórios',
-                // 'url'         => 'admin',
-                'icon'        => '',
-                'submenu'     => [
-                    [
-                        'text'    => 'Cargo',
-                        'url'     => 'cargo',
-                        'icon'    => '',
-                    ],
-                    [
-                        'text'    => 'Funcionario',
-                        'url'     => 'funcionario',
-                        'icon'    => '',
-                    ],
-                    [
-                        'text'    => 'Fornecedor',
-                        'url'     => 'fornecedor',
-                        'icon'    => '',
-                    ],
-                ]
+        ],
+        [
+            'text'        => 'Relatórios',
+            // 'url'         => 'admin',
+            'icon'        => 'fa fa-list-alt',
+            'submenu'     => [
+                [
+                    'text'    => 'Cargo',
+                    'url'     => 'cargo',
+                    'icon'    => '',
+                ],
+                [
+                    'text'    => 'Funcionario',
+                    'url'     => 'funcionario',
+                    'icon'    => '',
+                ],
+                [
+                    'text'    => 'Fornecedor',
+                    'url'     => 'fornecedor',
+                    'icon'    => '',
+                ],
+                [
+                    'text'    => 'Cliente',
+                    'url'     => 'cliente',
+                    'icon'    => '',
+                ],
             ]
+        ]
     ],
 
     /*

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cargo;
+use App\Http\Requests\MoneyValidationFormRequest;
 
 class CargoController extends Controller
 {
@@ -19,14 +20,17 @@ class CargoController extends Controller
         return view('rh.cargos.novo',compact('cargo'));
     }
 
-    public function store(Request $request, Cargo $cargo)
+    public function store(MoneyValidationFormRequest $request, Cargo $cargo)
     {
 
         $cargo = new Cargo;
         //$cargo = $cargo->firstOrCreate([]);
         $cargo->car_nome         = $request->car_nome;
         $cargo->car_descricao    = $request->car_descricao;
-        $cargo->car_salario_base = $request->car_salario_base;
+        
+        $ammount = number_format($request->car_salario_base, 2,'.','');
+        $cargo->car_salario_base = $ammount;
+
         $cargo->car_observacao   = $request->car_observacao;
         $response = $cargo->salvar();
         //$response = $cargo->save();
@@ -48,12 +52,15 @@ class CargoController extends Controller
         return view('rh.cargos.editar',compact('cargo'));
     }
 
-    public function updatePost(Request $request, $id)
+    public function updatePost(MoneyValidationFormRequest $request, $id)
     {
         $cargo = Cargo::findOrFail($id);
         $cargo->car_nome         = $request->car_nome;
         $cargo->car_descricao    = $request->car_descricao;
-        $cargo->car_salario_base = $request->car_salario_base;
+
+        $ammount = number_format($request->car_salario_base, 2,'.','');
+        $cargo->car_salario_base = $ammount;
+
         $cargo->car_observacao   = $request->car_observacao;
         $cargo->save();
         return redirect()->route('cargo.todos')->with('sucess', 'Cargo Atualizado');

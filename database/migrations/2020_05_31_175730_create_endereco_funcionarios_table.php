@@ -16,7 +16,7 @@ class CreateEnderecoFuncionariosTable extends Migration
         Schema::create('endereco_funcionarios', function (Blueprint $table) {
             $table->integer('fun_codigo')->unsigned();
             $table->integer('end_codigo')->unsigned();
-            $table->string('end_cli_observacao',200);
+            $table->string('end_cli_observacao',200)->nullable();
             $table->primary(['fun_codigo','end_codigo']);
 
             $table->foreign('fun_codigo')

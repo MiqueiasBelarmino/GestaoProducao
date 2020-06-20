@@ -18,7 +18,7 @@ class CreateProdutosTable extends Migration
             $table->double('prod_valor',10,2);
             $table->string('prod_nome',100)->unique();
             $table->string('prod_descricao',200);
-            $table->text('prod_observacao');
+            $table->text('prod_observacao')->nullable();
             //$table->timestamps();
         });
     }

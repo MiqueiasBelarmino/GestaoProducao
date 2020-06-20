@@ -17,11 +17,11 @@ class CreateFornecedoresTable extends Migration
             $table->increments('for_codigo');
             $table->string('for_nome_razao_social',200);
             $table->string('for_nome_social_fantasia',200);
-            $table->string('for_rg_inscricao_estadual',50);
+            $table->string('for_rg_inscricao_estadual',50)->nullable();
             $table->string('for_cpf_cnpj',18)->unique();
             $table->string('for_telefone',18);
             $table->string('for_email',80)->unique();
-            $table->text('for_observacao');
+            $table->text('for_observacao')->nullable();
             //$table->timestamps();
         });
     }

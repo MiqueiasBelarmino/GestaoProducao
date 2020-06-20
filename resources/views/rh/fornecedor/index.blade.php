@@ -33,6 +33,7 @@
                     <th>Telefone</th>
                     <th>E-mail</th>
                     <th>Observação</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,6 +47,16 @@
                     <td>{{$fornecedor->for_telefone}}</td>
                     <td>{{$fornecedor->for_email}}</td>
                     <td>{{$fornecedor->for_observacao}}</td>
+                    <td>
+                        <a href="{{route('fornecedor.editar',['id' => $fornecedor->for_codigo])}}" class="btn btn-primary">
+                            <!-- Editar -->
+                            <i class="fa fa-pen"></i>
+                        </a>
+                        <a href="{{url('fornecedor/'.$fornecedor->for_codigo.'/deletar')}}" class="btn btn-danger">
+                            <!-- Deletar -->
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
                 </tr>
                 @empty
                 @endforelse
