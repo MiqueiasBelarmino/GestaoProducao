@@ -22,8 +22,8 @@ class CreateFuncionariosTable extends Migration
             $table->integer('car_codigo')->unsigned();
             $table->foreign('car_codigo')
                 ->references('car_codigo')
-                ->on('cargos')
-                ->onDelete('cascade');
+                ->on('cargos');
+                //->onDelete('cascade');
             $table->integer('fun_comissao')->unsigned();
             $table->string('fun_telefone',18);
             $table->date('fun_data_admissao');

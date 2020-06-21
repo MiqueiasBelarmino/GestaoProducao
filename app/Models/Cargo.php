@@ -37,6 +37,6 @@ class Cargo extends Model
 
     public function funcionarios()
     {
-        return $this->hasMany('funcionarios','car_codigo');
+        return $this->hasMany(Funcionario::class,'car_codigo');
     }
 }

@@ -49,7 +49,7 @@
                     <td>{{$funcionario->cargo->car_nome}}</td>
                     <td>{{$funcionario->fun_comissao}}</td>
                     <td>{{$funcionario->fun_telefone}}</td>
-                    <td>{{$funcionario->fun_data_admissao}}</td>
+                    <td>{{$funcionario->formatarData($funcionario->fun_data_admissao)}}</td>
                     <td>{{$funcionario->fun_observacao}}</td>
                     <td>
                         <a href="{{route('funcionario.editar',['id' => $funcionario->fun_codigo])}}" class="btn btn-primary">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cargo;
 use App\Http\Requests\MoneyValidationFormRequest;
+use App\Models\Funcionario;
 
 class CargoController extends Controller
 {
@@ -69,7 +70,14 @@ class CargoController extends Controller
     public function delete($id)
     {
         $cargo = Cargo::findOrFail($id);
-        $cargo->delete();
-        return redirect()->route('cargo.todos')->with('success','Cargo deletado');
+        if($cargo->funcionarios()->count() > 0)
+        {
+            return redirect()->route('cargo.todos')->with('error','Há funcionários relacionados a esse cargo');
+        }else
+        {
+            $cargo->delete();
+        }
+        return redirect()->route('cargo.todos')->with('success','Cargo Deletado');
     }
+
 }

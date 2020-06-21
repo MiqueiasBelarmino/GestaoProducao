@@ -16,7 +16,14 @@ class CargosTableSeeder extends Seeder
             'car_nome'         => 'Administrador',
             'car_descricao'    => 'Administrar os processos e recursos da empresa',
             'car_salario_base' => 2500,
-            'car_observacao'   => ' ',
+            //'car_observacao'   => '',
+        ]);
+
+        Cargo::create([
+            'car_nome'         => 'Serigrafista',
+            'car_descricao'    => 'Estampa os produtos',
+            'car_salario_base' => 1500,
+            //'car_observacao'   => '',
         ]);
     }
 }

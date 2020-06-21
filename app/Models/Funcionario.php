@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Auth\Authenticatable;
+use Carbon\Carbon;
 use DB;
 
 class Funcionario extends Model implements AuthenticatableContract
@@ -15,6 +16,20 @@ class Funcionario extends Model implements AuthenticatableContract
     protected $primaryKey = 'fun_codigo';
     public $incrementing = true;
 
+    // protected $fillable = [
+    //     'fun_nome', 'fun_rg',
+    //     'fun_cpf','fun_email',
+    //     'car_codigo','fun_comissao',
+    //     'fun_telefone','fun_data_admissao',
+    //     'fun_senha','fun_observacao',
+    // ];
+
+
+    //recurso mutator
+    public function formatarData($value)
+    {
+        return Carbon::parse($value)->format('d/m/Y');
+    }
 
     public function salvar()
     {
