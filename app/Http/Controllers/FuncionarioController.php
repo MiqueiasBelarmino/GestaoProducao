@@ -13,6 +13,10 @@ class FuncionarioController extends Controller
     {
         return view('rh.funcionario.index');
     }
+    public function teste(Request $request)
+    {
+        return $request;
+    }
 
     public function novo($id=null)
     {
@@ -42,10 +46,10 @@ class FuncionarioController extends Controller
         return redirect()->back()->with('error', $response['message']);
     }
 
-    public function todos()
+    public function todos(Request $request)
     {
         $funcionarios = Funcionario::all();
-        return view('rh.funcionario.index', compact('funcionarios'));
+        return view('rh.funcionario.listagem', compact('funcionarios','request'));
     }
 
     public function updatePost(Request $request, $id)

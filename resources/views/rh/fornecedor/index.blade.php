@@ -28,8 +28,6 @@
                     <th>#</th>
                     <th>Razão Social</th>
                     <th>Nome Fantasia</th>
-                    <th>Inscrição Estadual</th>
-                    <th>CPF/CNPJ</th>
                     <th>Telefone</th>
                     <th>E-mail</th>
                     <th>Observação</th>
@@ -42,8 +40,6 @@
                     <td>{{$fornecedor->for_codigo}}</td>
                     <td>{{$fornecedor->for_nome_razao_social}}</td>
                     <td>{{$fornecedor->for_nome_social_fantasia}}</td>
-                    <td>{{$fornecedor->for_rg_inscricao_estadual}}</td>
-                    <td>{{$fornecedor->for_cpf_cnpj}}</td>
                     <td>{{$fornecedor->for_telefone}}</td>
                     <td>{{$fornecedor->for_email}}</td>
                     <td>{{$fornecedor->for_observacao}}</td>

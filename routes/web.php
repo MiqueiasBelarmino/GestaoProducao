@@ -26,7 +26,8 @@
 
 
 
-    $this->get('funcionario', 'FuncionarioController@todos')->name('funcionario.todos');
+    $this->get('funcionario', 'FuncionarioController@index')->name('funcionario');
+    $this->post('funcionario/todos', 'FuncionarioController@todos')->name('funcionario.todos');
     $this->get('funcionario/novo', 'FuncionarioController@novo')->name('funcionario.novo');
     $this->post('funcionario/novo', 'FuncionarioController@store')->name('funcionario.store');
     //editar e deletar funcionário
