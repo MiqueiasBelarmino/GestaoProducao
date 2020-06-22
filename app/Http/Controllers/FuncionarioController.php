@@ -13,11 +13,7 @@ class FuncionarioController extends Controller
     {
         return view('rh.funcionario.index');
     }
-    public function teste(Request $request)
-    {
-        return $request;
-    }
-
+    
     public function novo($id=null)
     {
         $funcionario = Funcionario::find($id);

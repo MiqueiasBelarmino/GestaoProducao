@@ -16,7 +16,8 @@
 
 
 
-    $this->get('fornecedor', 'FornecedorController@todos')->name('fornecedor.todos');
+    $this->get('fornecedor', 'FornecedorController@index')->name('fornecedor');
+    $this->post('fornecedor/todos', 'FornecedorController@todos')->name('fornecedor.todos');
     $this->get('fornecedor/novo', 'FornecedorController@novo')->name('fornecedor.novo');
     $this->post('fornecedor/novo', 'FornecedorController@store')->name('fornecedor.store');
     //editar e deletar fornecedor

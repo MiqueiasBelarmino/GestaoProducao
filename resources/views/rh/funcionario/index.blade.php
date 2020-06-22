@@ -20,19 +20,9 @@
     {{csrf_field()}}
       <!-- checkbox -->
       <div class="form-group">
-
-        <!-- <div class="col-sm-2"> -->
-          <div class="checkbox">
-            <label>
-              <input name="completo" type="checkbox">
-              Listagem Completa
-            </label>
-          </div>
-        <!-- </div> -->
-
-            <label>
-              OU
-            </label>
+            <!-- <label> -->
+              <h4><strong>Para listagem completa não marcar nenhuma opção</strong></h4>
+            <!-- </label> -->
 
         <div class="checkbox">
           <label>
@@ -100,7 +90,7 @@
         <div class="checkbox">
           <label>
             <input name="observacao" type="checkbox">
-            Observação do Funcionário
+            Observação sobre o Funcionário
           </label>
         </div>
 

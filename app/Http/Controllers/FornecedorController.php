@@ -39,10 +39,10 @@ class FornecedorController extends Controller
             return redirect()->back()->with('error',$response['message']);
     }
 
-    public function todos()
+    public function todos(Request $request)
     {
         $fornecedores = Fornecedor::all();
-        return view('rh.fornecedor.index',compact('fornecedores'));
+        return view('rh.fornecedor.listagem',compact('fornecedores','request'));
     }
 
     public function updateGet($id)
