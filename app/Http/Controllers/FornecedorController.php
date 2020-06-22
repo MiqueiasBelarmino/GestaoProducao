@@ -11,13 +11,13 @@ class FornecedorController extends Controller
 
     public function index()
     {
-        return view('rh.fornecedor.index');
+        return view('admin.fornecedor.index');
     }
 
     public function novo($id=null)
     {
         $fornecedor = Fornecedor::find($id);
-        return view('rh.fornecedor.novo',compact('fornecedor'));
+        return view('admin.fornecedor.novo',compact('fornecedor'));
     }
 
     public function store(Request $request, Fornecedor $fornecedor)
@@ -42,13 +42,13 @@ class FornecedorController extends Controller
     public function todos(Request $request)
     {
         $fornecedores = Fornecedor::all();
-        return view('rh.fornecedor.listagem',compact('fornecedores','request'));
+        return view('admin.fornecedor.listagem',compact('fornecedores','request'));
     }
 
     public function updateGet($id)
     {
         $fornecedor = Fornecedor::find($id);
-        return view('rh.fornecedor.editar',compact('fornecedor'));
+        return view('admin.fornecedor.editar',compact('fornecedor'));
     }
 
     public function updatePost(Request $request, $id)

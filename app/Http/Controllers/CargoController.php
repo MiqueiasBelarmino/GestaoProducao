@@ -12,13 +12,13 @@ class CargoController extends Controller
     private $totalPage = 10;
     public function index()
     {
-        return view('rh.cargos.index');
+        return view('admin.cargos.index');
     }
 
     public function novo($id=null)
     {
         $cargo = Cargo::find($id);
-        return view('rh.cargos.novo',compact('cargo'));
+        return view('admin.cargos.novo',compact('cargo'));
     }
 
     public function store(MoneyValidationFormRequest $request, Cargo $cargo)
@@ -44,13 +44,13 @@ class CargoController extends Controller
     public function todos()
     {
         $cargos = Cargo::all();
-        return view('rh.cargos.index',compact('cargos'));
+        return view('admin.cargos.index',compact('cargos'));
     }
 
     public function updateGet($id)
     {
         $cargo = Cargo::find($id);
-        return view('rh.cargos.editar',compact('cargo'));
+        return view('admin.cargos.editar',compact('cargo'));
     }
 
     public function updatePost(MoneyValidationFormRequest $request, $id)

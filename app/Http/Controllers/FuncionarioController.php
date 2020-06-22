@@ -11,14 +11,14 @@ class FuncionarioController extends Controller
     private $totalPage = 10;
     public function index()
     {
-        return view('rh.funcionario.index');
+        return view('admin.funcionario.index');
     }
     
     public function novo($id=null)
     {
         $funcionario = Funcionario::find($id);
         $cargos = Cargo::pluck('car_nome','car_codigo');
-        return view('rh.funcionario.novo',compact('car_codigo','cargos','funcionario'));
+        return view('admin.funcionario.novo',compact('car_codigo','cargos','funcionario'));
     }
 
     public function store(Request $request, Funcionario $funcionario)
@@ -45,7 +45,7 @@ class FuncionarioController extends Controller
     public function todos(Request $request)
     {
         $funcionarios = Funcionario::all();
-        return view('rh.funcionario.listagem', compact('funcionarios','request'));
+        return view('admin.funcionario.listagem', compact('funcionarios','request'));
     }
 
     public function updatePost(Request $request, $id)
