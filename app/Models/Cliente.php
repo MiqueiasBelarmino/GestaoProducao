@@ -11,4 +11,8 @@ class Cliente extends Model
     protected $primaryKey = 'cli_codigo';
     public $incrementing = true;
 
+    public function enderecos()
+    {
+        return $this->belongsToMany(Endereco::class, 'enderecos_clientes');
+    }
 }

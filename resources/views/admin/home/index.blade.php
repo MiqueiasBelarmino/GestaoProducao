@@ -14,7 +14,7 @@
     <li><strike>formatar datas</strike></li>
     <li><strike>remover rg/cpf/data_admissao das listagens</strike></li>
     <li>add máscara para telefone</li>
-    <li>'configurar' listagem antes de gerar</li>
+    <li><strike>'configurar' listagem antes de gerar</strike></li>
     <li>exportar listagem (PDF, CSV, XLS)</li>
 
     <br><br>
@@ -23,6 +23,8 @@
     FUNCIONÁRIO: fun_codigo, fun_nome, fun_rg, fun_cpf, fun_email, car_codigo, fun_comissao, fun_telefone, fun_data_admissao, fun_senha, fun_observacao
     <br>
     FORNECEDOR: for_codigo, for_nome_razao_social, for_nome_social_fantasia,for_rg_inscricao_estadual, for_cpf_cnpj, for_telefone, for_email, for_observacao
+    <br>
+    ENDEREÇO: end_codigo, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_cep, end_observacao
 
 
 @stop

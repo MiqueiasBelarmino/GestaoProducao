@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEnderecoFuncionariosTable extends Migration
+class CreateEnderecoClientesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateEnderecoFuncionariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('endereco_funcionarios', function (Blueprint $table) {
-            $table->integer('fun_codigo')->unsigned();
+        Schema::create('enderecos_clientes', function (Blueprint $table) {
+            $table->integer('cli_codigo')->unsigned();
             $table->integer('end_codigo')->unsigned();
             $table->string('end_cli_observacao',200)->nullable();
-            $table->primary(['fun_codigo','end_codigo']);
+            $table->primary(['cli_codigo','end_codigo']);
 
-            $table->foreign('fun_codigo')
-                ->references('fun_codigo')
-                ->on('funcionarios')
+            $table->foreign('cli_codigo')
+                ->references('cli_codigo')
+                ->on('clientes')
                 ->onDelete('cascade');
             $table->foreign('end_codigo')
                 ->references('end_codigo')
@@ -37,6 +37,6 @@ class CreateEnderecoFuncionariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('endereco_funcionarios');
+        Schema::dropIfExists('enderecos_clientes');
     }
 }

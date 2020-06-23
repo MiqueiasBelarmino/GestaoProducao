@@ -106,16 +106,25 @@
                         value="@if(isset($funcionario)){{$funcionario->fun_data_admissao}}@endif" required>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-9">
                     <div class="form-group">
                         <label for="fun_observacao">Observação:</label>
-                        <textarea class="form-control" name="fun_observacao" id="fun_observacao" rows="4" placeholder="Escreva...">@if(isset($funcionario)){{$funcionario->fun_observacao}}@endif</textarea>
+                        <textarea class="form-control" name="fun_observacao" id="fun_observacao" rows="2" placeholder="Escreva...">@if(isset($funcionario)){{$funcionario->fun_observacao}}@endif</textarea>
                     </div>
                 </div>
-
             </div>
+
+            
+            
             <button type="submit" class="btn btn-primary">Confirmar</button>
         </form>
     </div>
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+<script>
+    $(document).ready(function () { 
+        var $seuCampoCpf = $("#fun_cpf");
+        $seuCampoCpf.mask('000.000.000-00', {reverse: true});
+    });
+</script>
 @stop

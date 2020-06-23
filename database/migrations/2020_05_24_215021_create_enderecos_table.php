@@ -21,11 +21,6 @@ class CreateEnderecosTable extends Migration
             $table->string('end_cidade',80);
             $table->string('end_estado',80);
             $table->string('end_cep',8);
-            $table->integer('cli_codigo')->unsigned();
-            $table->foreign('cli_codigo')
-                ->references('cli_codigo')
-                ->on('clientes')
-                ->onDelete('cascade');
             $table->text('end_observacao')->nullable();
             //$table->timestamps();
         });

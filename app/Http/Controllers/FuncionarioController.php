@@ -21,6 +21,12 @@ class FuncionarioController extends Controller
         return view('admin.funcionario.novo',compact('car_codigo','cargos','funcionario'));
     }
 
+    public function endereco($id=null)
+    {
+        $funcionario = Funcionario::find($id);
+        return view('admin.funcionario.endereco',compact('funcionario'));
+    }
+
     public function store(Request $request, Funcionario $funcionario)
     {
 

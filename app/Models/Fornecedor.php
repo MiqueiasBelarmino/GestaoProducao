@@ -14,6 +14,19 @@ class Fornecedor extends Model
     public $incrementing = true;
 
 
+    public function getForCpfCnpjAttribute()//XX. XXX. XXX/XXXX-XX
+    {
+        $cpf = $this->attributes['for_cpf_cnpj'];
+        if(strlen($cpf) == 11)
+        {
+            $cpf = substr($cpf,0,3).'.'.substr($cpf,3,3).'.'.substr($cpf,7,3).'-'.substr($cpf,-2);
+        }else
+        {
+            $cpf = substr($cpf,0,2).'.'.substr($cpf,2,3).'.'.substr($cpf,5,3).'/'.substr($cpf,8,4).'-'.substr($cpf,-2);
+        }
+        return $cpf;
+    }
+
     public function salvar()
     {
         DB::beginTransaction();

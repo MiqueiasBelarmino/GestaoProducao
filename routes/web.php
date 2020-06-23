@@ -34,6 +34,10 @@
     //editar e deletar funcionário
     $this->get('funcionario/{id}/editar', 'FuncionarioController@novo')->name('funcionario.editar');
     $this->post('funcionario/{id}/editar', 'FuncionarioController@updatePost')->name('funcionario.editar.salvar');
+    
+    $this->get('funcionario/{id}/endereco', 'FuncionarioController@endereco')->name('funcionario.endereco');
+    $this->post('funcionario/{id}/endereco', 'FuncionarioController@updatePost')->name('funcionario.endereco.salvar');
+
     $this->get('funcionario/{id}/deletar', 'FuncionarioController@delete')->name('funcionario.deletar');
 
 
