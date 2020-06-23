@@ -26,6 +26,15 @@
     $this->get('fornecedor/{id}/deletar', 'FornecedorController@delete')->name('fornecedor.deletar');
 
 
+    $this->get('cliente', 'ClienteController@index')->name('cliente');
+    $this->post('cliente/todos', 'ClienteController@todos')->name('cliente.todos');
+    $this->get('cliente/novo', 'ClienteController@novo')->name('cliente.novo');
+    $this->post('cliente/novo', 'ClienteController@store')->name('cliente.store');
+    //editar e deletar fornecedor
+    $this->get('cliente/{id}/editar', 'ClienteController@novo')->name('cliente.editar');
+    $this->post('cliente/{id}/editar', 'ClienteController@updatePost')->name('cliente.editar.salvar');
+    $this->get('cliente/{id}/deletar', 'ClienteController@delete')->name('cliente.deletar');
+
 
     $this->get('funcionario', 'FuncionarioController@index')->name('funcionario');
     $this->post('funcionario/todos', 'FuncionarioController@todos')->name('funcionario.todos');
@@ -34,10 +43,8 @@
     //editar e deletar funcionário
     $this->get('funcionario/{id}/editar', 'FuncionarioController@novo')->name('funcionario.editar');
     $this->post('funcionario/{id}/editar', 'FuncionarioController@updatePost')->name('funcionario.editar.salvar');
-    
     $this->get('funcionario/{id}/endereco', 'FuncionarioController@endereco')->name('funcionario.endereco');
     $this->post('funcionario/{id}/endereco', 'FuncionarioController@updatePost')->name('funcionario.endereco.salvar');
-
     $this->get('funcionario/{id}/deletar', 'FuncionarioController@delete')->name('funcionario.deletar');
 
 

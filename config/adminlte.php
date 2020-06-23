@@ -154,6 +154,11 @@ return [
                     'url'     => 'fornecedor/novo',
                     'icon'    => '',
                 ],
+                [
+                    'text'    => 'Cliente',
+                    'url'     => 'cliente/novo',
+                    'icon'    => '',
+                ],
             ]
         ],
         [
@@ -174,6 +179,11 @@ return [
                 [
                     'text'    => 'Fornecedor',
                     'url'     => 'fornecedor',
+                    'icon'    => '',
+                ],
+                [
+                    'text'    => 'Cliente',
+                    'url'     => 'cliente',
                     'icon'    => '',
                 ],
             ]

@@ -64,7 +64,7 @@ class CargoController extends Controller
 
         $cargo->car_observacao   = $request->car_observacao;
         $cargo->save();
-        return redirect()->route('cargo.todos')->with('sucess', 'Cargo Atualizado');
+        return redirect()->route('cargo.todos')->with('success', 'Cargo Atualizado');
     }
   
     public function delete($id)

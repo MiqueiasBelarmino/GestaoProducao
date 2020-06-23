@@ -67,7 +67,9 @@ class FuncionarioController extends Controller
         $funcionario->fun_data_admissao = $request->fun_data_admissao;
         $funcionario->fun_observacao    = $request->fun_observacao;
         $response = $funcionario->salvar();
-        return redirect()->route('funcionario.todos')->with('success', 'Funcionário Atualizado');
+        if ($response['success'])
+            return redirect()->route('funcionario')->with('success', $response['message']);
+       return redirect()->back()->with('error', $response['message']);
     }
   
     public function delete($id)

@@ -62,7 +62,9 @@ class FornecedorController extends Controller
         $fornecedor->for_email                  = $request->for_email;
         $fornecedor->for_observacao             = $request->for_observacao;
         $response = $fornecedor->salvar();
-        return redirect()->route('fornecedor.todos')->with('success', 'Fornecedor Atualizado');
+        if ($response['success'])
+            return redirect()->route('fornecedor')->with('success', $response['message']);
+       return redirect()->back()->with('error', $response['message']);
     }
   
     public function delete($id)

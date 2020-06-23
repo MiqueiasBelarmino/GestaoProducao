@@ -14,7 +14,7 @@ class Fornecedor extends Model
     public $incrementing = true;
 
 
-    public function getForCpfCnpjAttribute()//XX. XXX. XXX/XXXX-XX
+    public function getForCpfCnpj()//XX. XXX. XXX/XXXX-XX
     {
         $cpf = $this->attributes['for_cpf_cnpj'];
         if(strlen($cpf) == 11)

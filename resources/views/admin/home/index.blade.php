@@ -25,6 +25,7 @@
     FORNECEDOR: for_codigo, for_nome_razao_social, for_nome_social_fantasia,for_rg_inscricao_estadual, for_cpf_cnpj, for_telefone, for_email, for_observacao
     <br>
     ENDEREÇO: end_codigo, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_cep, end_observacao
-
+    <br>
+    CLIENTE: cli_codigo, cli_nome_razao_social, cli_nome_social_fantasia, cli_rg_incricao_estadual, cli_cpf_cnpj, cli_telefone, cli_email, cli_observacao
 
 @stop

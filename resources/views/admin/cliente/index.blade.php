@@ -3,7 +3,7 @@
 @section('title', 'Configurar Listagem')
 
 @section('content_header')
-<h1>Fornecedores</h1>
+<h1>Clientes</h1>
 @stop
 
 
@@ -16,8 +16,8 @@
   </div>
   <!-- /.box-header -->
   <div class="box-body">
-  @include('includes.alerts')
-    <form method="POST" action="{{route('fornecedor.todos')}}">
+    @include('includes.alerts')
+    <form method="POST" action="{{route('cliente.todos')}}">
     {{csrf_field()}}
       <!-- checkbox -->
       <div class="form-group">
@@ -77,7 +77,7 @@
         <div class="checkbox">
           <label>
             <input name="observacao" type="checkbox">
-            Observação sobre o fornecedor
+            Observação sobre o cliente
           </label>
         </div>
 
