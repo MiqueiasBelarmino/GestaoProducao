@@ -71,6 +71,6 @@ class FornecedorController extends Controller
     {
         $fornecedor = Fornecedor::findOrFail($id);
         $fornecedor->delete();
-        return redirect()->route('fornecedor.todos')->with('success','Fornecedor deletado');
+        return redirect()->route('fornecedor')->with('success','Fornecedor deletado');
     }
 }

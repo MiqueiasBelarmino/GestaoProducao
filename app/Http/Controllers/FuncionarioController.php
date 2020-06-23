@@ -76,6 +76,6 @@ class FuncionarioController extends Controller
     {
         $funcionario = Funcionario::findOrFail($id);
         $funcionario->delete();
-        return redirect()->route('funcionario.todos')->with('success','Funcionário deletado');
+        return redirect()->route('funcionario')->with('success','Funcionário deletado');
     }
 }

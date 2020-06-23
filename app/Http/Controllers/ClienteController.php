@@ -70,6 +70,6 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::findOrFail($id);
         $cliente->delete();
-        return redirect()->route('cliente.todos')->with('success','Cliente deletado');
+        return redirect()->route('cliente')->with('success','Cliente deletado');
     }
 }
