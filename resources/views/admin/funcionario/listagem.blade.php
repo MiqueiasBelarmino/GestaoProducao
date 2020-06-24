@@ -122,7 +122,9 @@
             </table>
             <!-- <button type="submit" class="btn btn-primary">Exportar</button> -->
             <a href="{{route('funcionario.pdf',[$request])}}" class="btn btn-primary" target="_blank">Exportar PDF</a>
+            <a href="{{route('funcionario.excel',[$request])}}" class="btn btn-primary">Exportar Planilha</a>
         </form>
+        
     </div>
 </div>
 @stop

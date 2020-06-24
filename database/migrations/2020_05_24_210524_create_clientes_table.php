@@ -17,7 +17,7 @@ class CreateClientesTable extends Migration
             $table->increments('cli_codigo');
             $table->string('cli_nome_razao_social',200);
             $table->string('cli_nome_social_fantasia',200)->nullable();
-            $table->string('cli_rg_incricao_estadual',50)->nullable();
+            $table->string('cli_rg_inscricao_estadual',50)->nullable();
             $table->string('cli_cpf_cnpj',18)->unique();
             $table->string('cli_telefone',18);
             $table->string('cli_email',80)->unique();

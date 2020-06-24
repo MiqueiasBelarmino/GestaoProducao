@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Exports\ClienteExport;
 use PDF;
+use Excel;
 
 class ClienteController extends Controller
 {
@@ -27,6 +29,16 @@ class ClienteController extends Controller
         $clientes = Cliente::all();
         $pdf = PDF::loadView('admin.cliente.pdf', compact('clientes','request'));
         return $pdf->setPaper('a4')->stream('Clientes.pdf');
+    }
+
+    public function gerarXLSX() 
+    {
+        return Excel::download(new ClienteExport, 'Clientes.xlsx');
+    }
+
+    public function gerarCSV() 
+    {
+        return Excel::download(new ClienteExport, 'Clientes.csv');
     }
 
     public function store(Request $request, Cliente $cliente)

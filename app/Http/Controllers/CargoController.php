@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cargo;
 use App\Http\Requests\MoneyValidationFormRequest;
-use App\Models\Funcionario;
+use App\Exports\CargoExport;
 use PDF;
+use Excel;
 
 class CargoController extends Controller
 {
@@ -27,6 +28,16 @@ class CargoController extends Controller
         $cargos = Cargo::all();
         $pdf = PDF::loadView('admin.cargos.pdf', compact('cargos'));
         return $pdf->setPaper('a4')->stream('Cargos.pdf');
+    }
+
+    public function gerarXLSX() 
+    {
+        return Excel::download(new CargoExport, 'Cargos.xlsx');
+    }
+
+    public function gerarCSV() 
+    {
+        return Excel::download(new CargoExport, 'Cargos.csv');
     }
 
     public function store(MoneyValidationFormRequest $request, Cargo $cargo)

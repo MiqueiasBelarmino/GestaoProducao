@@ -59,6 +59,7 @@
             </tbody>
         </table>
         <a href="{{route('cargo.pdf')}}" class="btn btn-primary" target="_blank">Exportar PDF</a>
+        <a href="{{route('cargo.excel')}}" class="btn btn-primary">Exportar Planilha</a>
         </form>
     </div>
     

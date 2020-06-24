@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Cargo;
 use App\Models\Funcionario;
 use Illuminate\Http\Request;
+use App\Exports\FuncionarioExport;
 use PDF;
+use Excel;
 
 class FuncionarioController extends Controller
 {
@@ -13,14 +15,6 @@ class FuncionarioController extends Controller
     public function index()
     {
         return view('admin.funcionario.index');
-    }
-
-    public function gerarPDF(Request $request)
-    {
-        $funcionarios = Funcionario::all();
-        $pdf = PDF::loadView('admin.funcionario.pdf', compact('funcionarios','request'));
-        //return dd($request);
-        return $pdf->setPaper('a4')->stream('Funcionarios.pdf');
     }
     
     public function novo($id=null)
@@ -34,6 +28,24 @@ class FuncionarioController extends Controller
     {
         $funcionario = Funcionario::find($id);
         return view('admin.funcionario.endereco',compact('funcionario'));
+    }
+
+    public function gerarPDF(Request $request)
+    {
+        $funcionarios = Funcionario::all();
+        $pdf = PDF::loadView('admin.funcionario.pdf', compact('funcionarios','request'));
+        //return dd($request);
+        return $pdf->setPaper('a4')->stream('Funcionarios.pdf');
+    }
+
+    public function gerarXLSX() 
+    {
+        return Excel::download(new FuncionarioExport, 'Funcionarios.xlsx');
+    }
+
+    public function gerarCSV() 
+    {
+        return Excel::download(new FuncionarioExport, 'Funcionarios.csv');
     }
 
     public function store(Request $request, Funcionario $funcionario)

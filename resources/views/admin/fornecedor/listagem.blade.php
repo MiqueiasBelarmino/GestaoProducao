@@ -106,6 +106,7 @@
             </tbody>
         </table>
         <a href="{{route('fornecedor.pdf',[$request])}}" class="btn btn-primary" target="_blank">Exportar PDF</a>
+        <a href="{{route('fornecedor.excel',[$request])}}" class="btn btn-primary">Exportar Planilha</a>
         </form>
     </div>
 </div>
