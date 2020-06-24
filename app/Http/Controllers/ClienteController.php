@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use PDF;
 
 class ClienteController extends Controller
 {
@@ -18,6 +19,14 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
         return view('admin.cliente.novo',compact('cliente'));
+    }
+
+
+    public function gerarPDF(Request $request)
+    {
+        $clientes = Cliente::all();
+        $pdf = PDF::loadView('admin.cliente.pdf', compact('clientes','request'));
+        return $pdf->setPaper('a4')->stream('Clientes.pdf');
     }
 
     public function store(Request $request, Cliente $cliente)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cargo;
 use App\Models\Funcionario;
 use Illuminate\Http\Request;
+use PDF;
 
 class FuncionarioController extends Controller
 {
@@ -12,6 +13,14 @@ class FuncionarioController extends Controller
     public function index()
     {
         return view('admin.funcionario.index');
+    }
+
+    public function gerarPDF(Request $request)
+    {
+        $funcionarios = Funcionario::all();
+        $pdf = PDF::loadView('admin.funcionario.pdf', compact('funcionarios','request'));
+        //return dd($request);
+        return $pdf->setPaper('a4')->stream('Funcionarios.pdf');
     }
     
     public function novo($id=null)

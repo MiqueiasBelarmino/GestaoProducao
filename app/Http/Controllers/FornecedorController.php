@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Fornecedor;
+use PDF;
 
 class FornecedorController extends Controller
 {
@@ -18,6 +19,13 @@ class FornecedorController extends Controller
     {
         $fornecedor = Fornecedor::find($id);
         return view('admin.fornecedor.novo',compact('fornecedor'));
+    }
+
+    public function gerarPDF(Request $request)
+    {
+        $fornecedores = Fornecedor::all();
+        $pdf = PDF::loadView('admin.fornecedor.pdf', compact('fornecedores','request'));
+        return $pdf->setPaper('a4')->stream('Fornecedores.pdf');
     }
 
     public function store(Request $request, Fornecedor $fornecedor)

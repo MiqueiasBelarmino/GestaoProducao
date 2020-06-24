@@ -15,7 +15,7 @@
     <li><strike>remover rg/cpf/data_admissao das listagens</strike></li>
     <li>add máscara para telefone</li>
     <li><strike>'configurar' listagem antes de gerar</strike></li>
-    <li>exportar listagem (PDF, CSV, XLS)</li>
+    <li>exportar listagem (<strike>PDF</strike>, CSV, XLS)</li>
 
     <br><br>
     CARGO: car_codigo, car_nome, car_descricao, car_salario_base, car_observacao

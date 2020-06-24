@@ -25,5 +25,12 @@ class CargosTableSeeder extends Seeder
             'car_salario_base' => 1500,
             //'car_observacao'   => '',
         ]);
+
+        Cargo::create([
+            'car_nome'         => 'Costureira',
+            'car_descricao'    => 'Costurar os produtos',
+            'car_salario_base' => 1500,
+            //'car_observacao'   => '',
+        ]);
     }
 }

@@ -128,11 +128,12 @@ return [
     */
 
     //https://fortawesome.com/sets?q=money%20bill ÍCONES
+    //https://fontawesome.com/icons?d=gallery
     'menu' => [
         [
             'text'        => 'Dashboard',
             'url'         => 'admin',
-            'icon'        => 'dashboard',
+            'icon'        => 'fa fa-tachometer-alt',
         ],
         [
             'text'        => 'Cadastros',
@@ -142,22 +143,22 @@ return [
                 [
                     'text'    => 'Cargo',
                     'url'     => 'cargo/novo',
-                    'icon'    => '',
+                    'icon'    => 'far fa-circle',
                 ],
                 [
                     'text'    => 'Funcionario',
                     'url'     => 'funcionario/novo',
-                    'icon'    => '',
+                    'icon'    => 'far fa-circle',
                 ],
                 [
                     'text'    => 'Fornecedor',
                     'url'     => 'fornecedor/novo',
-                    'icon'    => '',
+                    'icon'    => 'far fa-circle',
                 ],
                 [
                     'text'    => 'Cliente',
                     'url'     => 'cliente/novo',
-                    'icon'    => '',
+                    'icon'    => 'far fa-circle',
                 ],
             ]
         ],
@@ -169,22 +170,22 @@ return [
                 [
                     'text'    => 'Cargo',
                     'url'     => 'cargo',
-                    'icon'    => '',
+                    'icon'    => 'far fa-circle',
                 ],
                 [
                     'text'    => 'Funcionario',
                     'url'     => 'funcionario',
-                    'icon'    => '',
+                    'icon'    => 'far fa-circle',
                 ],
                 [
                     'text'    => 'Fornecedor',
                     'url'     => 'fornecedor',
-                    'icon'    => '',
+                    'icon'    => 'far fa-circle',
                 ],
                 [
                     'text'    => 'Cliente',
                     'url'     => 'cliente',
-                    'icon'    => '',
+                    'icon'    => 'far fa-circle',
                 ],
             ]
         ]

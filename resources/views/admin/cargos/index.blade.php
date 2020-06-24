@@ -22,6 +22,8 @@
     </div>
     <div class="box-body">
         @include('includes.alerts')
+        <form method="POST"  action="{{route('cargo.pdf')}}" class="form form-inline">
+        {!! csrf_field()!!}
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
@@ -56,6 +58,8 @@
                 @endforelse
             </tbody>
         </table>
+        <a href="{{route('cargo.pdf')}}" class="btn btn-primary" target="_blank">Exportar PDF</a>
+        </form>
     </div>
     
 </div>

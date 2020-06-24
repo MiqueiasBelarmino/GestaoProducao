@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cargo;
 use App\Http\Requests\MoneyValidationFormRequest;
 use App\Models\Funcionario;
+use PDF;
 
 class CargoController extends Controller
 {
@@ -19,6 +20,13 @@ class CargoController extends Controller
     {
         $cargo = Cargo::find($id);
         return view('admin.cargos.novo',compact('cargo'));
+    }
+
+    public function gerarPDF()
+    {
+        $cargos = Cargo::all();
+        $pdf = PDF::loadView('admin.cargos.pdf', compact('cargos'));
+        return $pdf->setPaper('a4')->stream('Cargos.pdf');
     }
 
     public function store(MoneyValidationFormRequest $request, Cargo $cargo)

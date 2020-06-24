@@ -7,6 +7,7 @@
 
 
     $this->get('cargo', 'CargoController@todos')->name('cargo.todos');
+    $this->any('cargo/PDF', 'CargoController@gerarPDF')->name('cargo.pdf');
     $this->get('cargo/novo', 'CargoController@novo')->name('cargo.novo');
     $this->post('cargo/novo', 'CargoController@store')->name('cargo.store');
     //editar e deletar cargo
@@ -18,6 +19,7 @@
 
     $this->get('fornecedor', 'FornecedorController@index')->name('fornecedor');
     $this->post('fornecedor/todos', 'FornecedorController@todos')->name('fornecedor.todos');
+    $this->any('fornecedor/PDF', 'FornecedorController@gerarPDF')->name('fornecedor.pdf');
     $this->get('fornecedor/novo', 'FornecedorController@novo')->name('fornecedor.novo');
     $this->post('fornecedor/novo', 'FornecedorController@store')->name('fornecedor.store');
     //editar e deletar fornecedor
@@ -28,6 +30,7 @@
 
     $this->get('cliente', 'ClienteController@index')->name('cliente');
     $this->post('cliente/todos', 'ClienteController@todos')->name('cliente.todos');
+    $this->any('cliente/PDF', 'ClienteController@gerarPDF')->name('cliente.pdf');
     $this->get('cliente/novo', 'ClienteController@novo')->name('cliente.novo');
     $this->post('cliente/novo', 'ClienteController@store')->name('cliente.store');
     //editar e deletar fornecedor
@@ -38,6 +41,7 @@
 
     $this->get('funcionario', 'FuncionarioController@index')->name('funcionario');
     $this->post('funcionario/todos', 'FuncionarioController@todos')->name('funcionario.todos');
+    $this->any('funcionario/PDF', 'FuncionarioController@gerarPDF')->name('funcionario.pdf');
     $this->get('funcionario/novo', 'FuncionarioController@novo')->name('funcionario.novo');
     $this->post('funcionario/novo', 'FuncionarioController@store')->name('funcionario.store');
     //editar e deletar funcionário
