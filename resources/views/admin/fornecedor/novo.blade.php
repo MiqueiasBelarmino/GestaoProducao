@@ -65,15 +65,15 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="cpf_cnpj">CPF/CNPJ:</label>
-                        <input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control" placeholder="Escreva..." 
-                        value="@if(isset($fornecedor)){{$fornecedor->for_cpf_cnpj}}@endif" required>
+                        <input type="text" name="cpf_cnpj" id="cpf_cnpj" class="cpf_cnpj form-control" placeholder="Escreva..." 
+                        value="@if(isset($fornecedor)){{$fornecedor->for_cpf_cnpj}}@endif"  required>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <!-- text input -->
                     <div class="form-group">
                         <label for="telefone">Telefone:</label>
-                        <input type="text" name="telefone" id="telefone" class="form-control" placeholder="(XX) XXXXXXXX" 
+                        <input type="text" name="telefone" id="telefone" class="telefone form-control" placeholder="(XX) XXXXXXXX" 
                         value="@if(isset($fornecedor)){{$fornecedor->for_telefone}}@endif" required>
                     </div>
                 </div>

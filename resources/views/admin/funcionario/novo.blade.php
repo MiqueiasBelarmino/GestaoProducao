@@ -91,7 +91,7 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="telefone">Telefone:</label>
-                        <input type="text" name="telefone" id="telefone" class="form-control" placeholder="(XX) XXXXXXXX" 
+                        <input type="text" name="telefone" id="telefone" class="telefone form-control" placeholder="(XX) XXXXXXXX" 
                         value="@if(isset($funcionario)){{$funcionario->fun_telefone}}@endif" required>
                     </div>
                 </div>
