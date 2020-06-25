@@ -45,13 +45,13 @@ class ClienteController extends Controller
     {
 
         $cliente = new Cliente;
-        $cliente->cli_nome_razao_social      = $request->cli_nome_razao_social;
-        $cliente->cli_nome_social_fantasia   = $request->cli_nome_social_fantasia;
-        $cliente->cli_rg_inscricao_estadual  = $request->cli_rg_inscricao_estadual;
-        $cliente->cli_cpf_cnpj               = $request->cli_cpf_cnpj;
-        $cliente->cli_telefone               = $request->cli_telefone;
-        $cliente->cli_email                  = $request->cli_email;
-        $cliente->cli_observacao             = $request->cli_observacao;
+        $cliente->cli_nome_razao_social      = $request->nome_razao_social;
+        $cliente->cli_nome_social_fantasia   = $request->nome_social_fantasia;
+        $cliente->cli_rg_inscricao_estadual  = $request->rg_inscricao_estadual;
+        $cliente->cli_cpf_cnpj               = $request->cpf_cnpj;
+        $cliente->cli_telefone               = $request->telefone;
+        $cliente->cli_email                  = $request->email;
+        $cliente->cli_observacao             = $request->observacao;
         $response = $cliente->salvar();
         if($response['success'])
             return redirect()->route('cliente.novo')->with('success',$response['message']);
@@ -74,13 +74,13 @@ class ClienteController extends Controller
     public function updatePost(Request $request, $id)
     {
         $cliente = Cliente::findOrFail($id);
-        $cliente->cli_nome_razao_social      = $request->cli_nome_razao_social;
-        $cliente->cli_nome_social_fantasia   = $request->cli_nome_social_fantasia;
-        $cliente->cli_rg_inscricao_estadual  = $request->cli_rg_inscricao_estadual;
-        $cliente->cli_cpf_cnpj               = $request->cli_cpf_cnpj;
-        $cliente->cli_telefone               = $request->cli_telefone;
-        $cliente->cli_email                  = $request->cli_email;
-        $cliente->cli_observacao             = $request->cli_observacao;
+        $cliente->cli_nome_razao_social      = $request->nome_razao_social;
+        $cliente->cli_nome_social_fantasia   = $request->nome_social_fantasia;
+        $cliente->cli_rg_inscricao_estadual  = $request->rg_inscricao_estadual;
+        $cliente->cli_cpf_cnpj               = $request->cpf_cnpj;
+        $cliente->cli_telefone               = $request->telefone;
+        $cliente->cli_email                  = $request->email;
+        $cliente->cli_observacao             = $request->observacao;
         $response = $cliente->salvar();
         if ($response['success'])
             return redirect()->route('cliente')->with('success', $response['message']);

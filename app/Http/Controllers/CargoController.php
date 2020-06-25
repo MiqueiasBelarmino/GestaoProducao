@@ -45,13 +45,13 @@ class CargoController extends Controller
 
         $cargo = new Cargo;
         //$cargo = $cargo->firstOrCreate([]);
-        $cargo->car_nome         = $request->car_nome;
-        $cargo->car_descricao    = $request->car_descricao;
+        $cargo->car_nome         = $request->nome;
+        $cargo->car_descricao    = $request->descricao;
         
-        $ammount = number_format($request->car_salario_base, 2,'.','');
+        $ammount = number_format($request->salario_base, 2,'.','');
         $cargo->car_salario_base = $ammount;
 
-        $cargo->car_observacao   = $request->car_observacao;
+        $cargo->car_observacao   = $request->observacao;
         $response = $cargo->salvar();
         //$response = $cargo->save();
         if($response['success'])
@@ -75,13 +75,13 @@ class CargoController extends Controller
     public function updatePost(MoneyValidationFormRequest $request, $id)
     {
         $cargo = Cargo::findOrFail($id);
-        $cargo->car_nome         = $request->car_nome;
-        $cargo->car_descricao    = $request->car_descricao;
+        $cargo->car_nome         = $request->nome;
+        $cargo->car_descricao    = $request->descricao;
 
-        $ammount = number_format($request->car_salario_base, 2,'.','');
+        $ammount = number_format($request->salario_base, 2,'.','');
         $cargo->car_salario_base = $ammount;
 
-        $cargo->car_observacao   = $request->car_observacao;
+        $cargo->car_observacao   = $request->observacao;
         $cargo->save();
         return redirect()->route('cargo.todos')->with('success', 'Cargo Atualizado');
     }

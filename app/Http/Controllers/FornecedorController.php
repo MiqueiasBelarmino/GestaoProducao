@@ -44,13 +44,13 @@ class FornecedorController extends Controller
     {
 
         $fornecedor = new Fornecedor;
-        $fornecedor->for_nome_razao_social      = $request->for_nome_razao_social;
-        $fornecedor->for_nome_social_fantasia   = $request->for_nome_social_fantasia;
-        $fornecedor->for_rg_inscricao_estadual  = $request->for_rg_inscricao_estadual;
-        $fornecedor->for_cpf_cnpj               = $request->for_cpf_cnpj;
-        $fornecedor->for_telefone               = $request->for_telefone;
-        $fornecedor->for_email                  = $request->for_email;
-        $fornecedor->for_observacao             = $request->for_observacao;
+        $fornecedor->for_nome_razao_social      = $request->nome_razao_social;
+        $fornecedor->for_nome_social_fantasia   = $request->nome_social_fantasia;
+        $fornecedor->for_rg_inscricao_estadual  = $request->rg_inscricao_estadual;
+        $fornecedor->for_cpf_cnpj               = $request->cpf_cnpj;
+        $fornecedor->for_telefone               = $request->telefone;
+        $fornecedor->for_email                  = $request->email;
+        $fornecedor->for_observacao             = $request->observacao;
         $response = $fornecedor->salvar();
         //$response = $fornecedor->save();
         if($response['success'])
@@ -74,13 +74,13 @@ class FornecedorController extends Controller
     public function updatePost(Request $request, $id)
     {
         $fornecedor = Fornecedor::findOrFail($id);
-        $fornecedor->for_nome_razao_social      = $request->for_nome_razao_social;
-        $fornecedor->for_nome_social_fantasia   = $request->for_nome_social_fantasia;
-        $fornecedor->for_rg_inscricao_estadual  = $request->for_rg_inscricao_estadual;
-        $fornecedor->for_cpf_cnpj               = $request->for_cpf_cnpj;
-        $fornecedor->for_telefone               = $request->for_telefone;
-        $fornecedor->for_email                  = $request->for_email;
-        $fornecedor->for_observacao             = $request->for_observacao;
+        $fornecedor->for_nome_razao_social      = $request->nome_razao_social;
+        $fornecedor->for_nome_social_fantasia   = $request->nome_social_fantasia;
+        $fornecedor->for_rg_inscricao_estadual  = $request->rg_inscricao_estadual;
+        $fornecedor->for_cpf_cnpj               = $request->cpf_cnpj;
+        $fornecedor->for_telefone               = $request->telefone;
+        $fornecedor->for_email                  = $request->email;
+        $fornecedor->for_observacao             = $request->observacao;
         $response = $fornecedor->salvar();
         if ($response['success'])
             return redirect()->route('fornecedor')->with('success', $response['message']);

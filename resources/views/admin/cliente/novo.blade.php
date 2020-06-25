@@ -34,8 +34,8 @@
                 <div class="col-sm-6">
                     <!-- text input -->
                     <div class="form-group">
-                        <label for="cli_nome_razao_social">Nome/Razão Social:</label>
-                        <input type="text" name="cli_nome_razao_social" id="cli_nome_razao_social" 
+                        <label for="nome_razao_social">Nome/Razão Social:</label>
+                        <input type="text" name="nome_razao_social" id="nome_razao_social" 
                         class="form-control" placeholder="Escreva..." required value="@if(isset($cliente)){{$cliente->cli_nome_razao_social}}@endif">
                     </div>
                 </div>
@@ -43,8 +43,8 @@
                 <div class="col-sm-6">
                     <!-- text input -->
                     <div class="form-group">
-                        <label for="cli_nome_social_fantasia">Nome Social/Nome Fantasia:</label>
-                        <input type="text" name="cli_nome_social_fantasia" id="cli_nome_social_fantasia"
+                        <label for="nome_social_fantasia">Nome Social/Nome Fantasia:</label>
+                        <input type="text" name="nome_social_fantasia" id="nome_social_fantasia"
                          class="form-control" placeholder="Escreva..." value="@if(isset($cliente)){{$cliente->cli_nome_social_fantasia}}@endif" required>
                     </div>
                 </div>
@@ -55,8 +55,8 @@
                 <div class="col-sm-3">
                     <!-- text input -->
                     <div class="form-group">
-                        <label for="cli_rg_inscricao_estadual">RG/Inscrição Estadual:</label>
-                        <input type="text" name="cli_rg_inscricao_estadual" id="cli_rg_inscricao_estadual"
+                        <label for="rg_inscricao_estadual">RG/Inscrição Estadual:</label>
+                        <input type="text" name="rg_inscricao_estadual" id="rg_inscricao_estadual"
                          class="form-control" placeholder="Escreva..." value="@if(isset($cliente)){{$cliente->cli_rg_inscricao_estadual}}@endif">
                     </div>
                 </div>
@@ -64,16 +64,16 @@
                 <div class="col-sm-3">
                     <!-- text input -->
                     <div class="form-group">
-                        <label for="cli_cpf_cnpj">CPF/CNPJ:</label>
-                        <input type="text" name="cli_cpf_cnpj" id="cli_cpf_cnpj" class="form-control" placeholder="Escreva..." 
+                        <label for="cpf_cnpj">CPF/CNPJ:</label>
+                        <input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control" placeholder="Escreva..." 
                         value="@if(isset($cliente)){{$cliente->cli_cpf_cnpj}}@endif" required>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <!-- text input -->
                     <div class="form-group">
-                        <label for="cli_telefone">Telefone:</label>
-                        <input type="text" name="cli_telefone" id="cli_telefone" class="form-control" placeholder="(XX) XXXXXXXX" 
+                        <label for="telefone">Telefone:</label>
+                        <input type="text" name="telefone" id="telefone" class="form-control" placeholder="(XX) XXXXXXXX" 
                         value="@if(isset($cliente)){{$cliente->cli_telefone}}@endif" required>
                     </div>
                 </div>
@@ -81,8 +81,8 @@
                 <div class="col-sm-3">
                     <!-- text input -->
                     <div class="form-group">
-                        <label for="cli_email">E-mail:</label>
-                        <input type="email" name="cli_email" id="cli_email" class="form-control" placeholder="Escreva..." 
+                        <label for="email">E-mail:</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Escreva..." 
                         value="@if(isset($cliente)){{$cliente->cli_email}}@endif" required>
                     </div>
                 </div>
@@ -91,8 +91,8 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="cli_observacao">Observação:</label>
-                        <textarea class="form-control" name="cli_observacao" id="cli_observacao"
+                        <label for="observacao">Observação:</label>
+                        <textarea class="form-control" name="observacao" id="observacao"
                          rows="4" placeholder="Escreva...">@if(isset($cliente)){{$cliente->cli_observacao}}@endif</textarea>
                     </div>
                 </div>

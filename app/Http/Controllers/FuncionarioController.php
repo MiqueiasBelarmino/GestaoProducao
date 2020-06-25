@@ -52,15 +52,15 @@ class FuncionarioController extends Controller
     {
 
         $funcionario = new Funcionario;
-        $funcionario->fun_nome          = $request->fun_nome;
-        $funcionario->fun_rg            = $request->fun_rg;
-        $funcionario->fun_cpf           = $request->fun_cpf;
-        $funcionario->fun_email         = $request->fun_email;
+        $funcionario->fun_nome          = $request->nome;
+        $funcionario->fun_rg            = $request->rg;
+        $funcionario->fun_cpf           = $request->cpf;
+        $funcionario->fun_email         = $request->email;
         $funcionario->car_codigo        = $request->car_codigo;
-        $funcionario->fun_comissao      = $request->fun_comissao;
-        $funcionario->fun_telefone      = $request->fun_telefone;
-        $funcionario->fun_data_admissao = $request->fun_data_admissao;
-        $funcionario->fun_observacao    = $request->fun_observacao;
+        $funcionario->fun_comissao      = $request->comissao;
+        $funcionario->fun_telefone      = $request->telefone;
+        $funcionario->fun_data_admissao = $request->data_admissao;
+        $funcionario->fun_observacao    = $request->observacao;
 
         $response = $funcionario->salvar();
         if ($response['success'])
@@ -78,15 +78,15 @@ class FuncionarioController extends Controller
     public function updatePost(Request $request, $id)
     {
         $funcionario = Funcionario::findOrFail($id);
-        $funcionario->fun_nome          = $request->fun_nome;
-        $funcionario->fun_rg            = $request->fun_rg;
-        $funcionario->fun_cpf           = $request->fun_cpf;
-        $funcionario->fun_email         = $request->fun_email;
+        $funcionario->fun_nome          = $request->nome;
+        $funcionario->fun_rg            = $request->rg;
+        $funcionario->fun_cpf           = $request->cpf;
+        $funcionario->fun_email         = $request->email;
         $funcionario->car_codigo        = $request->car_codigo;
-        $funcionario->fun_comissao      = $request->fun_comissao;
-        $funcionario->fun_telefone      = $request->fun_telefone;
-        $funcionario->fun_data_admissao = $request->fun_data_admissao;
-        $funcionario->fun_observacao    = $request->fun_observacao;
+        $funcionario->fun_comissao      = $request->comissao;
+        $funcionario->fun_telefone      = $request->telefone;
+        $funcionario->fun_data_admissao = $request->data_admissao;
+        $funcionario->fun_observacao    = $request->observacao;
         $response = $funcionario->salvar();
         if ($response['success'])
             return redirect()->route('funcionario')->with('success', $response['message']);

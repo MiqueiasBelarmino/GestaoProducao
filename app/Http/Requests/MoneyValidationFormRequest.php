@@ -24,7 +24,7 @@ class MoneyValidationFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'car_salario_base' => 'required|numeric',
+            'salario_base' => 'required|numeric',
         ];
     }
 }
