@@ -13,9 +13,16 @@
     <li><strike>separar cadastros de listagens</strike></li>
     <li><strike>formatar datas</strike></li>
     <li><strike>remover rg/cpf/data_admissao das listagens</strike></li>
-    <li>add máscara para telefone</li>
+    <li><strike>add máscara para telefone, CPF e CNPJ</strike></li>
     <li><strike>'configurar' listagem antes de gerar</strike></li>
     <li><strike>exportar listagem (PDF, CSV, XLS)</strike></li>
+    <li>2020-06-28</li>
+    <li>Funcionário sem assento no menu</li>
+    <li>checkbox "visualização completa"</li>
+    <li>validar "checkbox todos" se checkad desabilita os outros</li>
+    <li>remover nomenclatura editar </li>
+    <li>Senha para funcionários</li>
+    <li>Dashboard</li>
     <br>
 
     <br><br>

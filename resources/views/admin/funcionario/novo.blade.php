@@ -7,18 +7,19 @@
 @endif
 
 @section('content_header')
+<h1>Cadastro de Funcionário</h1>
 @stop
 
 
 @section('content')
 <div class="box">
-    <div class="box-header">
+<!-- <div class="box-header">
         @if(isset($funcionario))
             <h1>Editar Funcionário</h1>
         @else
             <h1>Novo Funcionário</h1>
         @endif
-    </div>
+    </div> -->
 
     <div class="box-body">
         @include('includes.alerts')
@@ -82,7 +83,7 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="comissao">Comissão:</label>
-                        <input type="number" step="0.01" min="1" max="100" name="comissao" id="comissao" class="form-control" 
+                        <input type="number" step="0.5" min="0" max="100" name="comissao" id="comissao" class="form-control" 
                         value="@if(isset($funcionario)){{$funcionario->fun_comissao}}@endif" required>
                     </div>
                 </div>
@@ -106,6 +107,17 @@
                         value="@if(isset($funcionario)){{$funcionario->fun_data_admissao}}@endif" required>
                     </div>
                 </div>
+                <div class="col-sm-3">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label for="senha">Senha:</label>
+                        <input type="text" name="senha" id="senha" class="form-control" placeholder="Escreva..." 
+                        value="@if(isset($funcionario)){{$funcionario->fun_senha}}@endif" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-sm-9">
                     <div class="form-group">
                         <label for="observacao">Observação:</label>

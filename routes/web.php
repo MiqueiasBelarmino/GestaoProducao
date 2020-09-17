@@ -6,16 +6,26 @@
     $this->get('/','AdminController@index')->name('admin.raiz');
 
 
-    $this->get('cargo', 'CargoController@todos')->name('cargo.todos');
+   
     $this->any('cargo/PDF', 'CargoController@gerarPDF')->name('cargo.pdf');
     $this->any('cargo/xlsx', 'CargoController@gerarXLSX')->name('cargo.excel');
     $this->any('cargo/csv', 'CargoController@gerarCSV')->name('cargo.csv');
+    
+    //editar e deletar cargo
+    $this->get('cargo', 'CargoController@todos')->name('cargo.todos');
     $this->get('cargo/novo', 'CargoController@novo')->name('cargo.novo');
     $this->post('cargo/novo', 'CargoController@store')->name('cargo.store');
-    //editar e deletar cargo
     $this->get('cargo/{id}/editar', 'CargoController@novo')->name('cargo.editar');
     $this->post('cargo/{id}/editar', 'CargoController@updatePost')->name('cargo.editar.salvar');
     $this->get('cargo/{id}/deletar', 'CargoController@delete')->name('cargo.deletar');
+
+
+    $this->get('processo', 'ProcessoController@todos')->name('processo.todos');
+    $this->get('processo/novo', 'ProcessoController@novo')->name('processo.novo');
+    $this->post('processo/novo', 'ProcessoController@store')->name('processo.store');
+    $this->get('processo/{id}/editar', 'ProcessoController@novo')->name('processo.editar');
+    $this->post('processo/{id}/editar', 'ProcessoController@updatePost')->name('processo.editar.salvar');
+    $this->get('processo/{id}/deletar', 'ProcessoController@delete')->name('processo.deletar');
 
 
 

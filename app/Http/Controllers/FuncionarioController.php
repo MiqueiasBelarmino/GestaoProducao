@@ -61,6 +61,7 @@ class FuncionarioController extends Controller
         $funcionario->fun_telefone      = $request->telefone;
         $funcionario->fun_data_admissao = $request->data_admissao;
         $funcionario->fun_observacao    = $request->observacao;
+        $funcionario->fun_senha         = bcrypt($request->senha);
 
         $response = $funcionario->salvar();
         if ($response['success'])
@@ -87,6 +88,7 @@ class FuncionarioController extends Controller
         $funcionario->fun_telefone      = $request->telefone;
         $funcionario->fun_data_admissao = $request->data_admissao;
         $funcionario->fun_observacao    = $request->observacao;
+        $funcionario->fun_senha         = bcrypt($request->senha);
         $response = $funcionario->salvar();
         if ($response['success'])
             return redirect()->route('funcionario')->with('success', $response['message']);

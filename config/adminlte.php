@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>Gestao de</b> Produção',
+    'logo' => '<b>Gestão de</b> Produção',
 
     'logo_mini' => '<b>G</b>P',
 
@@ -160,6 +160,11 @@ return [
                     'url'     => 'cliente/novo',
                     'icon'    => 'far fa-circle',
                 ],
+                [
+                    'text'    => 'Processo',
+                    'url'     => 'processo/novo',
+                    'icon'    => 'far fa-circle',
+                ],
             ]
         ],
         [
@@ -185,6 +190,11 @@ return [
                 [
                     'text'    => 'Cliente',
                     'url'     => 'cliente',
+                    'icon'    => 'far fa-circle',
+                ],
+                [
+                    'text'    => 'Processo',
+                    'url'     => 'processo',
                     'icon'    => 'far fa-circle',
                 ],
             ]
