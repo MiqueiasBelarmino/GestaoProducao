@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @if(isset($processo))
-    @section('title', 'Editar Processo')
+    @section('title', 'Processo')
 @else
     @section('title', 'Novo Processo')
 @endif
@@ -13,7 +13,7 @@
 <div class="box">
     <div class="box-header">
         @if(isset($processo))
-            <h1>Editar Processo</h1>
+            <h1>Processo</h1>
         @else
             <h1>Novo Processo</h1>
         @endif
@@ -33,7 +33,7 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="descricao">Descrição:</label>
-                        <input type="text" name="descricao" id="descricao" class="form-control" value="@if(isset($processo)) {{$processo->proc_descricao}} @endif" placeholder="Escreva...">
+                        <input type="text" name="descricao" id="descricao" class="form-control" value="@if(isset($processo)) {{$processo->proc_descricao}} @endif" placeholder="Escreva..." required>
                     </div>
                 </div>
 

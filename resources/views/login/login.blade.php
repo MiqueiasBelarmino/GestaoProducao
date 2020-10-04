@@ -17,7 +17,11 @@
         <p class="login-box-msg">{{ trans('adminlte::adminlte.login_message') }}</p>
         <form action="{{ route('login.logar') }}" method="post">
             {{ csrf_field() }}
-
+            @if ($errors->has('geral'))
+                <span class="help-block">
+                    <strong><li style="color:red;">{{ $errors->first('geral') }}</li></strong>
+                </span>
+                @endif
             <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                 <input type="email" name="fun_email" class="form-control" value="{{ old('email') }}" placeholder="{{ trans('adminlte::adminlte.email') }}" required>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

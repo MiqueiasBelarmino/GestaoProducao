@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @if(isset($fornecedor))
-    @section('title', 'Editar Fornecedor')
+    @section('title', 'Fornecedor')
 @else
     @section('title', 'Novo Fornecedor')
 @endif
@@ -14,7 +14,7 @@
 <div class="box">
     <div class="box-header">
         @if(isset($fornecedor))
-            <h1>Editar Fornecedor</h1>
+            <h1>Fornecedor</h1>
         @else
             <h1>Novo Fornecedor</h1>
         @endif
@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label for="nome_razao_social">Nome/Razão Social:</label>
                         <input type="text" name="nome_razao_social" id="nome_razao_social" 
-                        class="form-control" placeholder="Escreva..." required value="@if(isset($fornecedor)){{$fornecedor->for_nome_razao_social}}@endif">
+                        class="form-control" placeholder="Escreva..." value="@if(isset($fornecedor)){{$fornecedor->for_nome_razao_social}}@endif" required>
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                     <div class="form-group">
                         <label for="rg_inscricao_estadual">RG/Inscrição Estadual:</label>
                         <input type="text" name="rg_inscricao_estadual" id="rg_inscricao_estadual"
-                         class="form-control" placeholder="Escreva..." value="@if(isset($fornecedor)){{$fornecedor->for_rg_inscricao_estadual}}@endif">
+                         class="form-control" placeholder="Escreva..." value="@if(isset($fornecedor)){{$fornecedor->for_rg_inscricao_estadual}}@endif" required>
                     </div>
                 </div>
 

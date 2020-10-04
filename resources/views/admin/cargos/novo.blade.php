@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @if(isset($cargo))
-    @section('title', 'Editar Cargo')
+    @section('title', 'Cargo')
 @else
     @section('title', 'Novo Cargo')
 @endif
@@ -13,7 +13,7 @@
 <div class="box">
     <div class="box-header">
         @if(isset($cargo))
-            <h1>Editar Cargo</h1>
+            <h1>Cargo</h1>
         @else
             <h1>Novo Cargo</h1>
         @endif
@@ -33,7 +33,7 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" id="nome" class="form-control" value="@if(isset($cargo)) {{$cargo->car_nome}} @endif" placeholder="Escreva...">
+                        <input type="text" name="nome" id="nome" class="form-control" value="@if(isset($cargo)) {{$cargo->car_nome}} @endif" placeholder="Escreva..." required>
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <label for="salario_base">Salário Base (R$)</label>
                         <!-- <input type="number" step="0.01" min="1" max="20000" value="@if(isset($cargo)) {{$cargo->car_salario_base}} @endif" name="salario_base" id="salario_base" class="form-control" placeholder="Escreva..."> -->
-                        <input type="text" value="@if(isset($cargo)) {{$cargo->car_salario_base}} @endif" name="salario_base" id="salario_base" class="form-control" placeholder="Escreva...">
+                        <input type="text" value="@if(isset($cargo)) {{$cargo->car_salario_base}} @endif" name="salario_base" id="salario_base" class="form-control" placeholder="Escreva..." required>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="descricao">Descrição:</label>
-                        <input type="text" name="descricao" value="@if(isset($cargo)) {{$cargo->car_descricao}} @endif" id="descricao" class="form-control" placeholder="Escreva...">
+                        <input type="text" name="descricao" value="@if(isset($cargo)) {{$cargo->car_descricao}} @endif" id="descricao" class="form-control" placeholder="Escreva..." required>
                     </div>
                 </div>
                 <div class="col-sm-6">

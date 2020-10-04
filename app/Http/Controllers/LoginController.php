@@ -35,16 +35,20 @@ class LoginController extends Controller
         else
         {
             if (Hash::check($request->fun_senha, $fun_senha)) {
+                session(['user_code' => DB::table('funcionarios')->where('fun_email', $request->fun_email)->value('fun_codigo')]);
+                session(['user_email' => DB::table('funcionarios')->where('fun_email', $request->fun_email)->value('fun_nome')]);
                 return view('admin.home.index');
             }else
             {
-                return 'Credenciais inválidas';
+                return back()->withErrors(['geral'=>trans('E-mail/senha incorreto')]);
             }
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        return 'logout';
+        $request->session()->forget(['user_code', 'user_email']);
+        $request->session()->flush();
+        return view('login.login');
     }
 }

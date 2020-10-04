@@ -135,6 +135,23 @@ return [
             'url'         => 'admin',
             'icon'        => 'fa fa-tachometer-alt',
         ],
+        // [
+        //     'text'        => 'Manutenção',
+        //     // 'url'         => 'admin',
+        //     'icon'        => 'fa fa-list-alt',
+        //     'submenu'     => [
+        //         [
+        //             'text'    => 'Pagamento',
+        //             'url'     => '',
+        //             'icon'    => 'far fa-circle',
+        //         ],
+        //         [
+        //             'text'    => 'Recebimento',
+        //             'url'     => '',
+        //             'icon'    => 'far fa-circle',
+        //         ],
+        //     ]
+        // ],
         [
             'text'        => 'Cadastros',
             // 'url'         => 'admin',
@@ -146,13 +163,18 @@ return [
                     'icon'    => 'far fa-circle',
                 ],
                 [
-                    'text'    => 'Funcionario',
+                    'text'    => 'Funcionário',
                     'url'     => 'funcionario/novo',
                     'icon'    => 'far fa-circle',
                 ],
                 [
                     'text'    => 'Fornecedor',
                     'url'     => 'fornecedor/novo',
+                    'icon'    => 'far fa-circle',
+                ],
+                [
+                    'text'    => 'Material',
+                    'url'     => 'material/novo',
                     'icon'    => 'far fa-circle',
                 ],
                 [
@@ -178,13 +200,18 @@ return [
                     'icon'    => 'far fa-circle',
                 ],
                 [
-                    'text'    => 'Funcionario',
+                    'text'    => 'Funcionário',
                     'url'     => 'funcionario',
                     'icon'    => 'far fa-circle',
                 ],
                 [
                     'text'    => 'Fornecedor',
                     'url'     => 'fornecedor',
+                    'icon'    => 'far fa-circle',
+                ],
+                [
+                    'text'    => 'Material',
+                    'url'     => 'material',
                     'icon'    => 'far fa-circle',
                 ],
                 [

@@ -8,8 +8,8 @@
 
 @section('content')
 <div class="box">
-    <div class="box-header">
-        <!-- <a href="{{route('funcionario.novo')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Novo</a> -->
+    <!-- <div class="box-header">
+         <a href="{{route('funcionario.novo')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Novo</a>
 
         <div class="">
             <form action="{{route('funcionario.todos')}}" method="POST" class="form form-inline">
@@ -19,7 +19,7 @@
                 <button type="submit" class="btn btn-primary">Pesquisar</button>
             </form>
         </div>
-    </div>
+    </div> -->
     <div class="box-body">
         @include('includes.alerts')
         <form method="POST"  action="{{route('funcionario.pdf',[$request])}}" class="form form-inline">

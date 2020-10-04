@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @if(isset($cliente))
-    @section('title', 'Editar Cliente')
+    @section('title', 'Cliente')
 @else
     @section('title', 'Novo Cliente')
 @endif
@@ -14,7 +14,7 @@
 <div class="box">
     <div class="box-header">
         @if(isset($cliente))
-            <h1>Editar Cliente</h1>
+            <h1>Cliente</h1>
         @else
             <h1>Novo Cliente</h1>
         @endif
@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label for="nome_razao_social">Nome/Razão Social:</label>
                         <input type="text" name="nome_razao_social" id="nome_razao_social" 
-                        class="form-control" placeholder="Escreva..." required value="@if(isset($cliente)){{$cliente->cli_nome_razao_social}}@endif">
+                        class="form-control" placeholder="Escreva..." value="@if(isset($cliente)){{$cliente->cli_nome_razao_social}}@endif" required>
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <label for="nome_social_fantasia">Nome Social/Nome Fantasia:</label>
                         <input type="text" name="nome_social_fantasia" id="nome_social_fantasia"
-                         class="form-control" placeholder="Escreva..." value="@if(isset($cliente)){{$cliente->cli_nome_social_fantasia}}@endif" required>
+                         class="form-control" placeholder="Escreva..." value="@if(isset($cliente)){{$cliente->cli_nome_social_fantasia}}@endif">
                     </div>
                 </div>
             </div>
