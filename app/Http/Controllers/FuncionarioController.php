@@ -6,6 +6,7 @@ use App\Models\Cargo;
 use App\Models\Funcionario;
 use Illuminate\Http\Request;
 use App\Exports\FuncionarioExport;
+use App\Models\Endereco;
 use PDF;
 use Excel;
 
@@ -20,8 +21,10 @@ class FuncionarioController extends Controller
     public function novo($id=null)
     {
         $funcionario = Funcionario::find($id);
+        $endereco = $roles = Funcionario::find($id)->enderecos()->get();
+        //Endereco::where('fun_codigo', $id)->get()->first();
         $cargos = Cargo::pluck('car_nome','car_codigo');
-        return view('admin.funcionario.novo',compact('car_codigo','cargos','funcionario'));
+        return view('admin.funcionario.novo',compact('car_codigo','cargos','funcionario','endereco'));
     }
 
     public function endereco($id=null)

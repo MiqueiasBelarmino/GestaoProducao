@@ -66,9 +66,14 @@ class Funcionario extends Model implements AuthenticatableContract
         return $this->belongsTo(Cargo::class,'car_codigo');
     }
 
+    // public function enderecos()
+    // {
+    //     return $this->belongsToMany(Endereco::class, 'enderecos_funcionarios','fun_codigo','end_codigo');
+    // }
+
     public function enderecos()
     {
-        return $this->belongsToMany(Endereco::class, 'enderecos_funcionarios');
+        return $this->belongsToMany(Endereco::class,'enderecos_funcionarios','fun_codigo','end_codigo');
     }
 
 }
