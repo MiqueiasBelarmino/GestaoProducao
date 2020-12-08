@@ -122,15 +122,15 @@
                 <div class="col-sm-4">
                         <!-- text input -->
                         <div class="form-group">
-                            <label for="email">Rua:</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Escreva..." 
-                            value="@if(isset($endereco)){{}}@endif" required>
+                            <label for="rua">Rua:</label>
+                            <input type="text" name="rua" id="rua" class="form-control" placeholder="Escreva..." 
+                            value="@if(isset($endereco)){{$endereco->end_rua}}@endif" required>
                         </div>
                     </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="email">Número:</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Escreva..." 
+                        <label for="numero">Número:</label>
+                        <input type="text" name="numero" id="numero" class="form-control" placeholder="Escreva..." 
                         value="@if(isset($endereco)){{$endereco->end_numero}}@endif" required>
                     </div>
                 </div>
@@ -140,8 +140,8 @@
                     <div class="col-sm-3">
                         <!-- text input -->
                         <div class="form-group">
-                            <label for="comissao">Bairro:</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Escreva..." 
+                            <label for="bairro">Bairro:</label>
+                            <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Escreva..." 
                             value="@if(isset($endereco)){{$endereco->end_bairro}}@endif" required>
                         </div>
                     </div>
@@ -149,26 +149,26 @@
                     <div class="col-sm-3">
                         <!-- text input -->
                         <div class="form-group">
-                            <label for="telefone">Cidade:</label>
-                            <input type="text" name="telefone" id="telefone" class="telefone form-control" placeholder="(XX) XXXXXXXX" 
+                            <label for="cidade">Cidade:</label>
+                            <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Escreva..." 
                             value="@if(isset($endereco)){{$endereco->end_cidade}}@endif" required>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <!-- text input -->
                         <div class="form-group">
-                            <label for="comissao">CEP:</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Escreva..." 
-                            value="@if(isset($funcionario)){{$funcionario->fun_email}}@endif" onkeypress="$(this).mask('00000-000');" required>
+                            <label for="cep">CEP:</label>
+                            <input type="text" name="cep" id="cep" class="form-control" placeholder="Escreva..." 
+                            value="@if(isset($endereco)){{$endereco->end_cep}}@endif" onkeypress="$(this).mask('00000-000');" required>
                         </div>
                     </div>
 
                     <div class="col-sm-3">
                         <!-- text input -->
                         <div class="form-group">
-                            <label for="telefone">Estado:</label>
-                            <input type="text" name="telefone" id="telefone" class="telefone form-control" placeholder="(XX) XXXXXXXX" 
-                            value="@if(isset($endereco)){{$endereco->end_estado}}@endif" required>
+                            <label for="estado">Estado:</label>
+                            <input type="text" name="estado" id="estado" class="form-control" placeholder="Escreva..." 
+                            value="@if(isset($endereco)){{$endereco->end_estado}}@endif" onkeypress="$(this).mask('AA');" required>
                         </div>
                     </div>
 
@@ -182,8 +182,8 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="observacao">Observação (Endereço):</label>
-                        <textarea class="form-control" name="observacao" id="observacao" rows="2" placeholder="Escreva...">@if(isset($endereco)){{$endereco->end_observacao}}@endif</textarea>
+                        <label for="observacao_end">Observação (Endereço):</label>
+                        <textarea class="form-control" name="observacao_end" id="observacao_end" rows="2" placeholder="Escreva...">@if(isset($endereco)){{$endereco->end_observacao}}@endif</textarea>
                     </div>
                 </div>
             </div>

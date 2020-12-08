@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Endereco extends Model
 {
@@ -10,15 +11,33 @@ class Endereco extends Model
     public $incrementing = true;
     public $timestamps = false;
 
-    public function clientes()
+
+    public function salvar()
     {
-        return $this->belongsToMany(Cliente::class, 'enderecos_clientes');
+        DB::beginTransaction();
+
+        $endereco = $this->save();
+
+        if ($endereco) {
+            DB::commit();
+            return [
+                'success' => true,
+                'message' => 'Endereço registrado'
+            ];
+        } else {
+            DB::rollback();
+
+            return [
+                'success' => false,
+                'message' => 'Falha ao registrar'
+            ];
+        }
     }
 
-    // public function funcionarios()
-    // {
-    //     return $this->belongsToMany(Funcionario::class, 'enderecos_funcionarios','fun_codigo','end_codigo');
-    // }
+    public function clientes()
+    {
+        return $this->belongsToMany(Cliente::class, 'enderecos_clientes','cli_codigo','end_codigo');
+    }
 
     public function funcionarios()
     {

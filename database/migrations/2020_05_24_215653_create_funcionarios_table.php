@@ -29,7 +29,7 @@ class CreateFuncionariosTable extends Migration
             $table->date('fun_data_admissao');
             $table->string('fun_senha',250);
             $table->text('fun_observacao')->nullable();
-            //$table->timestamps();
+            $table->rememberToken();
         });
     }
 

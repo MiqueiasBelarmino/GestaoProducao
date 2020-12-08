@@ -1,39 +1,43 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard - Tasks</h1>
+<h1>Dashboard</h1>
 @stop
 
 @section('content')
+<div class="row">
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3>{{$clientes}}</h3>
 
-    <li><strike>add botão exclusão</strike></li>
-    <li><strike>add botão edição</strike></li>
-    <li><strike>separar cadastros de listagens</strike></li>
-    <li><strike>formatar datas</strike></li>
-    <li><strike>remover rg/cpf/data_admissao das listagens</strike></li>
-    <li><strike>add máscara para telefone, CPF e CNPJ</strike></li>
-    <li><strike>'configurar' listagem antes de gerar</strike></li>
-    <li><strike>exportar listagem (PDF, CSV, XLS)</strike></li>
-    <li>2020-06-28</li>
-    <li>Funcionário sem assento no menu</li>
-    <li>checkbox "visualização completa"</li>
-    <li>validar "checkbox todos" se checkad desabilita os outros</li>
-    <li>remover nomenclatura editar </li>
-    <li>Senha para funcionários</li>
-    <li>Dashboard</li>
-    <br>
+                <p>Clientes Registrados</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-red">
+            <div class="inner">
+                <h3>{{$materiais}}</h3>
 
-    <br><br>
-    CARGO: car_codigo, car_nome, car_descricao, car_salario_base, car_observacao
-    <br>
-    FUNCIONÁRIO: fun_codigo, fun_nome, fun_rg, fun_cpf, fun_email, car_codigo, fun_comissao, fun_telefone, fun_data_admissao, fun_senha, fun_observacao
-    <br>
-    FORNECEDOR: for_codigo, for_nome_razao_social, for_nome_social_fantasia,for_rg_inscricao_estadual, for_cpf_cnpj, for_telefone, for_email, for_observacao
-    <br>
-    ENDEREÇO: end_codigo, end_rua, end_numero, end_bairro, end_cidade, end_estado, end_cep, end_observacao
-    <br>
-    CLIENTE: cli_codigo, cli_nome_razao_social, cli_nome_social_fantasia, cli_rg_incricao_estadual, cli_cpf_cnpj, cli_telefone, cli_email, cli_observacao
-
+                <p>Materiais Registrados</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-cube"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
 @stop

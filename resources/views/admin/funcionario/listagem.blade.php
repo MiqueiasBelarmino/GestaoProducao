@@ -103,15 +103,12 @@
                         @endif
                         <td>
                             <a href="{{route('funcionario.editar',['id' => $funcionario->fun_codigo])}}" class="btn btn-primary">
-                                <!-- Editar -->
                                 <i class="fa fa-pen"></i>
                             </a>
-                            <a href="{{route('funcionario.endereco',['id' => $funcionario->fun_codigo])}}" class="btn btn-primary">
-                                <!-- Editar -->
+                            <!-- <a href="{{route('funcionario.endereco',['id' => $funcionario->fun_codigo])}}" class="btn btn-primary">
                                 <i class="fa fa-home"></i>
-                            </a>
+                            </a> -->
                             <a href="{{url('funcionario/'.$funcionario->fun_codigo.'/deletar')}}" class="btn btn-danger">
-                                <!-- Deletar -->
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>

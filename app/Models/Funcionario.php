@@ -24,6 +24,8 @@ class Funcionario extends Model implements AuthenticatableContract
         'fun_senha','fun_observacao',
     ];
 
+    protected $hidden = ['fun_senha','remember_token'];
+
     public function getFunCpf($value)
     {
        // $cpf = $this->attributes['fun_cpf'];

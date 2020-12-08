@@ -7,7 +7,9 @@ use App\Models\Funcionario;
 use Illuminate\Http\Request;
 use App\Exports\FuncionarioExport;
 use App\Models\Endereco;
+use App\Http\Requests\NumeroValidationFormRequest;
 use PDF;
+use DB;
 use Excel;
 
 class FuncionarioController extends Controller
@@ -17,41 +19,51 @@ class FuncionarioController extends Controller
     {
         return view('admin.funcionario.index');
     }
-    
-    public function novo($id=null)
+
+    public function novo($id = null)
     {
         $funcionario = Funcionario::find($id);
-        $endereco = $roles = Funcionario::find($id)->enderecos()->get();
+        if ($id != null) {
+            //$endereco = Funcionario::find($id)->enderecos()->get();
+            $temp = DB::table('enderecos')
+                ->join('enderecos_funcionarios', 'enderecos.end_codigo', '=', 'enderecos_funcionarios.end_codigo')
+                ->join('funcionarios', 'enderecos_funcionarios.fun_codigo', '=', 'funcionarios.fun_codigo')
+                ->select('enderecos.*')
+                ->where('funcionarios.fun_codigo', '=', $id)
+                ->get();
+            // dd($endereco);
+            $endereco = $temp[0];
+        }
         //Endereco::where('fun_codigo', $id)->get()->first();
-        $cargos = Cargo::pluck('car_nome','car_codigo');
-        return view('admin.funcionario.novo',compact('car_codigo','cargos','funcionario','endereco'));
+        $cargos = Cargo::pluck('car_nome', 'car_codigo');
+        return view('admin.funcionario.novo', compact('car_codigo', 'cargos', 'funcionario', 'endereco'));
     }
 
-    public function endereco($id=null)
+    public function endereco($id = null)
     {
         $funcionario = Funcionario::find($id);
-        return view('admin.funcionario.endereco',compact('funcionario'));
+        return view('admin.funcionario.endereco', compact('funcionario'));
     }
 
     public function gerarPDF(Request $request)
     {
         $funcionarios = Funcionario::all();
-        $pdf = PDF::loadView('admin.funcionario.pdf', compact('funcionarios','request'));
+        $pdf = PDF::loadView('admin.funcionario.pdf', compact('funcionarios', 'request'));
         //return dd($request);
         return $pdf->setPaper('a4')->stream('Funcionarios.pdf');
     }
 
-    public function gerarXLSX() 
+    public function gerarXLSX()
     {
         return Excel::download(new FuncionarioExport, 'Funcionarios.xlsx');
     }
 
-    public function gerarCSV() 
+    public function gerarCSV()
     {
         return Excel::download(new FuncionarioExport, 'Funcionarios.csv');
     }
 
-    public function store(Request $request, Funcionario $funcionario)
+    public function store(NumeroValidationFormRequest $request, Funcionario $funcionario)
     {
 
         $funcionario = new Funcionario;
@@ -66,20 +78,31 @@ class FuncionarioController extends Controller
         $funcionario->fun_observacao    = $request->observacao;
         $funcionario->fun_senha         = bcrypt($request->senha);
 
-        $response = $funcionario->salvar();
-        if ($response['success'])
-            return redirect()->route('funcionario.novo')->with('success', $response['message']);
+        $endereco = new Endereco;
+        $endereco->end_rua          = $request->rua;
+        $endereco->end_numero       = $request->numero;
+        $endereco->end_bairro       = $request->bairro;
+        $endereco->end_cidade       = $request->cidade;
+        $endereco->end_cep          = $request->cep;
+        $endereco->end_estado       = $request->estado;
+        $endereco->end_observacao   = $request->observacao_end;
 
+        $response = $funcionario->salvar();
+        if ($response['success']) {
+            $endereco->salvar();
+            $funcionario->enderecos()->attach($endereco->end_codigo);
+            return redirect()->route('funcionario.novo')->with('success', $response['message']);
+        }
         return redirect()->back()->with('error', $response['message']);
     }
 
     public function todos(Request $request)
     {
         $funcionarios = Funcionario::all();
-        return view('admin.funcionario.listagem', compact('funcionarios','request'));
+        return view('admin.funcionario.listagem', compact('funcionarios', 'request'));
     }
 
-    public function updatePost(Request $request, $id)
+    public function updatePost(NumeroValidationFormRequest $request, $id)
     {
         $funcionario = Funcionario::findOrFail($id);
         $funcionario->fun_nome          = $request->nome;
@@ -92,16 +115,42 @@ class FuncionarioController extends Controller
         $funcionario->fun_data_admissao = $request->data_admissao;
         $funcionario->fun_observacao    = $request->observacao;
         $funcionario->fun_senha         = bcrypt($request->senha);
+
+        $temp = DB::table('enderecos')
+            ->join('enderecos_funcionarios', 'enderecos.end_codigo', '=', 'enderecos_funcionarios.end_codigo')
+            ->join('funcionarios', 'enderecos_funcionarios.fun_codigo', '=', 'funcionarios.fun_codigo')
+            ->select('enderecos.*')
+            ->where('funcionarios.fun_codigo', '=', $funcionario->fun_codigo)
+            ->get();
+        $endereco = $temp[0];
+        $endereco->end_rua          = $request->rua;
+        $endereco->end_numero       = $request->numero;
+        $endereco->end_bairro       = $request->bairro;
+        $endereco->end_cidade       = $request->cidade;
+        $endereco->end_cep          = $request->cep;
+        $endereco->end_estado       = $request->estado;
+        $endereco->end_observacao   = $request->observacao_end;
+
         $response = $funcionario->salvar();
-        if ($response['success'])
+        if ($response['success']) {
+            $endereco->salvar();
             return redirect()->route('funcionario')->with('success', $response['message']);
-       return redirect()->back()->with('error', $response['message']);
+        }
+        return redirect()->back()->with('error', $response['message']);
     }
-  
+
     public function delete($id)
     {
         $funcionario = Funcionario::findOrFail($id);
+        $temp = DB::table('enderecos')
+            ->join('enderecos_funcionarios', 'enderecos.end_codigo', '=', 'enderecos_funcionarios.end_codigo')
+            ->join('funcionarios', 'enderecos_funcionarios.fun_codigo', '=', 'funcionarios.fun_codigo')
+            ->select('enderecos.*')
+            ->where('funcionarios.fun_codigo', '=', $funcionario->fun_codigo)
+            ->get();
+        $endereco = $temp[0];
+        $funcionario->enderecos()->detach($endereco->end_codigo);
         $funcionario->delete();
-        return redirect()->route('funcionario')->with('success','Funcionário deletado');
+        return redirect()->route('funcionario')->with('success', 'Funcionário deletado');
     }
 }

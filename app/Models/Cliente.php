@@ -35,6 +35,6 @@ class Cliente extends Model
 
     public function enderecos()
     {
-        return $this->belongsToMany(Endereco::class, 'enderecos_clientes');
+        return $this->belongsToMany(Endereco::class,'enderecos_clientes','cli_codigo','end_codigo');
     }
 }
