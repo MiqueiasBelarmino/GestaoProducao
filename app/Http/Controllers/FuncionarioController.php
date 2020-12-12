@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cargo;
 use App\Models\Funcionario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\Exports\FuncionarioExport;
 use App\Models\Endereco;
 use App\Http\Requests\NumeroValidationFormRequest;
@@ -15,9 +16,37 @@ use Excel;
 class FuncionarioController extends Controller
 {
     private $totalPage = 10;
+    
     public function index()
     {
         return view('admin.funcionario.index');
+    }
+
+    public function LoginActionHandler(Request $request)
+    {
+
+        // dd($request);
+        // $credentials = ['fun_email'=>Input::get('email'),'password'=>Input::get('password')];
+        $credentials = ['fun_email'=>$request->request->get("fun_email"),'password'=>$request->request->get("fun_senha")];
+        $funcionarioLog = auth()->guard('funcionario');
+        if($funcionarioLog->attempt($credentials)) {
+            return redirect()->route('admin.home');
+        } else {
+          return redirect()->back()->withErrors('Invalid Login, please try again');
+        }
+
+    }
+    public function username()
+    {
+        return 'fun_email';
+    }
+
+
+
+    public function logout()
+    {
+        auth()->guard('funcionario')->logout();
+        return back();
     }
 
     public function novo($id = null)

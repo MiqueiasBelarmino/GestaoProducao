@@ -13,11 +13,15 @@ return [
     |
     */
 
+    // 'defaults' => [
+    //     'guard' => 'web',
+    //     'passwords' => 'users',
+    // ],
+    
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'funcionario',
         'passwords' => 'users',
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -36,6 +40,10 @@ return [
     */
 
     'guards' => [
+        'funcionario' => [
+            'driver' => 'session',
+            'provider' => 'funcionario',
+        ],
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -65,9 +73,14 @@ return [
     */
 
     'providers' => [
+        'funcionario' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\Funcionario::class,
+            'table'  => 'funcionarios',
+        ],
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Funcionario::class,
+            'model' => App\User::class,
         ],
 
         // 'users' => [

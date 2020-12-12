@@ -3,14 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Carbon\Carbon;
 use DB;
 
-class Funcionario extends Model implements AuthenticatableContract
+class Funcionario extends Authenticatable
 {
-    use Authenticatable;
     public $timestamps = false;
     protected $table = "funcionarios";
     protected $primaryKey = 'fun_codigo';
@@ -25,6 +23,11 @@ class Funcionario extends Model implements AuthenticatableContract
     ];
 
     protected $hidden = ['fun_senha','remember_token'];
+
+    public function getAuthPassword()
+    {
+        return $this->fun_senha;
+    }
 
     public function getFunCpf($value)
     {
