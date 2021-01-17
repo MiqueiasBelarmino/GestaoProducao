@@ -26,6 +26,24 @@ class CreateMateriaisTable extends Migration
             $table->text('mat_observacao')->nullable();
             //$table->timestamps();
         });
+
+        // Schema::table('materiais_produtos', function($table)
+        // {
+        //     //$table->integer('mat_codigo')->change();
+		// 	$table->foreign('mat_codigo')
+        //         ->references('mat_codigo')
+        //         ->on('materiais')
+        //         ->onDelete('cascade');
+            
+        //     /*$table->foreign('proc_codigo','p_c')
+        //             ->references('proc_codigo')
+        //             ->on('processos')
+        //             ->onDelete('cascade');
+        //     $table->foreign('ped_codigo','o_c')
+        //         ->references('ped_codigo')
+        //         ->on('pedidos')
+        //         ->onDelete('cascade');*/
+        // });
     }
 
     /**

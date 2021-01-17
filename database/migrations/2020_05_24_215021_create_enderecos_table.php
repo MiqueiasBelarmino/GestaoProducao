@@ -24,6 +24,18 @@ class CreateEnderecosTable extends Migration
             $table->text('end_observacao')->nullable();
             //$table->timestamps();
         });
+        // Schema::table('enderecos_clientes',function (Blueprint $table){
+        //     $table->foreign('end_codigo')
+        //         ->references('end_codigo')
+        //         ->on('enderecos')
+        //         ->onDelete('cascade');
+        // });
+        // Schema::table('enderecos_funcionarios',function (Blueprint $table){
+        //     $table->foreign('end_codigo')
+        //         ->references('end_codigo')
+        //         ->on('enderecos')
+        //         ->onDelete('cascade');
+        // });
     }
 
     /**

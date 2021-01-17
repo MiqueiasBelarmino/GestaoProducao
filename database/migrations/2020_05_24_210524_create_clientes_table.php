@@ -24,6 +24,21 @@ class CreateClientesTable extends Migration
             $table->text('cli_observacao')->nullable();
             //$table->timestamps();
         });
+
+        // Schema::table('pedidos', function($table)
+        // {
+        //     //$table->integer('cli_codigo')->change();
+		// 	$table->foreign('cli_codigo')
+        //         ->references('cli_codigo')
+        //         ->on('clientes')
+        //         ->onDelete('cascade');
+        // });
+        // Schema::table('enderecos_clientes', function (Blueprint $table){
+        //     $table->foreign('cli_codigo')
+        //         ->references('cli_codigo')
+        //         ->on('clientes')
+        //         ->onDelete('cascade');
+        // });
     }
 
     /**

@@ -16,7 +16,7 @@ class CreateEnderecosClientesTable extends Migration
         Schema::create('enderecos_clientes', function (Blueprint $table) {
             $table->integer('cli_codigo')->unsigned();
             $table->integer('end_codigo')->unsigned();
-            $table->string('end_cli_observacao',200)->nullable();
+            $table->text('end_cli_observacao')->nullable();
             $table->primary(['cli_codigo','end_codigo']);
 
             $table->foreign('cli_codigo')

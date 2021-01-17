@@ -19,6 +19,12 @@ class CreateProcessosTable extends Migration
             $table->text('proc_observacao')->nullable();
             //$table->timestamps();
         });
+        // Schema::table('historico_producoes', function($table)
+        // {
+        //     // $table->increments('his_pro_codigo')->change();
+		// 	// $table->foreign('ped_codigo', 'fk_ped')->references('ped_codigo')->on('pedidos')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+		// 	$table->foreign('proc_codigo', 'fk_proc')->references('proc_codigo')->on('processos')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+        // });
     }
 
     /**
