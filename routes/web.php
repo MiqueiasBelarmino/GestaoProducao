@@ -25,6 +25,8 @@ $this->group(['middleware' => ['auth:funcionario']], function () {
     $this->post('cargo/{id}/editar', 'CargoController@updatePost')->name('cargo.editar.salvar');
     $this->get('cargo/{id}/deletar', 'CargoController@delete')->name('cargo.deletar');
 
+
+
     //material
     $this->get('material', 'MaterialController@todos')->name('material.todos');
     $this->get('material/novo', 'MaterialController@novo')->name('material.novo');
@@ -33,6 +35,14 @@ $this->group(['middleware' => ['auth:funcionario']], function () {
     $this->post('material/{id}/editar', 'MaterialController@updatePost')->name('material.editar.salvar');
     $this->get('material/{id}/deletar', 'MaterialController@delete')->name('material.deletar');
 
+    //produto
+    $this->get('produto', 'ProdutoController@todos')->name('produto.todos');
+    $this->get('produto/novo', 'ProdutoController@novo')->name('produto.novo');
+    $this->post('produto/novo', 'ProdutoController@store')->name('produto.store');
+    $this->get('produto/{id}/editar', 'ProdutoController@novo')->name('produto.editar');
+    $this->post('produto/{id}/editar', 'ProdutoController@updatePost')->name('produto.editar.salvar');
+    $this->get('produto/{id}/deletar', 'ProdutoController@delete')->name('produto.deletar');
+    $this->get('produto/produto/{id}', 'ProdutoController@getMateriais');
     //processo
     $this->get('processo', 'ProcessoController@todos')->name('processo.todos');
     $this->get('processo/novo', 'ProcessoController@novo')->name('processo.novo');

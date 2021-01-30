@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Cargo')
+@section('title', 'Editar Produto')
 
 @section('content_header')
 @stop
@@ -9,12 +9,12 @@
 
 <div class="box">
     <div class="box-header">
-        <h1>Editar Cargo</h1>
+        <h1>Editar Produto</h1>
     </div>
 
     <div class="box-body">
         @include('includes.alerts')
-        <form method="POST" action="{{ route('cargo.store') }}">
+        <form method="POST" action="{{ route('produto.store') }}">
             {{csrf_field()}}
             <div class="row">
 
@@ -36,10 +36,17 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label for="car_descricao">Descrição:</label>
+                        <input type="text" name="car_descricao" id="car_descricao" class="form-control" placeholder="Escreva...">
+                    </div>
+                </div>
+                <div class="col-sm-6">
                     <div class="form-group">
                         <label for="car_observacao">Observação:</label>
-                        <textarea class="form-control" name="car_observacao" id="car_observacao" rows="3" placeholder="Escreva..."></textarea>
+                        <textarea class="form-control" name="car_observacao" id="car_observacao" rows="4" placeholder="Escreva..."></textarea>
                     </div>
                 </div>
             </div>

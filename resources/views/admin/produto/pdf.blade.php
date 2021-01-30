@@ -11,7 +11,7 @@
             <tr>
                 <th>#</th>
                 <th>Nome</th>
-                <!-- <th>Descrição</th> -->
+                <th>Descrição</th>
                 <th>Salário Base</th>
                 <th>Observação</th>
             </tr>
@@ -21,7 +21,7 @@
                     <tr>
                         <td>{{$cargo->car_codigo}}</td>
                         <td>{{$cargo->car_nome}}</td>
-                        <!-- <td>{{$cargo->car_descricao}}</td> -->
+                        <td>{{$cargo->car_descricao}}</td>
                         <td>{{number_format($cargo->car_salario_base,2,'.',',')}}</td>
                         <td>{{$cargo->car_observacao}}</td>
                     </tr>

@@ -18,8 +18,9 @@ class CreateMaterialProdutosTable extends Migration
             $table->integer('prod_codigo')->unsigned();
             $table->double('mat_pro_valor', 10, 2)->default(0);
             // $table->double('mat_prod_rendimento',10,2);
-            $table->integer('mat_pro_unidade')->unsigned();
+            $table->integer('mat_pro_quantidade')->unsigned();
             $table->primary(['mat_codigo', 'prod_codigo']);
+            
             $table->foreign('prod_codigo')
                 ->references('prod_codigo')
                 ->on('produtos')
@@ -43,6 +44,9 @@ class CreateMaterialProdutosTable extends Migration
      */
     public function down()
     {
+        Schema::table('materiais', function (Blueprint $table) {
+            $table->dropForeign(['prod_codigo','mat_codigo']);
+        });
         Schema::dropIfExists('material_produtos');
     }
 }

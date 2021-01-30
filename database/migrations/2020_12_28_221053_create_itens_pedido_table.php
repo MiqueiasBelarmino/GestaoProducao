@@ -41,6 +41,9 @@ class CreateItensPedidoTable extends Migration
      */
     public function down()
     {
+        Schema::table('itens_pedido', function (Blueprint $table) {
+            $table->dropForeign(['prod_codigo','ped_codigo']);
+        });
         Schema::dropIfExists('itens_pedido');
     }
 }

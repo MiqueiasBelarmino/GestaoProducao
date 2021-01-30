@@ -24,8 +24,8 @@ class CreatePagamentosTable extends Migration
                 ->onDelete('cascade');
             $table->double('pag_valor', 10,2)->default(0);
             $table->integer('pag_parcela');
-            $table->date('pag_vencimento');
-            $table->date('pag_recebimento'); 
+            $table->date('pag_data_vencimento');
+            $table->date('pag_data_pagamento'); 
         });
     }
 
@@ -36,6 +36,9 @@ class CreatePagamentosTable extends Migration
      */
     public function down()
     {
+        Schema::table('pagamentos', function (Blueprint $table) {
+            $table->dropForeign(['ped_codigo']);
+        });
         Schema::dropIfExists('pagamentos');
     }
 }

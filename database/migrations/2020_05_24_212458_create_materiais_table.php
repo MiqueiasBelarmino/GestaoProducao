@@ -20,8 +20,8 @@ class CreateMateriaisTable extends Migration
                 ->references('for_codigo')
                 ->on('fornecedores')
                 ->onDelete('cascade');
+            $table->string('mat_unidade',20);
             $table->string('mat_nome',100)->unique();
-            $table->string('mat_descricao',200);
             $table->double('mat_custo',10,2);
             $table->text('mat_observacao')->nullable();
             //$table->timestamps();
@@ -53,6 +53,9 @@ class CreateMateriaisTable extends Migration
      */
     public function down()
     {
+        Schema::table('materiais', function (Blueprint $table) {
+            $table->dropForeign(['for_codigo']);
+        });
         Schema::dropIfExists('materiais');
     }
 }

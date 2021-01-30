@@ -37,6 +37,9 @@ class CreateEnderecosClientesTable extends Migration
      */
     public function down()
     {
+        Schema::table('enderecos_clientes', function (Blueprint $table) {
+            $table->dropForeign(['cli_codigo','end_codigo']);
+        });
         Schema::dropIfExists('enderecos_clientes');
     }
 }

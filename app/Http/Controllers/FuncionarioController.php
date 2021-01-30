@@ -31,8 +31,8 @@ class FuncionarioController extends Controller
         $credentials = ['fun_email'=>$request->request->get("fun_email"),'password'=>$request->request->get("fun_senha")];
         $funcionarioLog = auth()->guard('funcionario');
         if($funcionarioLog->attempt($credentials)) {
-            dd(Auth::user());
-            // return redirect()->route('admin.home');
+            //dd(Auth::user());
+            return redirect()->route('admin.home');
         } else {
           return redirect()->back()->withErrors('Invalid Login, please try again');
         }

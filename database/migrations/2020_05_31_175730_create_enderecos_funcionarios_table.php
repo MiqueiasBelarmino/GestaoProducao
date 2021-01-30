@@ -37,6 +37,9 @@ class CreateEnderecosFuncionariosTable extends Migration
      */
     public function down()
     {
+        Schema::table('enderecos_funcionarios', function (Blueprint $table) {
+            $table->dropForeign(['fun_codigo','end_codigo']);
+        });
         Schema::dropIfExists('enderecos_funcionarios');
     }
 }

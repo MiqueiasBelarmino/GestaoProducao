@@ -153,6 +153,24 @@ return [
         //     ]
         // ],
         [
+            'text'        => 'Pedido',
+            // 'url'         => 'admin',
+            'icon'        => 'fa fa-shopping-cart',
+            'submenu'     => [
+                [
+                    'text'    => 'Novo',
+                    'url'     => '',
+                    'icon'    => 'far fa-circle',
+                ],
+                [
+                    'text'    => 'Pagamento',
+                    'url'     => '',
+                    'icon'    => 'far fa-circle',
+                ],
+            ]
+        ],
+        [
+            
             'text'        => 'Cadastros',
             // 'url'         => 'admin',
             'icon'        => 'fa fa-edit',//'fa fa-fw fa-pencil-square-o',
@@ -185,6 +203,11 @@ return [
                 [
                     'text'    => 'Processo',
                     'url'     => 'processo/novo',
+                    'icon'    => 'far fa-circle',
+                ],
+                [
+                    'text'    => 'Produto',
+                    'url'     => 'produto/novo',
                     'icon'    => 'far fa-circle',
                 ],
             ]

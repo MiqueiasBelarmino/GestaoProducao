@@ -37,8 +37,9 @@ class LoginController extends Controller
             if (Hash::check($request->fun_senha, $fun_senha)) {
                 session(['user_code' => DB::table('funcionarios')->where('fun_email', $request->fun_email)->value('fun_codigo')]);
                 session(['user_email' => DB::table('funcionarios')->where('fun_email', $request->fun_email)->value('fun_nome')]);
+                return 'ESSSE';
                 // return view('admin.home.index');
-                return redirect()->route('admin.home');
+                //return redirect()->route('admin.home');
             }else
             {
                 return back()->withErrors(['geral'=>trans('E-mail/senha incorreto')]);

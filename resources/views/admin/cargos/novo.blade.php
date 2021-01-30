@@ -47,17 +47,10 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-6">
-                    <!-- text input -->
-                    <div class="form-group">
-                        <label for="descricao">Descrição:</label>
-                        <input type="text" name="descricao" value="@if(isset($cargo)) {{$cargo->car_descricao}} @endif" id="descricao" class="form-control" placeholder="Escreva..." required>
-                    </div>
-                </div>
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="observacao">Observação:</label>
-                        <textarea class="form-control" name="observacao" id="observacao" rows="4" placeholder="Escreva...">@if(isset($cargo)){{trim($cargo->car_observacao)}}@endif</textarea>
+                        <textarea class="form-control" name="observacao" id="observacao" rows="3" placeholder="Escreva...">@if(isset($cargo)){{trim($cargo->car_observacao)}}@endif</textarea>
                     </div>
                 </div>
             </div>

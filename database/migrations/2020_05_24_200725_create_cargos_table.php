@@ -16,7 +16,6 @@ class CreateCargosTable extends Migration
         Schema::create('cargos', function (Blueprint $table) {
             $table->increments('car_codigo');
             $table->string('car_nome',100)->unique();
-            $table->string('car_descricao',200);
             $table->double('car_salario_base', 10,2)->default(0);
             $table->text('car_observacao')->nullable();
             //$table->timestamps();

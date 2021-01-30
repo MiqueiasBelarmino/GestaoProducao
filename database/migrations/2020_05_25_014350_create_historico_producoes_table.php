@@ -57,6 +57,9 @@ class CreateHistoricoProducoesTable extends Migration
      */
     public function down()
     {
+        Schema::table('historico_producoes', function (Blueprint $table) {
+            $table->dropForeign(['ped_codigo','proc_codigo']);
+        });
         Schema::dropIfExists('historico_producoes');
     }
 }

@@ -41,6 +41,9 @@ class CreateDetalhesCamisetaTable extends Migration
      */
     public function down()
     {
+        Schema::table('detalhes_camiseta', function (Blueprint $table) {
+            $table->dropForeign(['prod_codigo']);
+        });
         Schema::dropIfExists('detalhes_camiseta');
     }
 }

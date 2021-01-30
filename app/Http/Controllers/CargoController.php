@@ -46,7 +46,7 @@ class CargoController extends Controller
         $cargo = new Cargo;
         //$cargo = $cargo->firstOrCreate([]);
         $cargo->car_nome         = $request->nome;
-        $cargo->car_descricao    = $request->descricao;
+        //$cargo->car_descricao    = $request->descricao;
         
         $ammount = number_format($request->salario_base, 2,'.','');
         $cargo->car_salario_base = $ammount;
@@ -76,7 +76,7 @@ class CargoController extends Controller
     {
         $cargo = Cargo::findOrFail($id);
         $cargo->car_nome         = $request->nome;
-        $cargo->car_descricao    = $request->descricao;
+        //$cargo->car_descricao    = $request->descricao;
 
         $ammount = number_format($request->salario_base, 2,'.','');
         $cargo->car_salario_base = $ammount;

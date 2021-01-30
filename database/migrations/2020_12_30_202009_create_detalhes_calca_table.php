@@ -40,6 +40,9 @@ class CreateDetalhesCalcaTable extends Migration
      */
     public function down()
     {
+        Schema::table('detalhes_calca', function (Blueprint $table) {
+            $table->dropForeign(['prod_codigo']);
+        });
         Schema::dropIfExists('detalhes_calca');
     }
 }

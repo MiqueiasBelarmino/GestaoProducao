@@ -26,7 +26,8 @@ class CreatePedidosTable extends Migration
                     ->on('funcionarios')
                     ->onDelete('cascade');
             $table->double('ped_total',10,2)->default(0);
-            $table->date('ped_data_abertura');
+            $table->date('ped_data');
+            $table->date('ped_data_aprovacao');
             $table->date('ped_data_entrega');
             $table->string('ped_status',30);
             $table->text('ped_observacao')->nullable();
@@ -54,6 +55,9 @@ class CreatePedidosTable extends Migration
      */
     public function down()
     {
+        Schema::table('pedidos', function (Blueprint $table) {
+            $table->dropForeign(['cli_codigo','fun_codigo']);
+        });
         Schema::dropIfExists('pedidos');
     }
 }

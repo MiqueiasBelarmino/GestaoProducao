@@ -17,11 +17,11 @@ class MaterialController extends Controller
         return view('admin.material.index');
     }
 
-    public function novo($id=null)
+    public function novo($id = null)
     {
         $material = Material::find($id);
-        $fornecedores = Fornecedor::pluck('for_nome_razao_social','for_codigo');
-        return view('admin.material.novo',compact('material','fornecedores'));
+        $fornecedores = Fornecedor::pluck('for_nome_razao_social', 'for_codigo');
+        return view('admin.material.novo', compact('material', 'fornecedores'));
     }
 
     // public function gerarPDF()
@@ -49,28 +49,28 @@ class MaterialController extends Controller
         $material->mat_nome         = $request->nome;
         $material->mat_descricao    = $request->descricao;
         $material->for_codigo       = $request->for_codigo;
-        $ammount = number_format($request->custo, 2,'.','');
+        $ammount = number_format($request->custo, 2, '.', '');
         $material->mat_custo = $ammount;
 
         $material->mat_observacao   = $request->observacao;
         $response = $material->salvar();
         //$response = $material->save();
-        if($response['success'])
-            return redirect()->route('material.novo')->with('success',$response['message']);
-        
-            return redirect()->back()->with('error',$response['message']);
+        if ($response['success'])
+            return redirect()->route('material.novo')->with('success', $response['message']);
+
+        return redirect()->back()->with('error', $response['message']);
     }
 
     public function todos()
     {
         $materiais = Material::all();
-        return view('admin.material.index',compact('materiais'));
+        return view('admin.material.index', compact('materiais'));
     }
 
     public function updateGet($id)
     {
         $material = Material::find($id);
-        return view('admin.material.editar',compact('material'));
+        return view('admin.material.editar', compact('material'));
     }
 
     public function updatePost(CustoValidationFormRequest $request, $id)
@@ -79,14 +79,14 @@ class MaterialController extends Controller
         $material->mat_nome         = $request->nome;
         $material->mat_descricao    = $request->descricao;
         $material->for_codigo       = $request->for_codigo;
-        $ammount = number_format($request->custo, 2,'.','');
+        $ammount = number_format($request->custo, 2, '.', '');
         $material->mat_custo = $ammount;
 
         $material->mat_observacao   = $request->observacao;
         $material->save();
         return redirect()->route('material.todos')->with('success', 'Material Atualizado');
     }
-  
+
     public function delete($id)
     {
         $material = Material::findOrFail($id);
@@ -95,9 +95,10 @@ class MaterialController extends Controller
         //     return redirect()->route('material.todos')->with('error','Há funcionários relacionados a esse material');
         // }else
         // {
-            $material->delete();
+        $material->delete();
         // }
-        return redirect()->route('material.todos')->with('success','Material Deletado');
+        return redirect()->route('material.todos')->with('success', 'Material Deletado');
     }
 
+    
 }

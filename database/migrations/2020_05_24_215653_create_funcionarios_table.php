@@ -16,7 +16,7 @@ class CreateFuncionariosTable extends Migration
     {
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->increments('fun_codigo');
-            $table->string('fun_nome', 80);
+            $table->string('fun_nome', 100);
             $table->string('fun_rg', 15);
             $table->string('fun_cpf', 14)->unique();
             $table->string('fun_email', 50);
@@ -25,6 +25,7 @@ class CreateFuncionariosTable extends Migration
                 ->references('car_codigo')
                 ->on('cargos');
             //->onDelete('cascade');
+            $table->double('fun_salario', 10,2)->default(0);
             $table->integer('fun_comissao')->unsigned();
             $table->string('fun_telefone', 18);
             $table->date('fun_data_admissao');
@@ -55,6 +56,9 @@ class CreateFuncionariosTable extends Migration
      */
     public function down()
     {
+        Schema::table('funcionarios', function (Blueprint $table) {
+            $table->dropForeign(['car_codigo']);
+        });
         Schema::dropIfExists('funcionarios');
     }
 }
