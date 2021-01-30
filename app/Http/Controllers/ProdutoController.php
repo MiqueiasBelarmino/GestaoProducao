@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CustoValidationFormRequest;
 use App\Models\Material;
+use App\Models\MaterialProduto;
 use App\Models\Produto;
 use PDF;
 use Excel;
@@ -61,40 +62,26 @@ class ProdutoController extends Controller
     {
 
         $request = $request->all();
-        // // dd($dados);
-        // // return response()->json(['success'=>'Form is successfully submitted!']);
-        // // dd($dados);
-        // // if ($request->ajax()) {
-        // //     $data = array(
-        // //         'prod_nome'    =>  $request->first_name,
-        // //         'prod_valor'     =>  '1'
-        // //     );
-        // //     $id = DB::table('produtos')->insert($data);
-        // //     if ($id > 0) {
-        // //        return "SUCESSO";
-        // //     }
-        // // }
+        $produto = new Produto;
 
-        // // $this->output->set_content_type('application/json');
-        // // echo json_encode(array('check' => 'check'));
+        $produto->prod_nome         = $request['data'][0]['nome'];
+        $ammount = number_format($request['data'][0]['valor'], 2, '.', '');
+        $produto->prod_valor        = $ammount;
+        $produto->prod_observacao   = $request['data'][0]['observacao'];
+        $response = $produto->salvar();
+        if ($response['success']) {
 
-        // $produto = new Produto;
-        // // //$produto = $produto->firstOrCreate([]);
-        // $produto->prod_nome         = $request->nome;
-        // $produto->prod_valor    = 20;
-        // // $produto->for_codigo       = $request->for_codigo;
-        // // $ammount = number_format($request->custo, 2,'.','');
-        // // $produto->mat_custo = $ammount;
-
-        // $produto->prod_observacao   = 'adssdsd';
-        // $response = $produto->salvar();
-        // // //$response = $produto->save();
-        // if ($response['success']) {
-        //     return response()->json(['success' => $response['message']]);
-        //     // return redirect()->route('produto.novo')->with('success',$response['message']);
-        // }
-        // // return redirect()->back()->with('error', $response['message']);
-        return response()->json(['success' => $request['data']]);
+            for ($i = 1; $i <= (sizeof($request['data']) - 1); $i++) {
+                $material_produto = new MaterialProduto();
+                $material_produto->mat_codigo = $request['data'][$i]['material'];
+                $material_produto->prod_codigo = $produto->prod_codigo;
+                $material_produto->mat_pro_valor = $request['data'][$i]['custo_material'];
+                $material_produto->mat_pro_quantidade = $request['data'][$i]['quantidade'];
+                $material_produto->save();
+            }
+            return response()->json(['success' => $response['message']]);
+        }
+        return response()->json(['error' => $response['message']]);
     }
 
     public function todos()

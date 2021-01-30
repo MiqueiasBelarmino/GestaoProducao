@@ -126,9 +126,10 @@
                 dataType: 'json',
                 data: $data,
                 success: function(data) {
-                    console.log(data);
+                    Swal.fire('', '', 'success');
                 },
-                error: function(data){
+                error: function(data) {
+                    Swal.fire('', '', 'error');
                     console.log(data);
                 }
 
@@ -172,8 +173,6 @@
             $('#MAIN').click(function() {
                 //validar se está tudo preenchido
 
-                let _token = $('meta[name="csrf-token"]').attr('content');
-
                 if (isEmpty() == 0) {
                     var table_data = [];
 
@@ -190,8 +189,8 @@
                         } else {
                             var sub = {
                                 'material': $(tr).find('td:eq(0)').text(),
-                                'quantidade': $(tr).find('td:eq(1)').text(),
-                                'valor': $(tr).find('td:eq(2)').text()
+                                'quantidade': $(tr).find('td:eq(2)').text(),
+                                'custo_material': $(tr).find('td:eq(3)').text()
                             };
                             table_data.push(sub);
                         }

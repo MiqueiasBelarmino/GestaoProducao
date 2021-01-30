@@ -34,8 +34,8 @@ class Produto extends Model
     }
 
 
-    // public function fornecedor()
-    // {
-    //     return $this->belongsTo(Fornecedor::class, 'for_codigo');
-    // }
+    public function materiais()
+    {
+        return $this->belongsToMany(MaterialProduto::class,'material_produtos','prod_codigo',['mat_codigo','prod_codigo']);
+    }
 }
