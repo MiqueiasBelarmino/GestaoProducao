@@ -34,7 +34,7 @@
                     <input type="text" name="nome" id="nome" class="form-control" value="@if(isset($produto)) {{$produto->mat_nome}} @endif" placeholder="Escreva..." required>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-2">
                 <div class="form-group">
                     <label for="valor">Valor(R$):</label>
                     <input type="text" name="valor" id="valor" class="form-control" value="@if(isset($produto)) {{$produto->prod_valor}} @endif" disabled>
@@ -60,7 +60,7 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label for="custo_material">Valor(R$):</label>
-                    <input type="text" name="custo_material" id="custo_material" class="form-control" disabled>
+                    <input type="text" name="custo_material" id="custo_material" class="form-control" readonly>
                 </div>
             </div>
             <div class="col-sm-2">
@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" id="MAIN" name="form_princ" class="btn btn-primary">Confirmar</button>
+        <button type="submit" id="MAIN" class="btn btn-primary">Confirmar</button>
         @else
         <h1>Nenhum material encontrado!</h1>
         <h2>Para cadastrar produtos devem existir materiais!</h2>

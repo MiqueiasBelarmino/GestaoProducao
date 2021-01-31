@@ -47,39 +47,90 @@
     <!-- <script src="{{ asset('vendor/adminlte/vendor/select2/dist/js/select2.min.js') }}"></script> -->
     <script type="text/javascript">
         var qtd_materiais = 0;
+        var qtd_produtos = 0;
         var sub_material = 0;
         var total_material = 0;
         $(document).ready(function() {
+            Date.prototype.toDateInputValue = (function(date) {
+                var local = new Date(date);
+                local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+                return local.toJSON().slice(0, 10);
+            });
+
+            Date.prototype.addDays = function(days) {
+                var date = new Date(this.valueOf());
+                date.setDate(date.getDate() + days);
+                return date;
+            }
+
+            document.getElementById('ped_data').value = new Date().toDateInputValue(new Date().addDays(0));
+            document.getElementById('ped_data_entrega').value = new Date().toDateInputValue(new Date().addDays(45));
+            document.getElementById('ped_data_vencimento').value = new Date().toDateInputValue(new Date().addDays(0));
+            // date('d/m/Y', strtotime('+5 days', strtotime('14-07-2014')))
             $('#seletor_material').select2();
+            $('#seletor_cliente').select2();
+            $('#seletor_produto').select2();
+            $('#seletor_cor').select2();
 
             $('#seletor_material').change(function() {
                 fetchRecords($('#seletor_material').val());
             });
+            $('#seletor_produto').change(function() {
+                getProdutosValor($('#seletor_produto').val());
+            });
+
+            $('#seletor_forma_pagamento').change(function() {
+
+                var adulto = $("#pag_parcela");
+                var vencimento = $('#ped_data_vencimento');
+                if ($('#seletor_forma_pagamento option:selected').text() == "Parcelamento") {
+                    adulto.prop("disabled", false);
+                    vencimento.prop("disabled", false);
+                }else if ($('#seletor_forma_pagamento option:selected').text() == "30 dias") {
+                    adulto.prop("disabled", true);
+                    vencimento.prop("disabled", false);
+                    document.getElementById('ped_data_vencimento').value = new Date().toDateInputValue(new Date().addDays(30));
+                } else {
+                    adulto.prop("disabled", true);
+                    document.getElementById('ped_data_vencimento').value = new Date().toDateInputValue(new Date().addDays(0));
+                }
+
+
+            });
 
         });
 
-        function remove(rowId) {
+
+        function removeMaterial(rowId) {
             $('#' + rowId).remove();
+            var aux = 0;
+            qtd_materiais--;
+
+            $('#tabela_materiais tr').each(function(row, tr) {
+                if ($(tr).find('td:eq(0)').text() == "") {} else {
+                    aux += parseFloat($(tr).find('td:eq(3)').text());
+                }
+
+            });
+            // total_material = parseFloat(total_material) - parseFloat($aux);
+
+            $('#valor').val(aux);
         }
 
-        function isEmpty() {
-            if ($('#nome').val() == "") {
-                return 1;
-            } else if (qtd_materiais == 0) {
-                return 2;
-            }
-            return 0;
-        }
+        function removeProduto(rowId) {
+            $('#' + rowId).remove();
+            var aux = 0;
+            qtd_materiais--;
 
-        function isProduto() {
-            if ($('#unidade').val() == "") {
-                return 1;
-            } else if ($('#custo_material').val() == "") {
-                return 2;
-            } else if ($('#quantidade').val() == "") {
-                return 3;
-            }
-            return 0;
+            $('#tabela_produtos tr').each(function(row, tr) {
+                if ($(tr).find('td:eq(0)').text() == "") {} else {
+                    aux += parseFloat($(tr).find('td:eq(3)').text());
+                }
+
+            });
+            // total_material = parseFloat(total_material) - parseFloat($aux);
+
+            $('#valor').val(aux);
         }
 
         function fetchRecords(id) {
@@ -107,73 +158,75 @@
             });
         }
 
-        function savaData($data) {
-            var _token = $('meta[name="_token"]').attr('content');
+        // function desabilitar(valor) {
 
-            $.ajaxSetup({
+        // }
 
-                headers: {
-
-                    'X-CSRF-TOKEN': _token
-
-                }
-
-            });
+        function getProdutosValor(id) {
             $.ajax({
-                type: 'POST',
-                url: "{{route('produto.store')}}",
-                // url: "produto/novo",
+                url: 'pedido/' + id,
+                type: 'get',
                 dataType: 'json',
-                data: $data,
-                success: function(data) {
-                    Swal.fire('', '', 'success');
-                },
-                error: function(data) {
-                    Swal.fire('', '', 'error');
-                    console.log(data);
-                }
+                success: function(response) {
 
+                    var len = 0;
+                    if (response['data'] != null) {
+                        len = response['data'].length;
+                    }
+
+                    if (len > 0) {
+                        var custo = response['data'][0].prod_valor;
+                        $('#custo_produto').val(custo);
+                    }
+                }
             });
         }
     </script>
     <script type="text/javascript">
         $(function() {
 
+            var setNumber = function($tabela) {
+                return table_len = $('#' + $tabela + ' tbody tr').length + 1;
+            }
+
             $('#add_material').click(function() {
-                // console.log(isProduto());
-                if (isProduto() == 0) {
+                if ($('#unidade').val() == "" || $('#custo_material').val() == "" || $('#quantidade').val() == "") {
+                    Swal.fire('Escolha o material e a quantidade!');
+                } else {
                     var nome = $('#seletor_material option:selected').text();
-                    var quantidade = $('#quantidade').val();
-                    var valor = $('#custo_material').val();
-                    sub_material = (valor * quantidade);
-                    total_material += sub_material;
+                    var quantidade = parseFloat($('#quantidade').val());
+                    var valor = parseFloat($('#custo_material').val());
+                    sub_material = (parseFloat(valor) * parseFloat(quantidade));
+                    total_material += parseFloat(sub_material);
+                    $id = setNumber('tabela_materiais');
                     $('#tabela_materiais tbody:last-child').append(
-                        '<tr id="' + $('#seletor_material').val() + '">' +
+                        '<tr id="' + $id + '">' +
                         '<td style="display:none;">' + $('#seletor_material').val() + '</td>' +
                         '<td>' + nome + '</td>' +
                         '<td>' + quantidade + '</td>' +
                         '<td>' + sub_material + '</td>' +
                         '<td>' +
                         // '<a class="delete_class btn btn-danger" id="' + $('#seletor_material').val() + '">' +
-                        '<button onclick="remove(' + $('#seletor_material').val() + ')">' +
+                        '<button onclick="removeMaterial(' + $id + ')">' +
                         '<i class="fa fa-trash"></i>' +
-                        //remover da table em tela : https://stackoverflow.com/questions/34956481/ajax-delete-row-in-table-with-php-id-selected
-                        //https://www.google.com/search?q=ajax+jquery+remove+line+from+table&oq=ajax+jquery+remove+line+from+table&aqs=chrome..69i57.12700j0j1&sourceid=chrome&ie=UTF-8 
+
                         '</button>' +
                         // '</a>' +
                         '</td>' +
                         '</tr>'
                     );
+                    $('#valor').val(total_material);
                     qtd_materiais++;
-                } else {
-                    Swal.fire('Escolha o material e a quantidade!');
+                    sub_material = 0;
                 }
             });
 
             $('#MAIN').click(function() {
-                //validar se está tudo preenchido
-
-                if (isEmpty() == 0) {
+                if ($('#nome').val() == "") {
+                    Swal.fire('Informe o nome do produto!');
+                } else if (qtd_materiais) {
+                    Swal.fire('Informe os materiais usados no produto!');
+                } else {
                     var table_data = [];
 
                     var prod = {
@@ -196,21 +249,172 @@
                         }
 
                     });
-                    var data = {
+                    var dataForm = {
                         'data': table_data
                     };
                     //salvar
-                    savaData(data);
+                    var _token = $('meta[name="_token"]').attr('content');
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': _token
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{route('produto.store')}}",
+                        // url: "produto/novo",
+                        dataType: 'json',
+                        data: dataForm,
+                        success: function(data) {
+                            total_material = 0;
+                            sub_material = 0;
+                            qtd_materiais = 0;
+                            Swal.fire({
+                                title: 'Produto registrado!',
+                                icon: 'success',
+                                showDenyButton: true,
+                                showCancelButton: false,
+                                confirmButtonText: 'OK',
+                            }).then((result) => {
+                                window.location.href = "{{route('produto.novo')}}";
+                            })
 
+                        },
+                        error: function(data) {
+                            Swal.fire('', '', 'error');
+                            console.log(data);
+                        }
 
+                    });
                     //zerar variéveis de valores
-                } else if (isEmpty() == 1) {
-                    Swal.fire('Informe o nome do produto!');
-                } else if (isEmpty() == 2) {
-                    Swal.fire('Informe os materiais usados no produto!');
                 }
 
             });
+
+
+            //AJAX PEDIDO
+            $('#add_produto').click(function() {
+                if ($('#custo_produto').val() == "" || $('#quantidade').val() == "") {
+                    Swal.fire('Escolha o produto e a quantidade!');
+                } else {
+                    var nome = $('#seletor_produto option:selected').text();
+                    var quantidade = $('#quantidade').val();
+                    var valor = parseFloat($('#custo_produto').val());
+                    var sub_produto = (valor * quantidade);
+                    var cor = $('#seletor_produto option:selected').text();
+                    var aux = 0;
+                    $id = setNumber('tabela_produtos');
+                    $('#tabela_produtos tbody:last-child').append(
+                        '<tr id="' + $id + '">' +
+                        '<td style="display:none;">' + $('#seletor_produto').val() + '</td>' +
+                        '<td>' + nome + '</td>' +
+                        '<td>' + quantidade + '</td>' +
+                        '<td>' + cor + '</td>' +
+                        '<td>' + sub_produto + '</td>' +
+                        '<td>' +
+                        // '<a class="delete_class btn btn-danger" id="' + $('#seletor_material').val() + '">' +
+                        '<button onclick="removeProduto(' + $id + ')">' +
+                        '<i class="fa fa-trash"></i>' +
+                        '</button>' +
+                        // '</a>' +
+                        '</td>' +
+                        '</tr>'
+                    );
+                    $('#tabela_produtos tr').each(function(row, tr) {
+                        if ($(tr).find('td:eq(0)').text() == "") {} else {
+                            aux += parseFloat($(tr).find('td:eq(4)').text());
+                        }
+
+                    });
+
+                    $('#valor').val(aux);
+                    qtd_produtos++;
+                    sub_produto = 0;
+                }
+            });
+
+            $('#confirma_pedido').click(function() {
+                //validar se está tudo preenchido
+
+                if ($('#seletor_cliente option:selected').text() == "SELECIONE") {
+                    Swal.fire('Selecione o cliente!');
+                } else if (qtd_produtos == 0) {
+                    Swal.fire('Selecione os produtos!');
+                } else {
+                    var table_data = [];
+
+                    var pedido = {
+                        'cli_codigo': $('#seletor_cliente').val(),
+                        'fun_codigo': $('#funcionario').val(),
+                        'ped_total': $('#valor').val(),
+                        'ped_data': $('#ped_data').val(),
+                        'ped_data_entrega': $('#ped_data_entrega').val(),
+                        'ped_status': "Em Aberto",
+                        'ped_observacao': $('#observacao').val()
+                    };
+                    table_data.push(pedido);
+                    var pagamento = {
+                        'pag_valor': $('#funcionario').val(),
+                        'pag_parcela': $('#valor').val(),
+                        'pag_data_vencimento': $('#ped_data').val(),
+                        'pag_data_pagamento': $('#ped_data_entrega').val()
+                    };
+                    table_data.push(pagamento);
+
+                    $('#tabela_produtos tr').each(function(row, tr) {
+                        if ($(tr).find('td:eq(0)').text() == "") {
+
+                        } else {
+                            var sub = {
+                                'prod_codigo': $(tr).find('td:eq(0)').text(),
+                                'quantidade': $(tr).find('td:eq(2)').text(),
+                                'cor': $(tr).find('td:eq(3)').text(),
+                                'custo_produto': $(tr).find('td:eq(4)').text()
+                            };
+                            table_data.push(sub);
+                        }
+
+                    });
+                    var dataForm = {
+                        'data': table_data
+                    };
+                    //salvar
+                    var _token = $('meta[name="_token"]').attr('content');
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': _token
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{route('pedido.store')}}",
+                        dataType: 'json',
+                        data: dataForm,
+                        success: function(data) {
+                            console.log(data);
+                            qtd_produtos = 0;
+                            Swal.fire({
+                                title: 'Pedido registrado!',
+                                icon: 'success',
+                                showCancelButton: false,
+                                confirmButtonText: 'OK',
+                            }).then((result) => {
+
+                            })
+
+                        },
+                        error: function(data) {
+                            Swal.fire('ERRO', '', 'error');
+                            console.log(data);
+                        }
+
+                    });
+                    //zerar variéveis de valores
+                }
+
+            });
+
+
         });
     </script>
 

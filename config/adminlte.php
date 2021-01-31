@@ -159,12 +159,12 @@ return [
             'submenu'     => [
                 [
                     'text'    => 'Novo',
-                    'url'     => '',
+                    'url'     => 'pedido/novo',
                     'icon'    => 'far fa-circle',
                 ],
                 [
                     'text'    => 'Pagamento',
-                    'url'     => '',
+                    'url'     => 'pagamento',
                     'icon'    => 'far fa-circle',
                 ],
             ]

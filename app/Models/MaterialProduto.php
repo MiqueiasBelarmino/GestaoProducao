@@ -45,8 +45,6 @@ class MaterialProduto extends Model
         }
     }
 
-
-
     public function material()
     {
         return $this->belongsTo(Material::class, 'mat_codigo');

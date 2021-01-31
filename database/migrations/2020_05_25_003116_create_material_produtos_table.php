@@ -18,7 +18,7 @@ class CreateMaterialProdutosTable extends Migration
             $table->integer('prod_codigo')->unsigned();
             $table->double('mat_pro_valor', 10, 2)->default(0);
             // $table->double('mat_prod_rendimento',10,2);
-            $table->integer('mat_pro_quantidade')->unsigned();
+            $table->double('mat_pro_quantidade')->unsigned();
             $table->primary(['mat_codigo', 'prod_codigo']);
             
             $table->foreign('prod_codigo')

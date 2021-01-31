@@ -94,6 +94,12 @@ $this->group(['middleware' => ['auth:funcionario']], function () {
     $this->get('funcionario/{id}/deletar', 'FuncionarioController@delete')->name('funcionario.deletar');
 
 
+    $this->get('pedido/novo', 'PedidoController@novo')->name('pedido.novo');
+    $this->post('pedido/novo', 'PedidoController@store')->name('pedido.store');
+    $this->get('pedido/pedido/{id}', 'PedidoController@getProdutosValor');
+
+    $this->get('pagamento', 'PagamentoController@novo')->name('pagamento');
+    $this->post('pagamento', 'PagamentoController@store')->name('pagamento.store');
 
 
     $this->any('logout', 'FuncionarioController@logout')->name('login.logout');
