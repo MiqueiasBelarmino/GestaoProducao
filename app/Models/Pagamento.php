@@ -48,6 +48,28 @@ class Pagamento extends Model
 		'pag_data_pagamento'
 	];
 
+	public function salvar()
+    {
+        DB::beginTransaction();
+
+        $pagamento = $this->save();
+
+        if ($pagamento) {
+            DB::commit();
+            return [
+                'success' => true,
+                'message' => 'Pagamento registrado'
+            ];
+        } else {
+            DB::rollback();
+
+            return [
+                'success' => false,
+                'message' => 'Falha ao registrar'
+            ];
+        }
+    }
+
 	public function pedido()
 	{
 		return $this->belongsTo(Pedido::class, 'ped_codigo');

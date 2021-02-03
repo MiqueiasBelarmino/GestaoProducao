@@ -81,20 +81,22 @@
 
             $('#seletor_forma_pagamento').change(function() {
 
-                var adulto = $("#pag_parcela");
+                var parcela = $("#pag_numero_parcela");
                 var vencimento = $('#ped_data_vencimento');
                 if ($('#seletor_forma_pagamento option:selected').text() == "Parcelamento") {
-                    adulto.prop("disabled", false);
+                    document.getElementById('data_venc').textContent = 'Primeiro Vencimento';
+                    parcela.prop("disabled", false);
                     vencimento.prop("disabled", false);
                 }else if ($('#seletor_forma_pagamento option:selected').text() == "30 dias") {
-                    adulto.prop("disabled", true);
+                    document.getElementById('data_venc').textContent = 'Data Vencimento';
+                    parcela.prop("disabled", true);
                     vencimento.prop("disabled", false);
                     document.getElementById('ped_data_vencimento').value = new Date().toDateInputValue(new Date().addDays(30));
                 } else {
-                    adulto.prop("disabled", true);
+                    document.getElementById('data_venc').textContent = 'Data Vencimento';
+                    parcela.prop("disabled", true);
                     document.getElementById('ped_data_vencimento').value = new Date().toDateInputValue(new Date().addDays(0));
                 }
-
 
             });
 
@@ -354,8 +356,8 @@
                     };
                     table_data.push(pedido);
                     var pagamento = {
-                        'pag_valor': $('#funcionario').val(),
-                        'pag_parcela': $('#valor').val(),
+                        'pag_forma':$('#seletor_forma_pagamento').val(),
+                        'pag_numero_parcela': $('#pag_numero_parcela').val(),
                         'pag_data_vencimento': $('#ped_data').val(),
                         'pag_data_pagamento': $('#ped_data_entrega').val()
                     };

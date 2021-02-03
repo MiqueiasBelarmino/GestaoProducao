@@ -23,7 +23,7 @@ class CreatePagamentosTable extends Migration
                 ->on('pedidos')
                 ->onDelete('cascade');
             $table->double('pag_valor', 10, 2)->default(0);
-            $table->integer('pag_parcela');
+            $table->integer('pag_numero_parcela');
             $table->date('pag_data_vencimento');
             $table->date('pag_data_pagamento');
         });

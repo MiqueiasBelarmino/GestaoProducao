@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CustoValidationFormRequest;
-use App\Models\Material;
+use App\Models\Pagamento;
 use App\Models\MaterialProduto;
 use App\Models\Pedido;
 use App\Models\Produto;
@@ -38,7 +38,7 @@ class PedidoController extends Controller
         $pedido = Pedido::find($id);
         $produtos = Produto::pluck('prod_nome', 'prod_codigo');
         $clientes = Cliente::pluck('cli_nome_razao_social', 'cli_codigo');
-        return view('admin.pedido.novo', compact('pedido', 'produtos','clientes'));
+        return view('admin.pedido.novo', compact('pedido', 'produtos', 'clientes'));
     }
     // public function gerarPDF()
     // {
@@ -74,17 +74,54 @@ class PedidoController extends Controller
         $pedido->ped_total        = $ammount;
         $response = $pedido->salvar();
 
+
+
         if ($response['success']) {
 
-            for ($i = 1; $i <= (sizeof($request['data']) - 1); $i++) {
+            for ($i = 2; $i <= (sizeof($request['data']) - 1); $i++) {
                 $item = new ItemPedido();
                 $item->ite_ped_cor = $request['data'][$i]['cor'];
                 $item->prod_codigo = $request['data'][$i]['prod_codigo'];
                 $item->ped_codigo = $pedido->ped_codigo;
                 $item->ite_ped_valor = $request['data'][$i]['custo_produto'];
-                $item->ite_ped_quantidade = $request['data'][$i]['quantidade'];//informação de toba es lolinha
+                $item->ite_ped_quantidade = $request['data'][$i]['quantidade'];
                 $item->save();
             }
+
+            if ($request['data'][1]['pag_forma'] == '1') {
+                $pagamento = new Pagamento;
+                $pagamento->ped_codigo = $pedido->ped_codigo;
+                $pagamento->pag_numero_parcela = 1;
+                $pagamento->pag_valor = number_format($request['data'][0]['ped_total'], 2, '.', '');
+                $pagamento->pag_data_vencimento = $request['data'][1]['pag_data_vencimento'];
+                $pagamento->pag_data_pagamento = $request['data'][1]['pag_data_vencimento'];
+                $pagamento->save();
+            } else if ($request['data'][1]['pag_forma'] == '2') {
+                $pagamento = new Pagamento;
+                $pagamento->ped_codigo = $pedido->ped_codigo;
+                $pagamento->pag_numero_parcela = 1;
+                $pagamento->pag_valor = number_format($request['data'][0]['ped_total'], 2, '.', '');
+                $pagamento->pag_data_vencimento = $request['data'][1]['pag_data_vencimento'];
+                $pagamento->save();
+            } else if ($request['data'][1]['pag_forma'] == '3') {
+
+                $aux = $request['data'][1]['pag_data_vencimento'];
+                $parcelas = $request['data'][1]['pag_numero_parcela'];
+                for ($j = 0; $j < ($parcelas); $j++) {
+                    $pagamento = new Pagamento;
+                    $pagamento->ped_codigo = $pedido->ped_codigo;
+                    $pagamento->pag_numero_parcela = ($j + 1);
+                    $pagamento->pag_valor = number_format(($request['data'][0]['ped_total']/$parcelas), 2, '.', '');
+                    $pagamento->pag_data_vencimento = $aux;
+                    if ($j != 0) {
+
+                        $pagamento->pag_data_vencimento->addDays(30);
+                        $aux = $request['data'][1]['pag_data_vencimento'];
+                    }
+                    $pagamento->save();
+                }
+            }
+
             return response()->json(['success' => $response['message']]);
         }
         return response()->json(['error' => $response['message']]);

@@ -123,8 +123,8 @@
 
         <div class="row">
             <div class="col-sm-2">
-                <label for="ite_ped_cor">Forma pagamento:</label>
-                <select name="ite_ped_cor" id="seletor_forma_pagamento" class="form-control">
+                <label for="forma_pagamento">Forma pagamento:</label>
+                <select name="forma_pagamento" id="seletor_forma_pagamento" class="form-control">
                     <option value="1">À Vista</option>
                     <option value="2">30 dias</option>
                     <option value="3">Parcelamento</option>
@@ -132,13 +132,13 @@
             </div>
             <div class="col-sm-2">
                 <div class="form-group">
-                    <label for="pag_parcela">Nº Parcelas:</label>
-                    <input type="text" name="pag_parcela" id="pag_parcela" class="form-control" placeholder="Escreva..." disabled="true">
+                    <label for="pag_numero_parcela">Nº Parcelas:</label>
+                    <input type="text" name="pag_numero_parcela" id="pag_numero_parcela" class="form-control" placeholder="Escreva..." disabled="true">
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="form-group">
-                    <label for="ped_data_vencimento">Data Vencimento:</label>
+                    <label id="data_venc" for="ped_data_vencimento">Data Vencimento:</label>
                     <input type="date" name="ped_data_vencimento" id="ped_data_vencimento" class="form-control" @if(isset($pedido)) value="{{$pedido->ped_data_vencimento}}" @endif required>
                 </div>
             </div>
