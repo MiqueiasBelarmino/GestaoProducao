@@ -51,6 +51,15 @@
         var sub_material = 0;
         var total_material = 0;
         $(document).ready(function() {
+
+            $('#tabela_pagamentos').dataTable({
+                "searching": true,
+                "paging": false,
+                "language": {
+                    "url": "http://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+                }
+            });
+
             Date.prototype.toDateInputValue = (function(date) {
                 var local = new Date(date);
                 local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -87,7 +96,7 @@
                     document.getElementById('data_venc').textContent = 'Primeiro Vencimento';
                     parcela.prop("disabled", false);
                     vencimento.prop("disabled", false);
-                }else if ($('#seletor_forma_pagamento option:selected').text() == "30 dias") {
+                } else if ($('#seletor_forma_pagamento option:selected').text() == "30 dias") {
                     document.getElementById('data_venc').textContent = 'Data Vencimento';
                     parcela.prop("disabled", true);
                     vencimento.prop("disabled", false);
@@ -294,6 +303,78 @@
             });
 
 
+            //js-ajax-search
+            $('#MAIN').click(function() {
+                if ($('#nome').val() == "") {
+                    Swal.fire('Informe o nome do produto!');
+                } else if (qtd_materiais) {
+                    Swal.fire('Informe os materiais usados no produto!');
+                } else {
+                    var table_data = [];
+
+                    var prod = {
+                        'nome': $('#nome').val(),
+                        'valor': $('#valor').val(),
+                        'observacao': $('#observacao').val()
+                    };
+                    table_data.push(prod);
+
+                    $('#tabela_materiais tr').each(function(row, tr) {
+                        if ($(tr).find('td:eq(0)').text() == "") {
+
+                        } else {
+                            var sub = {
+                                'material': $(tr).find('td:eq(0)').text(),
+                                'quantidade': $(tr).find('td:eq(2)').text(),
+                                'custo_material': $(tr).find('td:eq(3)').text()
+                            };
+                            table_data.push(sub);
+                        }
+
+                    });
+                    var dataForm = {
+                        'data': table_data
+                    };
+                    //salvar
+                    var _token = $('meta[name="_token"]').attr('content');
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': _token
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{route('produto.store')}}",
+                        // url: "produto/novo",
+                        dataType: 'json',
+                        data: dataForm,
+                        success: function(data) {
+                            total_material = 0;
+                            sub_material = 0;
+                            qtd_materiais = 0;
+                            Swal.fire({
+                                title: 'Produto registrado!',
+                                icon: 'success',
+                                showDenyButton: true,
+                                showCancelButton: false,
+                                confirmButtonText: 'OK',
+                            }).then((result) => {
+                                window.location.href = "{{route('produto.novo')}}";
+                            })
+
+                        },
+                        error: function(data) {
+                            Swal.fire('', '', 'error');
+                            console.log(data);
+                        }
+
+                    });
+                    //zerar variéveis de valores
+                }
+
+            });
+
+
             //AJAX PEDIDO
             $('#add_produto').click(function() {
                 if ($('#custo_produto').val() == "" || $('#quantidade').val() == "") {
@@ -351,12 +432,12 @@
                         'ped_total': $('#valor').val(),
                         'ped_data': $('#ped_data').val(),
                         'ped_data_entrega': $('#ped_data_entrega').val(),
-                        'ped_status': "Em Aberto",
+                        'ped_status_pagamento': "Pendente",
                         'ped_observacao': $('#observacao').val()
                     };
                     table_data.push(pedido);
                     var pagamento = {
-                        'pag_forma':$('#seletor_forma_pagamento').val(),
+                        'pag_forma': $('#seletor_forma_pagamento').val(),
                         'pag_numero_parcela': $('#pag_numero_parcela').val(),
                         'pag_data_vencimento': $('#ped_data').val(),
                         'pag_data_pagamento': $('#ped_data_entrega').val()
@@ -406,7 +487,7 @@
 
                         },
                         error: function(data) {
-                            Swal.fire('ERRO', '', 'error');
+                            Swal.fire('ERRO', data.message, 'error');
                             console.log(data);
                         }
 
@@ -433,6 +514,8 @@
     <!-- DataTables with bootstrap 3 renderer -->
     <script src="//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
     @endif
+    <script src="//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"></script>
+
 
     @if(config('adminlte.plugins.chartjs'))
     <!-- ChartJS -->

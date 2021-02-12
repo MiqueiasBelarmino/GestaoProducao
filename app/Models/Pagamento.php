@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pagamento extends Model
 {
 	protected $table = 'pagamentos';
+	protected $primaryKey = 'pag_codigo';
 	public $incrementing = true;
 	public $timestamps = false;
 
@@ -33,7 +34,7 @@ class Pagamento extends Model
 		'pag_codigo' => 'int',
 		'ped_codigo' => 'int',
 		'pag_valor' => 'float',
-		'pag_parcela' => 'int'
+		'pag_numero_parcela' => 'int'
 	];
 
 	protected $dates = [
@@ -43,7 +44,7 @@ class Pagamento extends Model
 
 	protected $fillable = [
 		'pag_valor',
-		'pag_parcela',
+		'pag_numero_parcela',
 		'pag_data_vencimento',
 		'pag_data_pagamento'
 	];

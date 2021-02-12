@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+
 class Pedido extends Model
 {
     protected $table = 'pedidos';
-	protected $primaryKey = 'ped_codigo';
+    protected $primaryKey = 'ped_codigo';
     public $timestamps = false;
     public $incrementing = true;
 
@@ -33,26 +34,57 @@ class Pedido extends Model
         }
     }
 
-	protected $casts = [
-		'cli_codigo' => 'int',
-		'fun_codigo' => 'int',
-		'ped_total' => 'float'
-	];
+    protected $casts = [
+        'cli_codigo' => 'int',
+        'fun_codigo' => 'int',
+        'ped_total' => 'float'
+    ];
 
-	protected $dates = [
-		'ped_data',
-		'ped_data_aprovacao',
-		'ped_data_entrega'
-	];
+    protected $dates = [
+        'ped_data',
+        'ped_data_aprovacao',
+        'ped_data_entrega'
+    ];
 
-	protected $fillable = [
-		'cli_codigo',
-		'fun_codigo',
-		'ped_total',
-		'ped_data',
-		'ped_data_aprovacao',
-		'ped_data_entrega',
-		'ped_status',
-		'ped_observacao'
-	];
+    protected $fillable = [
+        'cli_codigo',
+        'fun_codigo',
+        'ped_total',
+        'ped_data',
+        'ped_data_aprovacao',
+        'ped_data_entrega',
+        'ped_status_pagamento',
+        'ped_observacao'
+    ];
+
+    public function confirmaQuitacao($id)
+    {
+        DB::table($this->table)
+            ->where('id', $id)
+            ->update(['ped_status_pagamento' => 'Pago']);
+    }
+    public function cliente()
+	{
+		return $this->belongsTo(Cliente::class, 'cli_codigo');
+	}
+
+	public function funcionario()
+	{
+		return $this->belongsTo(Funcionario::class, 'fun_codigo');
+	}
+
+	public function historico_producos()
+	{
+		return $this->hasMany(HistoricoProduco::class, 'ped_codigo');
+	}
+
+	public function item_pedidos()
+	{
+		return $this->hasMany(ItemPedido::class, 'ped_codigo');
+	}
+
+	public function pagamentos()
+	{
+		return $this->hasMany(Pagamento::class, 'ped_codigo');
+	}
 }

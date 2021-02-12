@@ -29,7 +29,7 @@ class CreatePedidosTable extends Migration
             $table->date('ped_data');
             $table->date('ped_data_aprovacao')->nullable();
             $table->date('ped_data_entrega');
-            $table->string('ped_status',30);
+            $table->string('ped_status_pagamento',30);
             $table->text('ped_observacao')->nullable();
             //$table->timestamps();
         });

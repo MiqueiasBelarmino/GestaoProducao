@@ -69,7 +69,7 @@ class PedidoController extends Controller
         $pedido->ped_observacao         = $request['data'][0]['ped_observacao'];
         $pedido->ped_data         = $request['data'][0]['ped_data'];
         $pedido->ped_data_entrega         = $request['data'][0]['ped_data_entrega'];
-        $pedido->ped_status         = $request['data'][0]['ped_status'];
+        $pedido->ped_status_pagamento         = $request['data'][0]['ped_status_pagamento'];
         $ammount = number_format($request['data'][0]['ped_total'], 2, '.', '');
         $pedido->ped_total        = $ammount;
         $response = $pedido->salvar();
@@ -102,6 +102,7 @@ class PedidoController extends Controller
                 $pagamento->pag_numero_parcela = 1;
                 $pagamento->pag_valor = number_format($request['data'][0]['ped_total'], 2, '.', '');
                 $pagamento->pag_data_vencimento = $request['data'][1]['pag_data_vencimento'];
+                $pagamento->pag_data_pagamento = '0000-00-00 00:00:00';
                 $pagamento->save();
             } else if ($request['data'][1]['pag_forma'] == '3') {
 
@@ -118,6 +119,7 @@ class PedidoController extends Controller
                         $pagamento->pag_data_vencimento->addDays(30);
                         $aux = $request['data'][1]['pag_data_vencimento'];
                     }
+                    $pagamento->pag_data_pagamento = '0000-00-00 00:00:00';
                     $pagamento->save();
                 }
             }
