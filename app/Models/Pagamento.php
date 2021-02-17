@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 /**
  * Class Pagamento
@@ -66,7 +67,7 @@ class Pagamento extends Model
 
             return [
                 'success' => false,
-                'message' => 'Falha ao registrar'
+                'message' => 'Falha no pagamento'
             ];
         }
     }

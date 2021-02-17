@@ -57,7 +57,8 @@
                 "paging": false,
                 "language": {
                     "url": "http://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
-                }
+                },
+                ordering: false
             });
 
             Date.prototype.toDateInputValue = (function(date) {
@@ -439,7 +440,7 @@
                     var pagamento = {
                         'pag_forma': $('#seletor_forma_pagamento').val(),
                         'pag_numero_parcela': $('#pag_numero_parcela').val(),
-                        'pag_data_vencimento': $('#ped_data').val(),
+                        'pag_data_vencimento': $('#ped_data_vencimento').val(),
                         'pag_data_pagamento': $('#ped_data_entrega').val()
                     };
                     table_data.push(pagamento);
@@ -487,7 +488,7 @@
 
                         },
                         error: function(data) {
-                            Swal.fire('ERRO', data.message, 'error');
+                            Swal.fire('ERRO', data.responseJSON.message, 'error');
                             console.log(data);
                         }
 

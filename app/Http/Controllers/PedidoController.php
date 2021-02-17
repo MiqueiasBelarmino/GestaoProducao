@@ -102,24 +102,25 @@ class PedidoController extends Controller
                 $pagamento->pag_numero_parcela = 1;
                 $pagamento->pag_valor = number_format($request['data'][0]['ped_total'], 2, '.', '');
                 $pagamento->pag_data_vencimento = $request['data'][1]['pag_data_vencimento'];
-                $pagamento->pag_data_pagamento = '0000-00-00 00:00:00';
                 $pagamento->save();
             } else if ($request['data'][1]['pag_forma'] == '3') {
 
                 $aux = $request['data'][1]['pag_data_vencimento'];
+                $tempDate = $aux;
                 $parcelas = $request['data'][1]['pag_numero_parcela'];
                 for ($j = 0; $j < ($parcelas); $j++) {
                     $pagamento = new Pagamento;
                     $pagamento->ped_codigo = $pedido->ped_codigo;
                     $pagamento->pag_numero_parcela = ($j + 1);
-                    $pagamento->pag_valor = number_format(($request['data'][0]['ped_total']/$parcelas), 2, '.', '');
-                    $pagamento->pag_data_vencimento = $aux;
+                    $pagamento->pag_valor = number_format(($request['data'][0]['ped_total'] / $parcelas), 2, '.', '');
+                    $pagamento->pag_data_vencimento = $tempDate;
                     if ($j != 0) {
-
-                        $pagamento->pag_data_vencimento->addDays(30);
-                        $aux = $request['data'][1]['pag_data_vencimento'];
+                        
+                        $pagamento->pag_data_vencimento = $pagamento->pag_data_vencimento->addDays(30);
+                        $tempDate = $pagamento->pag_data_vencimento;
+                    } else {
+                        $pagamento->pag_data_vencimento = $tempDate;
                     }
-                    $pagamento->pag_data_pagamento = '0000-00-00 00:00:00';
                     $pagamento->save();
                 }
             }
