@@ -24,15 +24,45 @@ class PedidoController extends Controller
 
     public function index()
     {
-        return view('admin.pedido.index');
+        $pedidos = Pedido::orderBy('ped_data', 'ASC')->simplePaginate(10);
+        return view('admin.pedido.index', compact('pedidos'));
     }
 
     public function producao()
     {
         // $historicos = HistoricoView::all();
-        $historicos = HistoricoView::select('*')->where('his_pro_data_saida', '0000-00-00')->get();
+        $historicos = HistoricoView::select('*')->where('his_pro_data_saida', '=', null)->get();
         // dump($historicos);
         return view('admin.pedido.producao', compact('historicos'));
+    }
+
+    public function historico($id)
+    {
+        // $historicos = HistoricoView::all();
+        $historicos = HistoricoView::select('*')->where('ped_codigo', '=', $id)->get();
+        // dump($historicos);
+        return view('admin.pedido.historico', compact('historicos'));
+    }
+
+    public function producaoStore(Request $request, $id)
+    {
+
+        $historico = HistoricoProducao::findOrFail($id);
+        $temp = $historico;
+        $historico->his_pro_data_saida   = now();
+        $response = $historico->save();
+
+        if ($response == true) {
+            if ($temp->proc_codigo < (DB::table('processos')->count())) {
+                $historico                       = new HistoricoProducao;
+                $historico->ped_codigo           = $temp->ped_codigo;
+                $historico->proc_codigo          = ($temp->proc_codigo + 1);
+                $historico->his_pro_data_entrada = now();
+                $historico->save();
+                return redirect()->route('producao')->with('success', 'Pedido encaminhado para ' . (Processo::select('proc_nome')->where('proc_codigo', ($temp->proc_codigo + 1))->get())[0]->proc_nome);
+            } else
+                return redirect()->route('producao')->with('success', 'Pedido Finalizado');
+        }
     }
 
     public function getProdutosValor($id)
@@ -177,14 +207,8 @@ class PedidoController extends Controller
 
     public function delete($id)
     {
-        $pedido = Produto::findOrFail($id);
-        // if($pedido->funcionarios()->count() > 0)
-        // {
-        //     return redirect()->route('pedido.todos')->with('error','Há funcionários relacionados a esse pedido');
-        // }else
-        // {
-        $pedido->delete();
-        // }
-        return redirect()->route('pedido.todos')->with('success', 'Produto Deletado');
+        //$pedido = Pedido::findOrFail($id);
+        //$pedido->delete();
+       // return redirect()->route('pedido.todos')->with('success', 'Produto Deletado');
     }
 }

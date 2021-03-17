@@ -43,6 +43,7 @@ $this->group(['middleware' => ['auth:funcionario']], function () {
     $this->post('produto/{id}/editar', 'ProdutoController@updatePost')->name('produto.editar.salvar');
     $this->get('produto/{id}/deletar', 'ProdutoController@delete')->name('produto.deletar');
     $this->get('produto/produto/{id}', 'ProdutoController@getMateriais');
+
     //processo
     $this->get('processo', 'ProcessoController@todos')->name('processo.todos');
     $this->get('processo/novo', 'ProcessoController@novo')->name('processo.novo');
@@ -50,6 +51,9 @@ $this->group(['middleware' => ['auth:funcionario']], function () {
     $this->get('processo/{id}/editar', 'ProcessoController@novo')->name('processo.editar');
     $this->post('processo/{id}/editar', 'ProcessoController@updatePost')->name('processo.editar.salvar');
     $this->get('processo/{id}/deletar', 'ProcessoController@delete')->name('processo.deletar');
+    $this->any('processo/PDF', 'ProcessoController@gerarPDF')->name('processo.pdf');
+    $this->any('processo/xlsx', 'ProcessoController@gerarXLSX')->name('processo.excel');
+    $this->any('processo/csv', 'ProcessoController@gerarCSV')->name('processo.csv');
 
 
 
@@ -94,9 +98,12 @@ $this->group(['middleware' => ['auth:funcionario']], function () {
     $this->get('funcionario/{id}/deletar', 'FuncionarioController@delete')->name('funcionario.deletar');
 
 
+    $this->get('pedido', 'PedidoController@index')->name('pedido');
+    $this->get('pedido/{id}/historico', 'PedidoController@historico')->name('pedido.historico');
     $this->get('pedido/novo', 'PedidoController@novo')->name('pedido.novo');
     $this->post('pedido/novo', 'PedidoController@store')->name('pedido.store');
     $this->get('pedido/pedido/{id}', 'PedidoController@getProdutosValor');
+    $this->get('pedido/{id}/deletar', 'PedidoController@delete')->name('pedido.deletar');
 
     $this->get('pagamento', 'PagamentoController@index')->name('pagamento');
     $this->get('pagamento/{id}', 'PagamentoController@store')->name('pagamento.store');

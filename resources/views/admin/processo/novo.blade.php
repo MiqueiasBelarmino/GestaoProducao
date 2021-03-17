@@ -32,8 +32,8 @@
                 <div class="col-sm-6">
                     <!-- text input -->
                     <div class="form-group">
-                        <label for="descricao">Nome:</label>
-                        <input type="text" name="descricao" id="descricao" class="form-control" value="@if(isset($processo)) {{$processo->proc_descricao}} @endif" placeholder="Escreva..." required>
+                        <label for="nome">Nome:</label>
+                        <input type="text" name="nome" id="nome" class="form-control" value="@if(isset($processo)) {{$processo->proc_nome}} @endif" placeholder="Escreva..." required>
                     </div>
                 </div>
 
@@ -44,10 +44,6 @@
                     </div>
                 </div>
             </div>
-
-          
-                
-            
             <button type="submit" class="btn btn-primary">Confirmar</button>
         </form>
     </div>

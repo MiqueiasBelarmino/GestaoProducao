@@ -20,48 +20,66 @@
     </div> -->
     <div class="box-body">
         @include('includes.alerts')
-        <form method="POST"  action="" class="form form-inline">
-        {!! csrf_field()!!}
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Fornecedor</th>
-                    <th>Unidade</th>
-                    <th>Custo</th>
-                    <th>Observação</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($materiais as $material)
-                <tr>
-                    <td>{{$material->mat_codigo}}</td>
-                    <td>{{$material->mat_nome}}</td>
-                    <td>{{$material->fornecedor->for_nome_razao_social}}</td>
-                    <td>{{$material->mat_unidade}}</td>
-                    <td>{{number_format($material->mat_custo,2,'.',',')}}</td>
-                    <td>{{$material->mat_observacao}}</td>
-                    <td>
-                        <a href="{{route('material.editar',['id' => $material->mat_codigo])}}" class="btn btn-primary">
-                            <!-- Editar -->
-                            <i class="fa fa-pen"></i>
-                        </a>
-                        <a href="{{url('material/'.$material->mat_codigo.'/deletar')}}" class="btn btn-danger">
-                            <!-- Deletar -->
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                @empty
-                @endforelse
-            </tbody>
-        </table>
-        <a href="" class="btn btn-primary" target="_blank">Exportar PDF</a>
-        <a href="" class="btn btn-primary">Exportar Planilha</a>
+        <form method="POST" action="" class="form form-inline">
+            {!! csrf_field()!!}
+            <div id="tabela_materiais_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row">
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="tabela_materiais" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="tabela_processos_info">
+                            <thead>
+                                <tr role="row">
+                                    <th tabindex="0" rowspan="1" colspan="1">#</th>
+                                    <th tabindex="0" rowspan="1" colspan="1">Nome</th>
+                                    <th tabindex="0" rowspan="1" colspan="1">Fornecedor</th>
+                                    <th tabindex="0" rowspan="1" colspan="1">Unidade</th>
+                                    <th tabindex="0" rowspan="1" colspan="1">Custo</th>
+                                    <th tabindex="0" rowspan="1" colspan="1">Observação</th>
+                                    <th tabindex="0" rowspan="1" colspan="1">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($materiais as $material)
+                                <tr>
+                                    <td>{{$material->mat_codigo}}</td>
+                                    <td>{{$material->mat_nome}}</td>
+                                    <td>{{$material->fornecedor->for_nome_razao_social}}</td>
+                                    <td>{{$material->mat_unidade}}</td>
+                                    <td>{{number_format($material->mat_custo,2,'.',',')}}</td>
+                                    <td>{{$material->mat_observacao}}</td>
+                                    <td>
+                                        <a href="{{route('material.editar',['id' => $material->mat_codigo])}}" class="btn btn-primary">
+                                            <!-- Editar -->
+                                            <i class="fa fa-pen"></i>
+                                        </a>
+                                        <a href="{{url('material/'.$material->mat_codigo.'/deletar')}}" class="btn btn-danger">
+                                            <!-- Deletar -->
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @empty
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5"></div>
+                    <div class="pagination">
+                        {{ $materiais->links() }}
+                    </div>
+                </div>
+            </div>
+
+
+            <a href="" class="btn btn-primary" target="_blank">Exportar PDF</a>
+            <a href="" class="btn btn-primary">Exportar Planilha</a>
         </form>
     </div>
-    
+
 </div>
 @stop

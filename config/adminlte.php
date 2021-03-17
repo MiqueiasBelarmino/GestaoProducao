@@ -223,6 +223,11 @@ return [
             'icon'        => 'fa fa-list-alt',
             'submenu'     => [
                 [
+                    'text'    => 'Pedido',
+                    'url'     => 'pedido',
+                    'icon'    => 'far fa-circle',
+                ],
+                [
                     'text'    => 'Cargo',
                     'url'     => 'cargo',
                     'icon'    => 'far fa-circle',

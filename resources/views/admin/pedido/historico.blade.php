@@ -17,14 +17,14 @@
         {{csrf_field()}}
         <div class="row">
             <div class="col-sm-12">
-                <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div id="tabela_historico_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                     <div class="row">
                         <div class="col-sm-6">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="tabela_pedidos" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="tabela_pedidos_info">
+                            <table id="tabela_historico" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="tabela_historico_info">
                                 <thead>
                                     <tr role="row">
                                         <th tabindex="0" rowspan="1" colspan="1">Pedido</th>
@@ -32,7 +32,7 @@
                                         <th tabindex="0" rowspan="1" colspan="1">Data Pedido</th>
                                         <th tabindex="0" rowspan="1" colspan="1">Processo</th>
                                         <th tabindex="0" rowspan="1" colspan="1">Entrada</th>
-                                        <th tabindex="0" rowspan="1" colspan="1">Ações</th>
+                                        <th tabindex="0" rowspan="1" colspan="1">Saída</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,10 +43,7 @@
                                         <td>{{$historico->ped_data}}</td>
                                         <td>{{$historico->proc_nome}}</td>
                                         <td>{{$historico->his_pro_data_entrada}}</td>
-                                        <td><a href="{{url('producao/'.$historico->his_pro_codigo.'')}}" class="btn btn-success">
-                                                <i class="fas fa-fast-forward"></i>
-                                            </a>
-                                        </td>
+                                        <td>{{$historico->his_pro_data_saida}}</td>
                                     </tr>
                                     @empty
                                     @endforelse

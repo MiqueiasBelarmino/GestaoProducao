@@ -8,6 +8,7 @@ class HistoricoProducao extends Model
 {
     public $timestamps = false;
     protected $table = "historico_producoes";
+	protected $primaryKey = 'his_pro_codigo';
     // protected $primaryKey = ['his_pro_codigo','ped_codigo','proc_codigo'];
 
 	protected $casts = [
@@ -22,7 +23,7 @@ class HistoricoProducao extends Model
 
 	protected $fillable = [
 		'his_pro_data_entrada',
-		'his_pro_data_saida',
+		// 'his_pro_data_saida',
 		'his_pro_observacao'
 	];
 

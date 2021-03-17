@@ -11,7 +11,6 @@ use Excel;
 
 class MaterialController extends Controller
 {
-    private $totalPage = 10;
     public function index()
     {
         return view('admin.material.index');
@@ -63,7 +62,7 @@ class MaterialController extends Controller
 
     public function todos()
     {
-        $materiais = Material::all();
+        $materiais = Material::select('*')->simplePaginate(15);
         return view('admin.material.index', compact('materiais'));
     }
 

@@ -57,6 +57,12 @@ class Pedido extends Model
         'ped_observacao'
     ];
 
+    public function getDataFormatada($value)
+    {
+        if ($value != null)
+            return $value->format('d/m/Y');
+        return $value;
+    }
     public function confirmaQuitacao($id)
     {
         DB::table($this->table)
@@ -64,27 +70,27 @@ class Pedido extends Model
             ->update(['ped_status_pagamento' => 'Pago']);
     }
     public function cliente()
-	{
-		return $this->belongsTo(Cliente::class, 'cli_codigo');
-	}
+    {
+        return $this->belongsTo(Cliente::class, 'cli_codigo');
+    }
 
-	public function funcionario()
-	{
-		return $this->belongsTo(Funcionario::class, 'fun_codigo');
-	}
+    public function funcionario()
+    {
+        return $this->belongsTo(Funcionario::class, 'fun_codigo');
+    }
 
-	public function historico_producao()
-	{
-		return $this->hasMany(HistoricoProducao::class, 'ped_codigo');
-	}
+    public function historico_producao()
+    {
+        return $this->hasMany(HistoricoProducao::class, 'ped_codigo');
+    }
 
-	public function item_pedidos()
-	{
-		return $this->hasMany(ItemPedido::class, 'ped_codigo');
-	}
+    public function item_pedidos()
+    {
+        return $this->hasMany(ItemPedido::class, 'ped_codigo');
+    }
 
-	public function pagamentos()
-	{
-		return $this->hasMany(Pagamento::class, 'ped_codigo');
-	}
+    public function pagamentos()
+    {
+        return $this->hasMany(Pagamento::class, 'ped_codigo');
+    }
 }

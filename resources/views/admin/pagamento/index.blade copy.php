@@ -65,17 +65,16 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div><!-- row table -->
                     <div class="row">
                         <div class="col-sm-5"></div>
                         <div class="pagination">
                             {{ $pagamentos->links() }}
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- </form> -->
+                    </div><!-- row pagination -->
+                </div><!-- row wrapper -->
+            </div><!-- row col-md -->
+        </div><!-- row main -->
     </div>
 </div>
 @stop

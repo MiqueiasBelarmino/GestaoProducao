@@ -22,10 +22,6 @@
     <div class="box-body">
         @include('includes.alerts')
         @if(count($produtos)>0)
-        @if(isset($pedido))
-        <!-- <form method="POST" action="{{ route('pedido.editar.salvar',['id' =>$pedido->mat_codigo]) }}"> -->
-        @else
-        @endif
         {{csrf_field()}}
         <div class="row">
             <div class="col-sm-4">

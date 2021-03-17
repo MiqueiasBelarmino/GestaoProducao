@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Processo;
 use Illuminate\Http\Request;
+use App\Exports\ProcessoExport;
+use PDF;
+use Excel;
 
 class ProcessoController extends Controller
 {
@@ -19,28 +22,28 @@ class ProcessoController extends Controller
         return view('admin.processo.novo',compact('processo'));
     }
 
-    // public function gerarPDF()
-    // {
-    //     $processos = Cargo::all();
-    //     $pdf = PDF::loadView('admin.processo.pdf', compact('processos'));
-    //     return $pdf->setPaper('a4')->stream('Processos.pdf');
-    // }
+    public function gerarPDF()
+    {
+        $processos = Processo::all();
+        $pdf = PDF::loadView('admin.processo.pdf', compact('processos'));
+        return $pdf->setPaper('a4')->stream('Processos.pdf');
+    }
 
-    // public function gerarXLSX() 
-    // {
-    //     return Excel::download(new CargoExport, 'Cargos.xlsx');
-    // }
+    public function gerarXLSX() 
+    {
+        return Excel::download(new ProcessoExport, 'Cargos.xlsx');
+    }
 
-    // public function gerarCSV() 
-    // {
-    //     return Excel::download(new CargoExport, 'Cargos.csv');
-    // }
+    public function gerarCSV() 
+    {
+        return Excel::download(new ProcessoExport, 'Cargos.csv');
+    }
 
     public function store(Request $request, Processo $processo)
     {
 
         $processo = new Processo;
-        $processo->proc_descricao   = $request->descricao;
+        $processo->proc_nome   = $request->nome;
         $processo->proc_observacao   = $request->observacao;
         $response = $processo->salvar();
         //$response = $processo->save();
@@ -52,7 +55,7 @@ class ProcessoController extends Controller
 
     public function todos()
     {
-        $processos = Processo::all();
+        $processos = Processo::select('*')->simplePaginate(15);
         return view('admin.processo.index',compact('processos'));
     }
 
@@ -65,7 +68,7 @@ class ProcessoController extends Controller
     public function updatePost(Request $request, $id)
     {
         $processo = Processo::findOrFail($id);
-        $processo->proc_descricao   = $request->descricao;
+        $processo->proc_nome   = $request->nome;
         $processo->proc_observacao   = $request->observacao;
         $processo->save();
         return redirect()->route('processo.todos')->with('success', 'Processo Atualizado');

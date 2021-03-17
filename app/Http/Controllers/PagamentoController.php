@@ -10,7 +10,8 @@ class PagamentoController extends Controller
 {
     public function index()
     {
-        $pagamentos = Pagamento::orderBy('pag_data_pagamento', 'ASC')->orderBy('pag_data_vencimento', 'ASC')->simplePaginate(10);
+        $pagamentos = Pagamento::orderBy('pag_data_pagamento', 'ASC')
+        ->orderBy('pag_data_vencimento', 'ASC')->simplePaginate(10);
         return view('admin.pagamento.index', compact('pagamentos'));
     }
 
