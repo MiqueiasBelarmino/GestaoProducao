@@ -20,7 +20,7 @@ class CreateEnderecosTable extends Migration
             $table->string('end_bairro',100);
             $table->string('end_cidade',100);
             $table->string('end_estado',100);
-            $table->string('end_cep',8);
+            $table->string('end_cep',9);
             $table->text('end_observacao')->nullable();
             //$table->timestamps();
         });

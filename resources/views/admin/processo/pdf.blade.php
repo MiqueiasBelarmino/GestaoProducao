@@ -11,19 +11,15 @@
             <tr>
                 <th>#</th>
                 <th>Nome</th>
-                <th>Descrição</th>
-                <th>Salário Base</th>
                 <th>Observação</th>
             </tr>
             </thead>
             <tbody>
-                @forelse($cargos as $cargo)
+                @forelse($processos as $processo)
                     <tr>
-                        <td>{{$cargo->car_codigo}}</td>
-                        <td>{{$cargo->car_nome}}</td>
-                        <td>{{$cargo->car_descricao}}</td>
-                        <td>{{number_format($cargo->car_salario_base,2,'.',',')}}</td>
-                        <td>{{$cargo->car_observacao}}</td>
+                        <td>{{$processo->proc_codigo}}</td>
+                        <td>{{$processo->proc_nome}}</td>
+                        <td>{{$processo->proc_observacao}}</td>
                     </tr>
                 @empty
                 @endforelse

@@ -81,7 +81,7 @@
                             <td>{{$funcionario->fun_codigo}}</td>
                             <td>{{$funcionario->fun_nome}}</td>
                             <td>{{$funcionario->fun_rg}}</td>
-                            <td>{{$funcionario->getFunCpf($funcionario->fun_cpf)}}</td>
+                            <td>{{$funcionario->fun_cpf}}</td>
                             <td>{{$funcionario->fun_email}}</td>
                             <td>{{$funcionario->cargo->car_nome}}</td>
                             <td>{{$funcionario->fun_comissao}}</td>
@@ -93,7 +93,7 @@
                             @if(isset($request->codigo))<td>{{$funcionario->fun_codigo}}</td>@endif
                             @if(isset($request->nome))<td>{{$funcionario->fun_nome}}</td>@endif
                             @if(isset($request->rg))<td>{{$funcionario->fun_rg}}</td>@endif
-                            @if(isset($request->cpf))<td>{{$funcionario->getFunCpf($funcionario->fun_cpf)}}</td>@endif
+                            @if(isset($request->cpf))<td>{{$funcionario->fun_cpf}}</td>@endif
                             @if(isset($request->email))<td>{{$funcionario->fun_email}}</td>@endif
                             @if(isset($request->cargo))<td>{{$funcionario->cargo->car_nome}}</td>@endif
                             @if(isset($request->comissao))<td>{{$funcionario->fun_comissao}}</td>@endif

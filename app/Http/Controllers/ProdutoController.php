@@ -7,8 +7,11 @@ use App\Http\Requests\CustoValidationFormRequest;
 use App\Models\Material;
 use App\Models\MaterialProduto;
 use App\Models\Produto;
+use App\Models\DetalhesCamiseta;
+use App\Models\DetalhesCalca;
 use PDF;
 use Excel;
+use SebastianBergmann\Environment\Console;
 
 class ProdutoController extends Controller
 {
@@ -62,12 +65,17 @@ class ProdutoController extends Controller
     {
 
         $request = $request->all();
+    
         $produto = new Produto;
 
         $produto->prod_nome         = $request['data'][0]['nome'];
         $ammount = number_format($request['data'][0]['valor'], 2, '.', '');
         $produto->prod_valor        = $ammount;
         $produto->prod_observacao   = $request['data'][0]['observacao'];
+
+        $grupo = $request['data'][0]['grupo'];
+
+
         $response = $produto->salvar();
         if ($response['success']) {
 
@@ -79,6 +87,33 @@ class ProdutoController extends Controller
                 $material_produto->mat_pro_quantidade = $request['data'][$i]['quantidade'];
                 $material_produto->save();
             }
+
+            if($grupo == '1' || $grupo == 1){
+
+                $datalhes_camiseta = new DetalhesCamiseta;
+                $datalhes_camiseta->det_cam_manga_tipo   = $request['data'][0]['manga_tipo'];
+                $datalhes_camiseta->det_cam_manga_tamanho   = $request['data'][0]['manga_tamanho'];
+                $datalhes_camiseta->det_cam_manga_cor   = $request['data'][0]['manga_cor'];
+                $datalhes_camiseta->det_cam_manga_galao   = $request['data'][0]['manga_galao'];
+                $datalhes_camiseta->det_cam_gola_tipo   = $request['data'][0]['gola_tipo'];
+                $datalhes_camiseta->det_cam_gola_decote   = $request['data'][0]['gola_decote'];
+                $datalhes_camiseta->det_cam_bolso_frente   = $request['data'][0]['bolso_frente_cam'];
+                $datalhes_camiseta->prod_codigo = $produto->prod_codigo;
+                $datalhes_camiseta->save();
+
+            }else if($grupo == '2' || $grupo == 2){
+
+                $datalhes_calca = new DetalhesCalca;
+                $datalhes_calca->det_cal_passadores   = isset($request['data'][0]->passadores)?'1':'0' ;
+                $datalhes_calca->det_cal_elastico   = isset($request['data'][0]->elastico)?'1':'0' ;
+                $datalhes_calca->det_cal_bolso_frente   = isset($request['data'][0]->bolso_frente)?'1':'0' ;
+                $datalhes_calca->det_cal_bolso_costas   = isset($request['data'][0]->bolso_costas)?'1':'0' ;
+                $datalhes_calca->det_cal_refletiva   = isset($request['data'][0]->refletiva)?'1':'0' ;
+                $datalhes_calca->prod_codigo = $produto->prod_codigo;
+                $datalhes_calca->save();
+
+            }
+
             return response()->json(['success' => $response['message']]);
         }
         return response()->json(['error' => $response['message']]);

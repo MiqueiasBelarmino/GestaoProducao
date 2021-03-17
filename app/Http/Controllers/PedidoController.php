@@ -9,8 +9,12 @@ use App\Models\MaterialProduto;
 use App\Models\Pedido;
 use App\Models\Produto;
 use App\Models\Cliente;
+use App\Models\HistoricoProducao;
+use App\Models\HistoricoView;
 use App\Models\ItemPedido;
+use App\Models\Processo;
 use PDF;
+use DB;
 use Excel;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,6 +25,14 @@ class PedidoController extends Controller
     public function index()
     {
         return view('admin.pedido.index');
+    }
+
+    public function producao()
+    {
+        // $historicos = HistoricoView::all();
+        $historicos = HistoricoView::select('*')->where('his_pro_data_saida', '0000-00-00')->get();
+        // dump($historicos);
+        return view('admin.pedido.producao', compact('historicos'));
     }
 
     public function getProdutosValor($id)
@@ -115,7 +127,7 @@ class PedidoController extends Controller
                     $pagamento->pag_valor = number_format(($request['data'][0]['ped_total'] / $parcelas), 2, '.', '');
                     $pagamento->pag_data_vencimento = $tempDate;
                     if ($j != 0) {
-                        
+
                         $pagamento->pag_data_vencimento = $pagamento->pag_data_vencimento->addDays(30);
                         $tempDate = $pagamento->pag_data_vencimento;
                     } else {
@@ -124,6 +136,13 @@ class PedidoController extends Controller
                     $pagamento->save();
                 }
             }
+
+            $historico                       = new HistoricoProducao;
+            $processo                        = Processo::select('*')->where('proc_nome', '=', 'Artes')->get();
+            $historico->ped_codigo           = $pedido->ped_codigo;
+            $historico->proc_codigo          = $processo[0]->proc_codigo;
+            $historico->his_pro_data_entrada = $request['data'][0]['ped_data'];
+            $historico->save();
 
             return response()->json(['success' => $response['message']]);
         }

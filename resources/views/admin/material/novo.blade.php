@@ -55,6 +55,13 @@
                             <input type="text" value="@if(isset($material)) {{$material->mat_custo}} @endif" name="custo" id="custo" class="form-control" placeholder="Escreva...">
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="unidade">Unidade:</label>
+
+                            <input type="text" value="@if(isset($material)) {{$material->mat_unidade}} @endif" name="unidade" id="unidade" class="form-control" placeholder="Escreva...">
+                        </div>
+                    </div>
                     
                 </div>
 

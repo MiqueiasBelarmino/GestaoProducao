@@ -73,9 +73,9 @@ class Pedido extends Model
 		return $this->belongsTo(Funcionario::class, 'fun_codigo');
 	}
 
-	public function historico_producos()
+	public function historico_producao()
 	{
-		return $this->hasMany(HistoricoProduco::class, 'ped_codigo');
+		return $this->hasMany(HistoricoProducao::class, 'ped_codigo');
 	}
 
 	public function item_pedidos()

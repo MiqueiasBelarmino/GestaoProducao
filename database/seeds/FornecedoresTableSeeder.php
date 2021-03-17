@@ -32,5 +32,15 @@ class FornecedoresTableSeeder extends Seeder
             //'for_observacao'            => 'pagar sempre em 15 dias',
          ]);
 
+         Fornecedor::create([
+            'for_nome_razao_social'     => 'Capelini Malhas e Tecidos',
+            'for_nome_social_fantasia'  => 'Capelini Malhas',
+            'for_rg_inscricao_estadual' => 'ISENTO',
+            'for_cpf_cnpj'              => '66527425000161',
+            'for_telefone'              => '(15) 997311618',
+            'for_email'                 => 'administracao@capelinimalhas.com.br',
+            'for_observacao'            => 'fechamento mensal',
+         ]);
+
     }
 }

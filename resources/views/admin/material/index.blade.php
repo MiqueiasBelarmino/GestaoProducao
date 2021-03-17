@@ -28,7 +28,7 @@
                     <th>#</th>
                     <th>Nome</th>
                     <th>Fornecedor</th>
-                    <th>Descrição</th>
+                    <th>Unidade</th>
                     <th>Custo</th>
                     <th>Observação</th>
                     <th>Ações</th>
@@ -40,7 +40,7 @@
                     <td>{{$material->mat_codigo}}</td>
                     <td>{{$material->mat_nome}}</td>
                     <td>{{$material->fornecedor->for_nome_razao_social}}</td>
-                    <td>{{$material->mat_descricao}}</td>
+                    <td>{{$material->mat_unidade}}</td>
                     <td>{{number_format($material->mat_custo,2,'.',',')}}</td>
                     <td>{{$material->mat_observacao}}</td>
                     <td>

@@ -47,8 +47,8 @@ class MaterialController extends Controller
         $material = new Material;
         //$material = $material->firstOrCreate([]);
         $material->mat_nome         = $request->nome;
-        $material->mat_descricao    = $request->descricao;
         $material->for_codigo       = $request->for_codigo;
+        $material->mat_unidade      = $request->unidade;
         $ammount = number_format($request->custo, 2, '.', '');
         $material->mat_custo = $ammount;
 
@@ -77,8 +77,8 @@ class MaterialController extends Controller
     {
         $material = Material::findOrFail($id);
         $material->mat_nome         = $request->nome;
-        $material->mat_descricao    = $request->descricao;
         $material->for_codigo       = $request->for_codigo;
+        $material->mat_unidade      = $request->unidade;
         $ammount = number_format($request->custo, 2, '.', '');
         $material->mat_custo = $ammount;
 

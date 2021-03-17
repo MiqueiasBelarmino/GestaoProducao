@@ -32,7 +32,7 @@
                 <div class="col-sm-6">
                     <!-- text input -->
                     <div class="form-group">
-                        <label for="descricao">Descrição:</label>
+                        <label for="descricao">Nome:</label>
                         <input type="text" name="descricao" id="descricao" class="form-control" value="@if(isset($processo)) {{$processo->proc_descricao}} @endif" placeholder="Escreva..." required>
                     </div>
                 </div>

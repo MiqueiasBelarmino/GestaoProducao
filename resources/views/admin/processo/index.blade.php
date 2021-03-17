@@ -28,7 +28,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Descrição</th>
+                    <th>Nome</th>
                     <th>Observação</th>
                     <th>Ações</th>
                 </tr>
@@ -37,7 +37,7 @@
                 @forelse($processos as $processo)
                 <tr>
                     <td>{{$processo->proc_codigo}}</td>
-                    <td>{{$processo->proc_descricao}}</td>
+                    <td>{{$processo->proc_nome}}</td>
                     <td>{{$processo->proc_observacao}}</td>
                     <td>
                         <a href="{{route('processo.editar',['id' => $processo->proc_codigo])}}" class="btn btn-primary">

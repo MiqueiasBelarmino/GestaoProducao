@@ -28,7 +28,7 @@
         @endif
         {{csrf_field()}}
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-7">
                 <div class="form-group">
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome" id="nome" class="form-control" value="@if(isset($produto)) {{$produto->mat_nome}} @endif" placeholder="Escreva..." required>
@@ -40,7 +40,115 @@
                     <input type="text" name="valor" id="valor" class="form-control" value="@if(isset($produto)) {{$produto->prod_valor}} @endif" disabled>
                 </div>
             </div>
+            <div class="col-sm-3">
+                <label for="seletor_grupo">Grupo:</label>
+                <select name="seletor_grupo" id="seletor_grupo" class="form-control">
+                    <option value="1">Camisetas</option>
+                    <option value="2">Calças</option>
+                </select>
+            </div>
         </div>
+
+        <hr />
+
+        <div class="row" id="detalhes_camiseta">
+            <div class="col-sm-2">
+                <label for="manga_tipo">Tipo Manga:</label>
+                <select name="manga_tipo" id="seletor_tipo_manga" class="form-control">
+                    <option value="0">Padrão</option>
+                    <option value="1">Raglã</option>
+                    <option value="2">Regata</option>
+                    <option value="3">Machão</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label for="manga_tamanho">Tamanho Manga:</label>
+                <select name="manga_tamanho" id="seletor_tamanho_manga" class="form-control">
+                    <option value="0">Curta</option>
+                    <option value="1">Longa</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label for="manga_cor">Cor Manga:</label>
+                <input type="text" name="manga_cor" id="manga_cor" class="form-control" value="" placeholder="Escreva..." required>
+            </div>
+            <div class="col-sm-1">
+                <label for="manga_galao">Galão:</label>
+                <input type="number" step="1" min="0" max="2" name="manga_galao" id="manga_galao" class="form-control">
+                
+            </div>
+            <div class="col-sm-2">
+                <label for="gola_tipo">Gola:</label>
+                <select name="gola_tipo" id="seletor_gola" class="form-control">
+                    <option value="0">Viés</option>
+                    <option value="1">Ribana</option>
+                    <option value="2">Polo</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label for="gola_decote">Decote:</label>
+                <select name="gola_decote" id="seletor_decote" class="form-control">
+                    <option value="0">Redondo</option>
+                    <option value="1">Vê</option>
+                </select>
+            </div>
+
+            <div class="col-sm-1">
+                <label for="bolso_frente_cam">Bolso:</label>
+                <input type="number" step="1" min="0" max="2" name="bolso_frente_cam" id="bolso_frente_cam" class="form-control">
+            </div>
+
+        </div>
+
+        <div class="row" id="detalhes_calca">
+            <div class="col-sm-2">
+                <div class="checkbox">
+                    <label>
+                        <input id="passadores" name="passadores" type="checkbox">
+                        Passadores
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="checkbox">
+                    <label>
+                        <input id="elastico" name="elastico" type="checkbox">
+                        Elástico
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="checkbox">
+                    <label>
+                        <input id="bolso_frente" name="bolso_frente" type="checkbox">
+                        Bolso Frente
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="checkbox">
+                    <label>
+                        <input id="bolso_costas" name="bolso_costas" type="checkbox">
+                        Bolso Costas
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="checkbox">
+                    <label>
+                        <input id="refletiva" name="refletiva" type="checkbox">
+                        Refletiva
+                    </label>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <hr />
+
         <div class="row">
             <div class="col-sm-4">
                 <label for="mat_codigo">Material:</label>
@@ -93,6 +201,7 @@
                 </table>
             </div>
         </div>
+        <hr />
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
@@ -101,7 +210,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" id="MAIN" class="btn btn-primary">Confirmar</button>
+        <button type="submit" id="confirma_produto" class="btn btn-primary">Confirmar</button>
         @else
         <h1>Nenhum material encontrado!</h1>
         <h2>Para cadastrar produtos devem existir materiais!</h2>

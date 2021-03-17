@@ -52,7 +52,39 @@
         var total_material = 0;
         $(document).ready(function() {
 
+            $('#seletor_material').select2();
+            $('#seletor_cliente').select2();
+            $('#seletor_produto').select2();
+            $('#seletor_cor').select2();
+            $('#detalhes_calca').hide();
+
+            $('#seletor_material').change(function() {
+                fetchRecords($('#seletor_material').val());
+            });
+            $('#seletor_produto').change(function() {
+                getProdutosValor($('#seletor_produto').val());
+            });
+
+            $('#seletor_grupo').change(function() {
+                if ($('#seletor_grupo').val() === '1') {
+                    $('#detalhes_camiseta').show();
+                    $('#detalhes_calca').hide();
+                } else if ($('#seletor_grupo').val() === '2') {
+                    $('#detalhes_calca').show();
+                    $('#detalhes_camiseta').hide();
+                }
+            });
+
             $('#tabela_pagamentos').dataTable({
+                "searching": true,
+                "paging": false,
+                "language": {
+                    "url": "http://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+                },
+                ordering: false
+            });
+
+            $('#tabela_pedidos').dataTable({
                 "searching": true,
                 "paging": false,
                 "language": {
@@ -72,22 +104,17 @@
                 date.setDate(date.getDate() + days);
                 return date;
             }
-
-            document.getElementById('ped_data').value = new Date().toDateInputValue(new Date().addDays(0));
-            document.getElementById('ped_data_entrega').value = new Date().toDateInputValue(new Date().addDays(45));
-            document.getElementById('ped_data_vencimento').value = new Date().toDateInputValue(new Date().addDays(0));
+            var pedData = document.getElementById('ped_data');
+            var pedDataEntrega = document.getElementById('ped_data_entrega');
+            var pedDataVencimento = document.getElementById('ped_data_vencimento');
+            if (pedData !== null)
+                document.getElementById('ped_data').value = new Date().toDateInputValue(new Date().addDays(0));
+            if (pedDataEntrega !== null)
+                document.getElementById('ped_data_entrega').value = new Date().toDateInputValue(new Date().addDays(45));
+            if (pedDataVencimento !== null)
+                document.getElementById('ped_data_vencimento').value = new Date().toDateInputValue(new Date().addDays(0));
             // date('d/m/Y', strtotime('+5 days', strtotime('14-07-2014')))
-            $('#seletor_material').select2();
-            $('#seletor_cliente').select2();
-            $('#seletor_produto').select2();
-            $('#seletor_cor').select2();
 
-            $('#seletor_material').change(function() {
-                fetchRecords($('#seletor_material').val());
-            });
-            $('#seletor_produto').change(function() {
-                getProdutosValor($('#seletor_produto').val());
-            });
 
             $('#seletor_forma_pagamento').change(function() {
 
@@ -132,7 +159,7 @@
         function removeProduto(rowId) {
             $('#' + rowId).remove();
             var aux = 0;
-            qtd_materiais--;
+            qtd_produtos--;
 
             $('#tabela_produtos tr').each(function(row, tr) {
                 if ($(tr).find('td:eq(0)').text() == "") {} else {
@@ -233,10 +260,10 @@
                 }
             });
 
-            $('#MAIN').click(function() {
+            $('#confirma_produto').click(function() {
                 if ($('#nome').val() == "") {
                     Swal.fire('Informe o nome do produto!');
-                } else if (qtd_materiais) {
+                } else if (qtd_materiais == 0) {
                     Swal.fire('Informe os materiais usados no produto!');
                 } else {
                     var table_data = [];
@@ -244,79 +271,21 @@
                     var prod = {
                         'nome': $('#nome').val(),
                         'valor': $('#valor').val(),
-                        'observacao': $('#observacao').val()
-                    };
-                    table_data.push(prod);
-
-                    $('#tabela_materiais tr').each(function(row, tr) {
-                        if ($(tr).find('td:eq(0)').text() == "") {
-
-                        } else {
-                            var sub = {
-                                'material': $(tr).find('td:eq(0)').text(),
-                                'quantidade': $(tr).find('td:eq(2)').text(),
-                                'custo_material': $(tr).find('td:eq(3)').text()
-                            };
-                            table_data.push(sub);
-                        }
-
-                    });
-                    var dataForm = {
-                        'data': table_data
-                    };
-                    //salvar
-                    var _token = $('meta[name="_token"]').attr('content');
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': _token
-                        }
-                    });
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{route('produto.store')}}",
-                        // url: "produto/novo",
-                        dataType: 'json',
-                        data: dataForm,
-                        success: function(data) {
-                            total_material = 0;
-                            sub_material = 0;
-                            qtd_materiais = 0;
-                            Swal.fire({
-                                title: 'Produto registrado!',
-                                icon: 'success',
-                                showDenyButton: true,
-                                showCancelButton: false,
-                                confirmButtonText: 'OK',
-                            }).then((result) => {
-                                window.location.href = "{{route('produto.novo')}}";
-                            })
-
-                        },
-                        error: function(data) {
-                            Swal.fire('', '', 'error');
-                            console.log(data);
-                        }
-
-                    });
-                    //zerar variéveis de valores
-                }
-
-            });
-
-
-            //js-ajax-search
-            $('#MAIN').click(function() {
-                if ($('#nome').val() == "") {
-                    Swal.fire('Informe o nome do produto!');
-                } else if (qtd_materiais) {
-                    Swal.fire('Informe os materiais usados no produto!');
-                } else {
-                    var table_data = [];
-
-                    var prod = {
-                        'nome': $('#nome').val(),
-                        'valor': $('#valor').val(),
-                        'observacao': $('#observacao').val()
+                        'observacao': $('#observacao').val(),
+                        'grupo': $('#seletor_grupo').val(),
+                        'manga_tipo': $('#seletor_tipo_manga').val(),
+                        'manga_tamanho': $('#seletor_tamanho_manga').val(),
+                        'manga_cor': $('#manga_cor').val(),
+                        'manga_galao': $('#manga_galao').val(),
+                        'gola_tipo': $('#seletor_gola').val(),
+                        'gola_decote': $('#seletor_decote').val(),
+                        'bolso_frente_cam': $('#bolso_frente_cam').val(),
+                        'passadores': $('#passadores').val(),
+                        'elastico': $('#elastico').val(),
+                        'elastico_costa': $('#elastico_costa').val(),
+                        'bolso_frente': $('#bolso_frente').val(),
+                        'bolso_costas': $('#bolso_costas').val(),
+                        'refletiva': $('#refletiva').val()
                     };
                     table_data.push(prod);
 

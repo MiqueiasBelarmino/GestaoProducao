@@ -18,18 +18,22 @@ class CreateDetalhesCalcaTable extends Migration
             $table->integer('prod_codigo')->unsigned();
             $table->primary(['det_cal_codigo','prod_codigo']);
 
-            $table->integer('det_cal_passadores')->unsigned();
-            $table->integer('det_cal_elastico')->unsigned();
-            $table->integer('det_cal_elastico_costas')->unsigned();
-            $table->integer('det_cal_bolso_frente')->unsigned();
-            $table->integer('det_cal_bolso_costas')->unsigned();
-            $table->integer('det_cal_refletiva')->unsigned();
+            $table->integer('det_cal_passadores');
+            $table->integer('det_cal_elastico');
+            $table->integer('det_cal_bolso_frente');
+            $table->integer('det_cal_bolso_costas');
+            $table->integer('det_cal_refletiva');
 
             $table->foreign('prod_codigo')
                 ->references('prod_codigo')
                 ->on('produtos')
                 ->onDelete('cascade');
             //$table->timestamps();
+        });
+
+        Schema::table('detalhes_calca', function($table)
+        {
+            $table->increments('det_cal_codigo')->change();
         });
     }
 

@@ -19,7 +19,7 @@ class CreateItensPedidoTable extends Migration
             $table->integer('ite_ped_quantidade')->unsigned();
             $table->string('ite_ped_cor',50)->nullable();
             $table->double('ite_ped_valor',10,2)->default(0);
-            $table->text('ite_ped_observacao');
+            $table->text('ite_ped_observacao')->nullable();
             $table->primary(['prod_codigo','ped_codigo']);
 
             $table->foreign('prod_codigo')

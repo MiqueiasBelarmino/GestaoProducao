@@ -34,6 +34,12 @@ class Processo extends Model
     }
 
 
+    public function getProcCodigo($codigo)
+	{
+		$processo = Processo::find($codigo);
+		return $processo->proc_nome;
+	}
+
     public function historico_producao()
     {
         return $this->hasMany(HistoricoProducao::class,'proc_codigo');

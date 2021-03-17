@@ -16,7 +16,7 @@ class CreateFornecedoresTable extends Migration
         Schema::create('fornecedores', function (Blueprint $table) {
             $table->increments('for_codigo');
             $table->string('for_nome_razao_social',100);
-            $table->string('for_nome_social_fantasia',100);
+            $table->string('for_nome_social_fantasia',100)->nullable();
             $table->string('for_rg_inscricao_estadual',50)->nullable();
             $table->string('for_cpf_cnpj',18)->unique();
             $table->string('for_telefone',18);

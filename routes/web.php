@@ -100,6 +100,9 @@ $this->group(['middleware' => ['auth:funcionario']], function () {
 
     $this->get('pagamento', 'PagamentoController@index')->name('pagamento');
     $this->get('pagamento/{id}', 'PagamentoController@store')->name('pagamento.store');
+
+    $this->get('producao', 'PedidoController@producao')->name('producao');
+    $this->get('producao/{id}', 'PedidoController@producaoStore')->name('producao.store');
     
 
 
