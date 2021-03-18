@@ -12,6 +12,8 @@ use App\Models\Cliente;
 use App\Models\HistoricoProducao;
 use App\Models\HistoricoView;
 use App\Models\ItemPedido;
+use App\Models\CompraPedidoView;
+use App\Models\CompraView;
 use App\Models\Processo;
 use PDF;
 use DB;
@@ -38,10 +40,17 @@ class PedidoController extends Controller
 
     public function historico($id)
     {
-        // $historicos = HistoricoView::all();
         $historicos = HistoricoView::select('*')->where('ped_codigo', '=', $id)->get();
-        // dump($historicos);
         return view('admin.pedido.historico', compact('historicos'));
+    }
+
+    public function compra($id = null)
+    {
+        if ($id != null)
+            $itens_compra = CompraPedidoView::where('ped_codigo', '=', $id)->simplePaginate(10);
+        else
+            $itens_compra = CompraView::select('*')->simplePaginate(10);
+        return view('admin.pedido.compra', compact('itens_compra'));
     }
 
     public function producaoStore(Request $request, $id)
@@ -52,7 +61,16 @@ class PedidoController extends Controller
         $historico->his_pro_data_saida   = now();
         $response = $historico->save();
 
+        if ($temp->proc_codigo == 1) {
+        }
+
         if ($response == true) {
+            if ($temp->proc_codigo == 1) {
+                $pedido = Pedido::findOrFail($temp->ped_codigo);
+                $pedido->ped_data_aprovacao = now();
+                $pedido->save();
+            }
+    
             if ($temp->proc_codigo < (DB::table('processos')->count())) {
                 $historico                       = new HistoricoProducao;
                 $historico->ped_codigo           = $temp->ped_codigo;
@@ -82,22 +100,20 @@ class PedidoController extends Controller
         $clientes = Cliente::pluck('cli_nome_razao_social', 'cli_codigo');
         return view('admin.pedido.novo', compact('pedido', 'produtos', 'clientes'));
     }
-    // public function gerarPDF()
-    // {
-    //     $cargos = Produto::all();
-    //     $pdf = PDF::loadView('admin.cargos.pdf', compact('cargos'));
-    //     return $pdf->setPaper('a4')->stream('Cargos.pdf');
-    // }
 
-    // public function gerarXLSX() 
-    // {
-    //     return Excel::download(new CargoExport, 'Cargos.xlsx');
-    // }
+    public function gerarCompraPDF($id = null)
+    {
+        if ($id != null) {
+            $itens_compra = CompraPedidoView::select('*')->where('ped_codigo', '=', $id)->get();
+            $pdf = PDF::loadView('admin.pedido.pdf', compact('itens_compra'));
+            return $pdf->setPaper('a4')->stream('Compra_' . now() . '.pdf');
+        } else {
+            $itens_compra = CompraView::all();
+            $pdf = PDF::loadView('admin.pedido.pdf.compra', compact('itens_compra'));
+            return $pdf->setPaper('a4')->stream('Compra_' . now() . '.pdf');
+        }
+    }
 
-    // public function gerarCSV() 
-    // {
-    //     return Excel::download(new CargoExport, 'Cargos.csv');
-    // }
 
     // public function store(Request $request, Produto $produto)
     public function store(Request $request)
@@ -209,6 +225,6 @@ class PedidoController extends Controller
     {
         //$pedido = Pedido::findOrFail($id);
         //$pedido->delete();
-       // return redirect()->route('pedido.todos')->with('success', 'Produto Deletado');
+        // return redirect()->route('pedido.todos')->with('success', 'Produto Deletado');
     }
 }

@@ -41,10 +41,6 @@
                                     <td>{{$pedido->getDataFormatada($pedido->ped_data_aprovacao)}}</td>
                                     <td>{{$pedido->getDataFormatada($pedido->ped_data_entrega)}}</td>
                                     <td>
-                                        <a href="" class="btn btn-primary">
-                                            <!-- Editar -->
-                                            <i class="fa fa-cart-plus"></i>
-                                        </a>
                                         <a href="{{url('pedido/'.$pedido->ped_codigo.'/historico')}}" class="btn btn-primary">
                                             <!-- Editar -->
                                             <i class="fa fa-bars"></i>
@@ -68,8 +64,8 @@
                     </div>
                 </div>
             </div>
-            <a href="" class="btn btn-primary" target="_blank">Exportar PDF</a>
-            <a href="" class="btn btn-primary">Exportar Planilha</a>
+            <!-- <a href="" class="btn btn-primary" target="_blank">Exportar PDF</a>
+            <a href="" class="btn btn-primary">Exportar Planilha</a> -->
         </form>
     </div>
 

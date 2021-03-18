@@ -30,6 +30,7 @@ $this->group(['middleware' => ['auth:funcionario']], function () {
     //material
     $this->get('material', 'MaterialController@todos')->name('material.todos');
     $this->get('material/novo', 'MaterialController@novo')->name('material.novo');
+    $this->any('material/PDF', 'MaterialController@gerarPDF')->name('material.pdf');
     $this->post('material/novo', 'MaterialController@store')->name('material.store');
     $this->get('material/{id}/editar', 'MaterialController@novo')->name('material.editar');
     $this->post('material/{id}/editar', 'MaterialController@updatePost')->name('material.editar.salvar');
@@ -108,6 +109,9 @@ $this->group(['middleware' => ['auth:funcionario']], function () {
     $this->get('pagamento', 'PagamentoController@index')->name('pagamento');
     $this->get('pagamento/{id}', 'PagamentoController@store')->name('pagamento.store');
 
+    $this->get('producao/compra', 'PedidoController@compra')->name('compra.todos');
+    $this->get('producao/{id}/compra', 'PedidoController@compra')->name('compra');
+    $this->any('compra/{id}/PDF', 'PedidoController@gerarCompraPDF')->name('compra.pdf');
     $this->get('producao', 'PedidoController@producao')->name('producao');
     $this->get('producao/{id}', 'PedidoController@producaoStore')->name('producao.store');
     

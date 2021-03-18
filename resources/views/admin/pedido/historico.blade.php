@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Produção')
+@section('title', 'Histórico')
 
 @section('content_header')
 <meta name="_token" content="{{ csrf_token() }}">
@@ -8,7 +8,7 @@
 @section('content')
 <div class="box">
     <div class="box-header">
-        <h1>Produção</h1>
+        <h1>Histórico de Produção</h1>
     </div>
 
     <div class="box-body">

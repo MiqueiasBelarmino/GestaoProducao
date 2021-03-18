@@ -168,6 +168,11 @@ return [
                     'icon'    => 'far fa-circle',
                 ],
                 [
+                    'text'    => 'Compra',
+                    'url'     => 'producao/compra',
+                    'icon'    => 'far fa-circle',
+                ],
+                [
                     'text'    => 'Pagamento',
                     'url'     => 'pagamento',
                     'icon'    => 'far fa-circle',

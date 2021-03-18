@@ -30,12 +30,10 @@
 </head>
 
 <body>
-    <h2 style="text-align: center;">Materiais necessários para produção do pedido "{{$itens_compra[0]->ped_codigo}}"</h2>
+    <h2 style="text-align: center;">Materiais necessários comprados para produção dos pedidos</h2>
         <table align=center class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Pedido</th>
-                    <th>Data Pedido</th>
                     <th>Material</th>
                     <th>Unidade</th>
                     <th>Quantidade</th>
@@ -45,11 +43,9 @@
             <tbody>
                 @forelse($itens_compra as $itens)
                 <tr>
-                    <td>{{$itens->ped_codigo}}</td>
-                    <td>{{$itens->ped_data}}</td>
                     <td>{{$itens->mat_nome}}</td>
                     <td>{{$itens->mat_unidade}}</td>
-                    <td>{{$itens->quantidade}}</td>
+                    <td>{{$itens->mat_pro_quantidade}}</td>
                     <td>{{$itens->valor}}</td>
                 </tr>
                 @empty

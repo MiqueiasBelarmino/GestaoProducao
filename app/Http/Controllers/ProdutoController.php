@@ -43,22 +43,6 @@ class ProdutoController extends Controller
         $this->output->set_content_type('application/json');
         echo json_encode(array('check' => 'check'));
     }
-    // public function gerarPDF()
-    // {
-    //     $cargos = Produto::all();
-    //     $pdf = PDF::loadView('admin.cargos.pdf', compact('cargos'));
-    //     return $pdf->setPaper('a4')->stream('Cargos.pdf');
-    // }
-
-    // public function gerarXLSX() 
-    // {
-    //     return Excel::download(new CargoExport, 'Cargos.xlsx');
-    // }
-
-    // public function gerarCSV() 
-    // {
-    //     return Excel::download(new CargoExport, 'Cargos.csv');
-    // }
 
     // public function store(Request $request, Produto $produto)
     public function store(Request $request)

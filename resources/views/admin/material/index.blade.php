@@ -76,8 +76,7 @@
             </div>
 
 
-            <a href="" class="btn btn-primary" target="_blank">Exportar PDF</a>
-            <a href="" class="btn btn-primary">Exportar Planilha</a>
+            <a href="{{url('material/PDF')}}" class="btn btn-primary" target="_blank">Exportar PDF</a>
         </form>
     </div>
 

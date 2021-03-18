@@ -106,6 +106,7 @@
                             <!-- <th >Código</th> -->
                             <th>Nome</th>
                             <th>Quantidade</th>
+                            <th>Cor</th>
                             <th>Valor</th>
                             <th>Ações</th>
                         </tr>
@@ -137,10 +138,6 @@
                     <label id="data_venc" for="ped_data_vencimento">Data Vencimento:</label>
                     <input type="date" name="ped_data_vencimento" id="ped_data_vencimento" class="form-control" @if(isset($pedido)) value="{{$pedido->ped_data_vencimento}}" @endif required>
                 </div>
-            </div>
-            <div class="col-sm-2">
-                <br />
-                <button id="add_produto" class="btn btn-primary"><i class="fa fa-plus"></i></button>
             </div>
 
         </div>

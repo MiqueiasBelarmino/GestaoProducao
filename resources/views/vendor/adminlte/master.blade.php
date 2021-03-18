@@ -93,14 +93,14 @@
                 ordering: false
             });
 
-            $('#tabela_materiais').dataTable({
-                "searching": true,
-                "paging": false,
-                "language": {
-                    "url": "http://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
-                },
-                ordering: false
-            });
+            // $('#tabela_materiais').dataTable({
+            //     "searching": true,
+            //     "paging": false,
+            //     "language": {
+            //         "url": "http://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+            //     },
+            //     ordering: false
+            // });
 
             $('#tabela_processos').dataTable({
                 "searching": true,
@@ -372,7 +372,7 @@
                     var quantidade = $('#quantidade').val();
                     var valor = parseFloat($('#custo_produto').val());
                     var sub_produto = (valor * quantidade);
-                    var cor = $('#seletor_produto option:selected').text();
+                    var cor = $('#seletor_cor option:selected').text();
                     var aux = 0;
                     $id = setNumber('tabela_produtos');
                     $('#tabela_produtos tbody:last-child').append(

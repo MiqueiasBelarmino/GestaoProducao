@@ -23,22 +23,12 @@ class MaterialController extends Controller
         return view('admin.material.novo', compact('material', 'fornecedores'));
     }
 
-    // public function gerarPDF()
-    // {
-    //     $cargos = Material::all();
-    //     $pdf = PDF::loadView('admin.cargos.pdf', compact('cargos'));
-    //     return $pdf->setPaper('a4')->stream('Cargos.pdf');
-    // }
-
-    // public function gerarXLSX() 
-    // {
-    //     return Excel::download(new CargoExport, 'Cargos.xlsx');
-    // }
-
-    // public function gerarCSV() 
-    // {
-    //     return Excel::download(new CargoExport, 'Cargos.csv');
-    // }
+    public function gerarPDF()
+    {
+        $materiais = Material::all();
+        $pdf = PDF::loadView('admin.material.pdf', compact('materiais'));
+        return $pdf->setPaper('a4')->stream('Materiais.pdf');
+    }
 
     public function store(CustoValidationFormRequest $request, Material $material)
     {
