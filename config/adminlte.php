@@ -169,7 +169,7 @@ return [
                 ],
                 [
                     'text'    => 'Compra',
-                    'url'     => 'producao/compra',
+                    'url'     => 'producao/materiais',
                     'icon'    => 'far fa-circle',
                 ],
                 [

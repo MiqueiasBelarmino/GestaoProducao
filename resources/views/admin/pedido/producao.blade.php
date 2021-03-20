@@ -45,7 +45,7 @@
                                         <td>{{$historico->his_pro_data_entrada}}</td>
                                         <td>
                                             
-                                            <a @if($historico->proc_nome != "Compra") disabled @endif href="{{url('producao/'.$historico->ped_codigo.'/compra')}}" class="btn btn-primary">
+                                            <a @if($historico->proc_nome != "Compra") disabled @endif href="{{url('producao/'.$historico->ped_codigo.'/materiais')}}" class="btn btn-primary">
                                                 <!-- Editar -->
                                                 <i class="fa fa-cart-plus"></i>
                                             </a>

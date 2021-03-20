@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Pagamento')
+@section('title', 'Recebimento')
 
 @section('content_header')
 <meta name="_token" content="{{ csrf_token() }}">
@@ -8,7 +8,7 @@
 @section('content')
 <div class="box">
     <div class="box-header">
-        <h1>Pagamentos</h1>
+        <h1>Recebimentos</h1>
     </div>
 
     <div class="box-body">

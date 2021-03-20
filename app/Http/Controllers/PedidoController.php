@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CustoValidationFormRequest;
 use App\Models\Pagamento;
-use App\Models\MaterialProduto;
+use App\Models\MaterialCompra;
 use App\Models\Pedido;
 use App\Models\Produto;
 use App\Models\Cliente;
+use App\Models\Compra;
 use App\Models\HistoricoProducao;
 use App\Models\HistoricoView;
 use App\Models\ItemPedido;
@@ -53,6 +54,45 @@ class PedidoController extends Controller
         return view('admin.pedido.compra', compact('itens_compra'));
     }
 
+    public function confirmar($id)
+    {
+        return view('admin.pedido.vencimento', compact('id'));
+    }
+
+    public function compraPedido(Request $request)
+    {
+        $itens_compra = CompraPedidoView::where('ped_codigo', '=', $request->ped_codigo)->get();
+        $aux = 0;
+        foreach ($itens_compra as $item) {
+            $aux = $aux + $item->valor;
+        }
+        $compra =  new Compra;
+        $compra->com_data       = now();
+        $compra->com_total = $aux;
+        $compra->com_data_vencimento = $request->com_data_vencimento;
+        $teste = $compra->save();
+
+        if ($teste == true) {
+            foreach ($itens_compra as $item) {
+                $material_compra = new MaterialCompra;
+                $material_compra->mat_codigo = $item->mat_codigo;
+                $material_compra->com_codigo = $compra->com_codigo;
+                $material_compra->mat_com_quantidade = $item->quantidade;
+                $material_compra->mat_com_custo = $item->valor;
+                $material_compra->save();
+            }
+
+            return redirect()->route('producao')->with('success', 'Compra efetuada');
+        }
+    }
+
+    public function compraTodos(Request $request, $id)
+    {
+        $itens_compra = CompraPedidoView::where('ped_codigo', '=', $id);
+        $compra =  new Compra;
+        $compra->com_data       = now();
+    }
+
     public function producaoStore(Request $request, $id)
     {
 
@@ -70,7 +110,7 @@ class PedidoController extends Controller
                 $pedido->ped_data_aprovacao = now();
                 $pedido->save();
             }
-    
+
             if ($temp->proc_codigo < (DB::table('processos')->count())) {
                 $historico                       = new HistoricoProducao;
                 $historico->ped_codigo           = $temp->ped_codigo;
@@ -83,6 +123,10 @@ class PedidoController extends Controller
         }
     }
 
+    public function compraMateriais()
+    {
+        return view('admin.pedido.sucesso');
+    }
     public function getProdutosValor($id)
     {
         $produtos = Produto::select('*')->where('prod_codigo', $id)->get();
@@ -101,17 +145,18 @@ class PedidoController extends Controller
         return view('admin.pedido.novo', compact('pedido', 'produtos', 'clientes'));
     }
 
-    public function gerarCompraPDF($id = null)
+    // public function gerarCompraPDF($id = null)
+    public function gerarCompraPDF($id)
     {
-        if ($id != null) {
+        // if ($id != null) {
             $itens_compra = CompraPedidoView::select('*')->where('ped_codigo', '=', $id)->get();
             $pdf = PDF::loadView('admin.pedido.pdf', compact('itens_compra'));
             return $pdf->setPaper('a4')->stream('Compra_' . now() . '.pdf');
-        } else {
-            $itens_compra = CompraView::all();
-            $pdf = PDF::loadView('admin.pedido.pdf.compra', compact('itens_compra'));
-            return $pdf->setPaper('a4')->stream('Compra_' . now() . '.pdf');
-        }
+        // } else {
+        //     $itens_compra = CompraView::all();
+        //     $pdf = PDF::loadView('admin.pedido.pdf.compra', compact('itens_compra'));
+        //     return $pdf->setPaper('a4')->stream('Compra_' . now() . '.pdf');
+        // }
     }
 
 

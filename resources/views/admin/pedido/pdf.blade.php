@@ -37,6 +37,7 @@
                     <th>Pedido</th>
                     <th>Data Pedido</th>
                     <th>Material</th>
+                    <th>Fornecedor</th>
                     <th>Unidade</th>
                     <th>Quantidade</th>
                     <th>Custo</th>
@@ -48,6 +49,7 @@
                     <td>{{$itens->ped_codigo}}</td>
                     <td>{{$itens->ped_data}}</td>
                     <td>{{$itens->mat_nome}}</td>
+                    <td>{{$itens->fornecedor}}</td>
                     <td>{{$itens->mat_unidade}}</td>
                     <td>{{$itens->quantidade}}</td>
                     <td>{{$itens->valor}}</td>

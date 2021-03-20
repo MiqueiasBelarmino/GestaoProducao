@@ -15,18 +15,20 @@ class CreateComprasTable extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->integer('com_codigo')->unsigned();
-            $table->integer('ped_codigo')->unsigned();
-            $table->primary(['pag_codigo', 'ped_codigo']);
+            $table->integer('mat_codigo')->unsigned();
+            $table->primary(['com_codigo', 'mat_codigo']);
 
-            $table->foreign('ped_codigo')
-                ->references('ped_codigo')
-                ->on('pedidos')
+            $table->foreign('mat_codigo')
+                ->references('mat_codigo')
+                ->on('materiais')
                 ->onDelete('cascade');
             $table->double('com_total', 10, 2)->default(0);
             $table->date('com_data')->nullable();
+            $table->date('com_data_vencimento')->nullable();
+            $table->date('com_data_pagamento')->nullable();
         });
-        Schema::table('pagamentos', function ($table) {
-            $table->increments('pag_codigo')->change();
+        Schema::table('compras', function ($table) {
+            $table->increments('com_codigo')->change();
         });
     }
 
@@ -38,8 +40,7 @@ class CreateComprasTable extends Migration
     public function down()
     {
         Schema::table('compras', function (Blueprint $table) {
-            $table->dropForeign(['ped_codigo']);
-            $table->dropForeign(['for_codigo']);
+            $table->dropForeign(['mat_codigo']);
         });
         Schema::dropIfExists('compras');
     }

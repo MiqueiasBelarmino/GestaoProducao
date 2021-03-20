@@ -109,8 +109,16 @@ $this->group(['middleware' => ['auth:funcionario']], function () {
     $this->get('pagamento', 'PagamentoController@index')->name('pagamento');
     $this->get('pagamento/{id}', 'PagamentoController@store')->name('pagamento.store');
 
-    $this->get('producao/compra', 'PedidoController@compra')->name('compra.todos');
-    $this->get('producao/{id}/compra', 'PedidoController@compra')->name('compra');
+    $this->get('producao/materiais', 'PedidoController@compra');
+    $this->get('producao/materiais/confirmar', 'PedidoController@compraMateriais');//temp
+    $this->get('producao/compra/todos', 'PedidoController@compraTodos');
+
+    $this->get('producao/{id}/materiais', 'PedidoController@compra');
+    $this->get('compra/{id}/confirmar', 'PedidoController@confirmar');
+
+    $this->post('producao/compra/pedido', 'PedidoController@compraPedido')->name('compra.store');
+    
+
     $this->any('compra/{id}/PDF', 'PedidoController@gerarCompraPDF')->name('compra.pdf');
     $this->get('producao', 'PedidoController@producao')->name('producao');
     $this->get('producao/{id}', 'PedidoController@producaoStore')->name('producao.store');
