@@ -30,6 +30,7 @@
 </head>
 
 <body>
+@include('includes.functions')
     <h2 style="text-align: center;">Materiais necessários para produção do pedido "{{$itens_compra[0]->ped_codigo}}"</h2>
         <table align=center class="table table-bordered table-hover">
             <thead>
@@ -47,7 +48,7 @@
                 @forelse($itens_compra as $itens)
                 <tr>
                     <td>{{$itens->ped_codigo}}</td>
-                    <td>{{$itens->ped_data}}</td>
+                    <td>{{dateFormat($itens->ped_data)}}</td>
                     <td>{{$itens->mat_nome}}</td>
                     <td>{{$itens->fornecedor}}</td>
                     <td>{{$itens->mat_unidade}}</td>

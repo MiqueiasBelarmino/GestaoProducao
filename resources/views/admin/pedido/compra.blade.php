@@ -39,6 +39,7 @@
 
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         <!-- <form method="POST" action="{{url('compra/confirmar')}}" class="form form-inline"> -->
             {{csrf_field()}}
             <div class="row">
@@ -54,9 +55,9 @@
                                     <thead>
                                         <tr role="row">
                                             @if(isset($itens_compra[0]->ped_codigo))
-                                            <!-- <th tabindex="0" rowspan="1" colspan="1">Pedido</th> -->
                                             <th tabindex="0" rowspan="1" colspan="1">Data Pedido</th>
                                             @endif
+                                            <th tabindex="0" rowspan="1" colspan="1">Fornecedor</th>
                                             <th tabindex="0" rowspan="1" colspan="1">Material</th>
                                             <th tabindex="0" rowspan="1" colspan="1">Unidade</th>
                                             <th tabindex="0" rowspan="1" colspan="1">Quantidade</th>
@@ -68,9 +69,9 @@
                                         @forelse($itens_compra as $itens)
                                         <tr>
                                             @if(isset($itens->ped_codigo))
-                                            <!-- <td>{{$itens->ped_codigo}}</td> -->
-                                            <td>{{$itens->ped_data}}</td>
+                                            <td>{{dateFormat($itens->ped_data)}}</td>
                                             @endif
+                                            <td>{{$itens->fornecedor}}</td>
                                             <td>{{$itens->mat_nome}}</td>
                                             <td>{{$itens->mat_unidade}}</td>
                                             <td>{{$itens->quantidade}}</td>
@@ -88,11 +89,13 @@
                                 {{$itens_compra->links()}}
                             </div>
                         </div>
-                        <a href="{{url('compra/'.$itens_compra[0]->ped_codigo.'/PDF')}}" class="btn btn-primary" target="_blank">Exportar PDF</a>
+                        
                         @if(isset($itens_compra[0]->ped_codigo))
                         <a href="{{url('compra/'.$itens_compra[0]->ped_codigo.'/confirmar')}}" class="btn btn-success">Comprar</a>
+                        <a href="{{url('compra/'.$itens_compra[0]->ped_codigo.'/PDF')}}" class="btn btn-primary" target="_blank">Exportar PDF</a>
                         @else
                         <a href="{{url('producao/materiais/confirmar')}}" class="btn btn-success">Comprar</a>
+                        <a href="{{url('compra/PDF')}}" class="btn btn-primary" target="_blank">Exportar PDF</a>
                         @endif
                     </div>
                 </div>

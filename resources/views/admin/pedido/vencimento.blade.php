@@ -10,6 +10,7 @@
 <div class="box">
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         <form method="POST" action="{{ route('compra.store') }}">
             {{csrf_field()}}
             <input type="hidden" name="ped_codigo" value="{{$id}}">

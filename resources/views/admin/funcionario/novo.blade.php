@@ -23,6 +23,7 @@
 
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         @if(isset($funcionario))
             <form method="POST" action="{{ route('funcionario.editar.salvar',['id' =>$funcionario->fun_codigo]) }}">
         @else

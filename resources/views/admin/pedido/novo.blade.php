@@ -21,6 +21,7 @@
 
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         @if(count($produtos)>0)
         {{csrf_field()}}
         <div class="row">

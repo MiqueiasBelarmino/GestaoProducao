@@ -14,6 +14,7 @@
 
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         <form method="POST" action="{{ route('funcionario.store') }}">
             {{csrf_field()}}
             <div class="row">

@@ -36,6 +36,7 @@
 
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         <!-- <form method="POST"  action="" class="form form-inline"> -->
         {{csrf_field()}}
         <div class="row">
@@ -155,15 +156,12 @@
                                                 {{$historico->ped_codigo}}
                                             </a>
                                         </td>
-                                        <td>{{$historico->getDataFormatada($historico->ped_data)}}</td>
-                                        <td>{{$historico->getDataFormatada($historico->ped_data_entrega)}}</td>
+                                        <td>{{dateFormat($historico->ped_data)}}</td>
+                                        <td>{{dateFormat($historico->ped_data_entrega)}}</td>
                                         <td>{{$historico->prazo}} dias</td>
                                         <td>{{$historico->proc_nome}}</td>
                                         <td>
-
-                                            <a @if($historico->proc_nome != "Compra") disabled @endif
-                                                href="{{url('producao/'.$historico->ped_codigo.'/materiais')}}"
-                                                class="btn btn-primary">
+                                            <a @if($historico->proc_nome == "Compra") href="{{url('producao/'.$historico->ped_codigo.'/materiais')}}" enabled @else disabled @endif class="btn btn-primary">
                                                 <!-- Editar -->
                                                 <i class="fa fa-cart-plus"></i>
                                             </a>

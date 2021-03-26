@@ -22,7 +22,7 @@
 
     <div class="box-body">
         @include('includes.alerts')
-
+        @include('includes.functions')
         @if(isset($cliente))
         <form method="POST" action="{{ route('cliente.editar.salvar',['id' =>$cliente->cli_codigo]) }}">
             @else

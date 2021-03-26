@@ -21,6 +21,7 @@
 
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         @if(isset($processo))
             <form method="POST" action="{{ route('processo.editar.salvar',['id' =>$processo->proc_codigo]) }}">
         @else

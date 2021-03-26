@@ -20,6 +20,7 @@
     </div> -->
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         <form method="POST" action="" class="form form-inline">
             {!! csrf_field()!!}
             <div id="tabela_materiais_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">

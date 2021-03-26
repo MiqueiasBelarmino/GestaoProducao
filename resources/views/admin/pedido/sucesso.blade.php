@@ -10,6 +10,7 @@
 <div class="box">
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         <h1>Compra Liberada</h1>
     </div>
 </div>

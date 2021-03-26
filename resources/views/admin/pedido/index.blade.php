@@ -10,6 +10,7 @@
 <div class="box">
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         <form method="POST" action="" class="form form-inline">
             {!! csrf_field()!!}
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -37,9 +38,9 @@
                                     <td>{{$pedido->ped_codigo}}</td>
                                     <td>{{$pedido->cliente->cli_nome_razao_social}}</td>
                                     <td>{{number_format($pedido->ped_total,2,'.',',')}}</td>
-                                    <td>{{$pedido->getDataFormatada($pedido->ped_data)}}</td>
-                                    <td>{{$pedido->getDataFormatada($pedido->ped_data_aprovacao)}}</td>
-                                    <td>{{$pedido->getDataFormatada($pedido->ped_data_entrega)}}</td>
+                                    <td>{{dateFormat($pedido->ped_data)}}</td>
+                                    <td>{{dateFormat($pedido->ped_data_aprovacao)}}</td>
+                                    <td>{{dateFormat($pedido->ped_data_entrega)}}</td>
                                     <td>
                                         <a href="{{url('pedido/'.$pedido->ped_codigo.'/historico')}}" class="btn btn-primary">
                                             <!-- Editar -->

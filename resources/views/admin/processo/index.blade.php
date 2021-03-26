@@ -10,6 +10,7 @@
 <div class="box">
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         <form method="POST" action="" class="form form-inline">
             {!! csrf_field()!!}
             <div class="row">

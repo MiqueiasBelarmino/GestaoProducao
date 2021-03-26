@@ -28,6 +28,7 @@
     </style>
 </head>
 <body>
+@include('includes.functions')
 <h2 style="text-align: center;">Funcionários</h2>
         <table align=center class="table table-bordered table-hover">
         <thead>
@@ -102,7 +103,7 @@
                         @if(isset($request->cargo))<td>{{$funcionario->cargo->car_nome}}</td>@endif
                         @if(isset($request->comissao))<td>{{$funcionario->fun_comissao}}</td>@endif
                         @if(isset($request->telefone))<td>{{$funcionario->fun_telefone}}</td>@endif
-                        @if(isset($request->data_admissao))<td>{{$funcionario->formatarData($funcionario->fun_data_admissao)}}</td>@endif
+                        @if(isset($request->data_admissao))<td>{{dateFormat($funcionario->fun_data_admissao)}}</td>@endif
                         @if(isset($request->observacao))<td>{{$funcionario->fun_observacao}}</td>@endif
                     @endif
                 </tr>

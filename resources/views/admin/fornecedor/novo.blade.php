@@ -22,7 +22,7 @@
 
     <div class="box-body">
         @include('includes.alerts')
-        
+        @include('includes.functions')
         @if(isset($fornecedor))
             <form method="POST" action="{{ route('fornecedor.editar.salvar',['id' =>$fornecedor->for_codigo]) }}">
         @else

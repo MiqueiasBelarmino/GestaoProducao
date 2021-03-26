@@ -107,10 +107,7 @@ class PedidoController extends Controller
         $temp = $historico;
         $historico->his_pro_data_saida   = now();
         $response = $historico->save();
-
-        if ($temp->proc_codigo == 1) {
-        }
-
+        
         if ($response == true) {
             if ($temp->proc_codigo == 1) {
                 $pedido = Pedido::findOrFail($temp->ped_codigo);
@@ -152,18 +149,17 @@ class PedidoController extends Controller
         return view('admin.pedido.novo', compact('pedido', 'produtos', 'clientes'));
     }
 
-    // public function gerarCompraPDF($id = null)
-    public function gerarCompraPDF($id)
+    public function gerarCompraPDF($id=null)
     {
-        // if ($id != null) {
+        if ($id != null) {
             $itens_compra = CompraPedidoView::select('*')->where('ped_codigo', '=', $id)->get();
             $pdf = PDF::loadView('admin.pedido.pdf', compact('itens_compra'));
             return $pdf->setPaper('a4')->stream('Compra_' . now() . '.pdf');
-        // } else {
-        //     $itens_compra = CompraView::all();
-        //     $pdf = PDF::loadView('admin.pedido.pdf.compra', compact('itens_compra'));
-        //     return $pdf->setPaper('a4')->stream('Compra_' . now() . '.pdf');
-        // }
+        } else {
+            $itens_compra = CompraView::all();
+            $pdf = PDF::loadView('admin.pedido.pdfTodos', compact('itens_compra'));
+            return $pdf->setPaper('a4')->stream('Compra_' . now() . '.pdf');
+        }
     }
 
 

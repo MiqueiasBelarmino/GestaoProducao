@@ -57,12 +57,7 @@ class Pedido extends Model
         'ped_observacao'
     ];
 
-    public function getDataFormatada($value)
-    {
-        if ($value != null)
-            return $value->format('d/m/Y');
-        return $value;
-    }
+
     public function confirmaQuitacao($id)
     {
         DB::table($this->table)

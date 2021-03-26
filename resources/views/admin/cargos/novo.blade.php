@@ -21,6 +21,7 @@
 
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         @if(isset($cargo))
             <form method="POST" action="{{ route('cargo.editar.salvar',['id' =>$cargo->car_codigo]) }}">
         @else

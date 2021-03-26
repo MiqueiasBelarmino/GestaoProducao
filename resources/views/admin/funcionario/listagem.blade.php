@@ -22,6 +22,7 @@
     </div> -->
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         <form method="POST"  action="{{route('funcionario.pdf',[$request])}}" class="form form-inline">
         {!! csrf_field()!!}
             <table class="table table-bordered table-hover">
@@ -86,7 +87,7 @@
                             <td>{{$funcionario->cargo->car_nome}}</td>
                             <td>{{$funcionario->fun_comissao}}</td>
                             <td>{{$funcionario->fun_telefone}}</td>
-                            <td>{{$funcionario->formatarData($funcionario->fun_data_admissao)}}</td>
+                            <td>{{dateFormat($funcionario->fun_data_admissao)}}</td>
                             <td>{{$funcionario->fun_observacao}}</td>
 
                         @else

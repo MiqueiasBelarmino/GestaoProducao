@@ -21,6 +21,7 @@
 
     <div class="box-body">
         @include('includes.alerts')
+        @include('includes.functions')
         @if(count($materiais)>0)
         @if(isset($produto))
         <!-- <form method="POST" action="{{ route('produto.editar.salvar',['id' =>$produto->mat_codigo]) }}"> -->

@@ -17,6 +17,7 @@
   <!-- /.box-header -->
   <div class="box-body">
   @include('includes.alerts')
+  @include('includes.functions')
     <form method="POST" action="{{route('fornecedor.todos')}}">
     {{csrf_field()}}
       <!-- checkbox -->
