@@ -12,6 +12,7 @@ use App\Models\Cliente;
 use App\Models\Compra;
 use App\Models\HistoricoProducao;
 use App\Models\HistoricoView;
+use App\Models\PedidoView;
 use App\Models\ItemPedido;
 use App\Models\CompraPedidoView;
 use App\Models\CompraView;
@@ -44,6 +45,12 @@ class PedidoController extends Controller
         $historicos = HistoricoView::select('*')->where('ped_codigo', '=', $id)->get();
         return view('admin.pedido.historico', compact('historicos'));
     }
+
+    // public function historicoView($id)
+    // {
+    //     $historicos = HistoricoView::select('*')->where('ped_codigo', '=', $id)->get();
+    //     return view('admin.pedido.historico', compact('historicos'));
+    // }
 
     public function compra($id = null)
     {
@@ -250,6 +257,34 @@ class PedidoController extends Controller
     {
         $pedido = Produto::find($id);
         return view('admin.pedido.editar', compact('pedido'));
+    }
+    public function historicoView($id)
+    {
+        $historicos = HistoricoView::select('*')->where('ped_codigo', '=', $id)->get();
+        // Fetch all records
+        $historicosData['data'] = $historicos;
+
+        echo json_encode($historicosData);
+        // exit;
+    }
+    public function pedidoView($id)
+    {
+        $pedidos = PedidoView::select('*')->where('pedido_detalhe.ped_codigo', '=', $id)->get();
+        $detalhes  = '';
+
+        foreach($pedidos as $pedido)
+        {
+            if($pedido->det_cam_codigo != null){
+                $detalhes = DB::table('dcam')->select('*')->where('ped_codigo', '=', $pedido->ped_codigo)->get();
+            }
+            if($pedido->det_cal_codigo != null){
+                $detalhes = DB::table('dcal')->select('*')->where('ped_codigo', '=', $pedido->ped_codigo)->get();
+            }
+        }
+
+        $detalhesPedido['pedido'] = $pedidos;
+        $detalhesPedido['detalhes'] = $detalhes;
+        echo json_encode($detalhesPedido);
     }
 
     public function updatePost(CustoValidationFormRequest $request, $id)

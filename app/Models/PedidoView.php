@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-class HistoricoView extends Model
+class PedidoView extends Model
 {
 
-    protected $table = 'historico';
+    protected $table = 'pedido_detalhe';
 
     public function getDataFormatada($value)
     {

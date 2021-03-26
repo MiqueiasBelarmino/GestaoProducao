@@ -122,7 +122,8 @@ $this->group(['middleware' => ['auth:funcionario']], function () {
     $this->any('compra/{id}/PDF', 'PedidoController@gerarCompraPDF')->name('compra.pdf');
     $this->get('producao', 'PedidoController@producao')->name('producao');
     $this->get('producao/{id}', 'PedidoController@producaoStore')->name('producao.store');
-    
+    $this->get('producao/{id}/historico', 'PedidoController@historicoView');
+    $this->get('producao/{id}/pedido', 'PedidoController@pedidoView');
 
 
     $this->any('logout', 'FuncionarioController@logout')->name('login.logout');

@@ -135,26 +135,8 @@ return [
             'url'         => 'admin',
             'icon'        => 'fa fa-tachometer-alt',
         ],
-        // [
-        //     'text'        => 'Manutenção',
-        //     // 'url'         => 'admin',
-        //     'icon'        => 'fa fa-list-alt',
-        //     'submenu'     => [
-        //         [
-        //             'text'    => 'Pagamento',
-        //             'url'     => '',
-        //             'icon'    => 'far fa-circle',
-        //         ],
-        //         [
-        //             'text'    => 'Recebimento',
-        //             'url'     => '',
-        //             'icon'    => 'far fa-circle',
-        //         ],
-        //     ]
-        // ],
         [
             'text'        => 'Pedido',
-            // 'url'         => 'admin',
             'icon'        => 'fa fa-shopping-cart',
             'submenu'     => [
                 [
@@ -163,18 +145,24 @@ return [
                     'icon'    => 'far fa-circle',
                 ],
                 [
-                    'text'    => 'Produção',
+                    'text'    => 'Pagamento',
+                    'url'     => 'pagamento',
+                    'icon'    => 'far fa-circle',
+                ],
+            ]
+        ],
+        [
+            'text'        => 'Produção',
+            'icon'        => 'fa fa-industry',
+            'submenu'     => [
+                [
+                    'text'    => 'Controle',
                     'url'     => 'producao',
                     'icon'    => 'far fa-circle',
                 ],
                 [
                     'text'    => 'Compra',
                     'url'     => 'producao/materiais',
-                    'icon'    => 'far fa-circle',
-                ],
-                [
-                    'text'    => 'Pagamento',
-                    'url'     => 'pagamento',
                     'icon'    => 'far fa-circle',
                 ],
             ]
