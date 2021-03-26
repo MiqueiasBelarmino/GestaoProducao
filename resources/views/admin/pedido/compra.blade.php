@@ -91,11 +91,11 @@
                         </div>
                         
                         @if(isset($itens_compra[0]->ped_codigo))
-                        <a href="{{url('compra/'.$itens_compra[0]->ped_codigo.'/confirmar')}}" class="btn btn-success">Comprar</a>
                         <a href="{{url('compra/'.$itens_compra[0]->ped_codigo.'/PDF')}}" class="btn btn-primary" target="_blank">Exportar PDF</a>
+                        <a href="{{url('compra/'.$itens_compra[0]->ped_codigo.'/confirmar')}}" class="btn btn-success">Comprar</a>
                         @else
-                        <a href="{{url('producao/materiais/confirmar')}}" class="btn btn-success">Comprar</a>
                         <a href="{{url('compra/PDF')}}" class="btn btn-primary" target="_blank">Exportar PDF</a>
+                        <a href="{{url('producao/materiais/confirmar')}}" class="btn btn-success">Comprar</a>
                         @endif
                     </div>
                 </div>

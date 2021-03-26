@@ -137,7 +137,7 @@
             "searching": true,
             "paging": false,
             "language": {
-                "url": "http://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+                "url": "{{ asset('json/Portuguese-Brasil.json') }}"
             },
             ordering: false
         });
@@ -146,25 +146,16 @@
             "searching": true,
             "paging": false,
             "language": {
-                "url": "http://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+                "url": "{{ asset('json/Portuguese-Brasil.json') }}"
             },
             ordering: false
         });
-
-        // $('#tabela_materiais').dataTable({
-        //     "searching": true,
-        //     "paging": false,
-        //     "language": {
-        //         "url": "http://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
-        //     },
-        //     ordering: false
-        // });
 
         $('#tabela_processos').dataTable({
             "searching": true,
             "paging": false,
             "language": {
-                "url": "http://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+                "url": "{{ asset('json/Portuguese-Brasil.json') }}"
             },
             ordering: false
         });

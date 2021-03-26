@@ -145,7 +145,7 @@ return [
                     'icon'    => 'far fa-circle',
                 ],
                 [
-                    'text'    => 'Pagamento',
+                    'text'    => 'Recebimento',
                     'url'     => 'pagamento',
                     'icon'    => 'far fa-circle',
                 ],
