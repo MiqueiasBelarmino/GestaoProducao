@@ -266,15 +266,17 @@ class PedidoController extends Controller
     public function pedidoView($id)
     {
         $pedidos = PedidoView::select('*')->where('pedido_detalhe.ped_codigo', '=', $id)->get();
-        $detalhes  = '';
+        $detalhes  = array();
 
         foreach($pedidos as $pedido)
         {
             if($pedido->det_cam_codigo != null){
-                $detalhes = DB::table('dcam')->select('*')->where('ped_codigo', '=', $pedido->ped_codigo)->get();
+                // $detalhes = DB::table('dcam')->select('*')->where('ped_codigo', '=', $pedido->ped_codigo)->get();
+                $detalhes = array_merge($detalhes, (DB::table('dcam')->select('*')->where('ped_codigo', '=', $pedido->ped_codigo)->get()->toArray()));
             }
             if($pedido->det_cal_codigo != null){
-                $detalhes = DB::table('dcal')->select('*')->where('ped_codigo', '=', $pedido->ped_codigo)->get();
+                // $detalhes = DB::table('dcal')->select('*')->where('ped_codigo', '=', $pedido->ped_codigo)->get();
+                $detalhes = array_merge($detalhes, (DB::table('dcal')->select('*')->where('ped_codigo', '=', $pedido->ped_codigo)->get()->toArray()));
             }
         }
 

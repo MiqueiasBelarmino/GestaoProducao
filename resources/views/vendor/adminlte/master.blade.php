@@ -303,8 +303,9 @@
             dataType: 'json',
             success: function(response) {
 
-                console.log(response['detalhes']);
+                console.log(response);
                 var len = 0;
+                $('#produtos_detalhes').empty();
                 $('#table_modal_pedido tbody').empty();
                 if (response['pedido'] != null) {
                     len = response['pedido'].length;
@@ -324,7 +325,9 @@
                     );
 
                     for(var i=0; i<(response['detalhes'].length);i++){
-                        $("#table_modal_prod tbody").append(
+                        $("#produtos_detalhes").append(
+                            '<table id="table_det_ite'+i+'" class="table">'+
+                            '<tbody>'+
                             '<tr>' +
                             '<td><strong>Produto: </strong></td>' +
                             '<td>' +response['detalhes'][i].prod_nome + '</td>' +
@@ -340,27 +343,15 @@
                             '<tr>' +
                             '<td><strong>Valor(R$): </strong></td>' +
                             '<td>' +response['detalhes'][i].ite_ped_valor+ '</td>' +
-                            '</tr>'
-                            +'<tr><td>&nbsp;</td><td>&nbsp;</td></tr>'
+                            '</tr>'+
+                            '</tbody>'
+                            // +'<tr><td>&nbsp;</td><td>&nbsp;</td></tr>'
+                            +'</table>'
                         );
-                        if(response['pedido'][0].det_cal_codigo !== null){
-                            // $("#table_modal_prod tbody").append(
-                            //     '<tr>' +
-                            //         '<td><strong>Passadores: </strong>' +
-                            //         '' +(response['detalhes'][i].det_cal_passadores===1? "Sim":"Não")+ ' - ' +
-                            //         '<strong>Elástico: </strong>' +
-                            //         '' +(response['detalhes'][i].det_cal_elastico===1? "Sim":"Não") + ' - ' +
-                            //         '<strong>Bolso Frente: </strong>' +
-                            //         '' +(response['detalhes'][i].det_cal_bolso_frente===1? "Sim":"Não") + ' - ' +
-                            //         '<strong>Bolso Costas: </strong>' +
-                            //         '' +(response['detalhes'][i].det_cal_bolso_costas===1? "Sim":"Não") + ' - ' +
-                            //         '<strong>Refletiva: </strong>' +
-                            //         '' +(response['detalhes'][i].det_cal_refletiva==1? "Sim":"Não") + '</td>' +
-                            //     '</tr>'+
-                            //     '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>'
-                            // );
-                            $("#table_modal_prod tbody").append(
-                                '<tr>' +
+                        if(response['pedido'][i].det_cal_codigo !== null && response['pedido'][i].det_cam_codigo === null){
+                            $("#produtos_detalhes").append(
+                                '<table id="table_det_cal'+i+'" class="table">' +
+                                '<tbody><tr>'+
                                     '<td><strong>Passadores: </strong></td>' +
                                     '<td>' +(response['detalhes'][i].det_cal_passadores===1? "Sim":"Não")+ '</td>' +
                                     '<td><strong>Elástico: </strong></td>' +
@@ -372,40 +363,85 @@
                                     '<td><strong>Refletiva: </strong></td>' +
                                     '<td>' +(response['detalhes'][i].det_cal_refletiva==1? "Sim":"Não") + '</td>' +
                                 '</tr>'+
-                                '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>'
+                                '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>'+
+                                '<tbody>'+'</table>'
                             );
                         } 
-                        //else if((response['pedido'][0].det_cal_codigo === null) &&(response['pedido'][0].det_cam_codigo !== null)){
-                        //     $("#table_modal_prod tbody").append(
-                        //         '<tr>' +
-                        //         '<td><strong>Passadores: </strong></td>' +
-                        //         '<td>' +response['detalhes'][i].det_cal_passadores===1? "Sim":"Não" + '</td>' +
-                        //         '</tr>' +
-                        //         '<tr>' +
-                        //         '<td><strong>Elástico: </strong></td>' +
-                        //         '<td>' +response['detalhes'][i].det_cal_elastico===1? "Sim":"Não" + '</td>' +
-                        //         '</tr>' +
-                        //         '<tr>' +
-                        //         '<td><strong>Bolso Frente: </strong></td>' +
-                        //         '<td>' +response['detalhes'][i].det_cal_bolso_frente===1? "Sim":"Não" + '</td>' +
-                        //         '</tr>' +
-                        //         '<tr>' +
-                        //         '<td><strong>Bolso Costas: </strong></td>' +
-                        //         '<td>' +response['detalhes'][i].det_cal_bolso_costas===1? "Sim":"Não" + '</td>' +
-                        //         '</tr>' +
-                        //         '<tr>' +
-                        //         '<td><strong>Refletiva: </strong></td>' +
-                        //         '<td>' +response['detalhes'][i].det_cal_refletiva==1? "Sim":"Não" + '</td>' +
-                        //         '</tr>' +
-                        //         '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>'
-                        //     );
-                        // }
+                        else if(response['pedido'][i].det_cam_codigo !== null && response['pedido'][i].det_cal_codigo === null){
+                            $("#produtos_detalhes").append(
+                                '<table id="table_det_cam'+i+'" class="table">' +
+                                '<tbody><tr>'+
+                                '<td><strong>Tipo Manga: </strong></td>' +
+                                '<td>' +auxiliar("det_cam_manga_tipo",response,i)+ '</td>' +
+                                '</tr>' +
+                                '<tr>' +
+                                '<td><strong>Tamanho Manga: </strong></td>' +
+                                '<td>' +auxiliar("det_cam_manga_tamanho",response,i)+ '</td>' +
+                                '</tr>' +
+                                '<tr>' +
+                                '<td><strong>Cor Manga: </strong></td>' +
+                                '<td>' +auxiliar("det_cam_manga_cor",response,i)+ '</td>' +
+                                '</tr>' +
+                                '<tr>' +
+                                '<td><strong>Galão: </strong></td>' +
+                                '<td>' +response['detalhes'][i].det_cam_manga_galao===1? "Sim":"Não" + '</td>' +
+                                '</tr>' +
+                                '<tr>' +
+                                '<td><strong>Gola: </strong></td>' +
+                                '<td>' +auxiliar("det_cam_gola_tipo",response,i) + '</td>' +
+                                '</tr>' +
+                                '<tr>' +
+                                '<td><strong>Decote: </strong></td>' +
+                                '<td>' +auxiliar("det_cam_gola_decote",response,i)+ '</td>' +
+                                '</tr>' +
+                                '<tr>' +
+                                '<td><strong>Refletiva: </strong></td>' +
+                                '<td>' +response['detalhes'][i].det_cam_bolso_frente==1? "Sim":"Não" + '</td>' +
+                                '</tr>' +
+                                '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>'+
+                                '<tbody>'+'</table>'
+                            );
+                        }
                         
                     }
                 }
 
             }
         });
+    }
+
+    function auxiliar(value, response,i){
+        if(value==="det_cam_manga_tipo"){
+            var aux = response['detalhes'][i].det_cam_manga_tipo;
+            if(aux===0)
+                return "Padrão";
+            else if(aux===1)
+                return "Raglã";
+            else if(aux===2)
+                return "Regata";
+            else if(aux===2)
+                return "Machão";
+        }else if(value==="det_cam_manga_tamanho"){
+            var aux = response['detalhes'][i].det_cam_manga_tamanho;
+            if(aux===0)
+                return "Curta";
+            else if(aux===1)
+                return "Longa";
+        }else if(value==="det_cam_gola_tipo"){
+            var aux = response['detalhes'][i].det_cam_gola_tipo;
+            if(aux===0)
+                return "Viés";
+            else if(aux===1)
+                return "Ribana";
+            else if(aux===2)
+                return "Polo";
+        }else if(value==="det_cam_gola_decote"){
+            var aux = response['detalhes'][i].det_cam_manga_tamanho;
+            if(aux===0)
+                return "Redondo";
+            else if(aux===1)
+                return "Vê";
+        }
     }
 
     function fetchRecords(id) {

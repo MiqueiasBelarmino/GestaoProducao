@@ -66,8 +66,8 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="email">E-mail:</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Escreva..." 
-                        value="@if(isset($funcionario)){{$funcionario->fun_email}}@endif" required>
+                        <input type="email" name="email" id="email" class="form-control" 
+                        @if(isset($funcionario)) value="{{$funcionario->fun_email}}" @endif required>
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@
                     <div class="form-group">
                         <label for="comissao">Comissão:</label>
                         <input type="number" step="0.5" min="0" max="100" name="comissao" id="comissao" class="form-control" 
-                        value="@if(isset($funcionario)){{$funcionario->fun_comissao}}@endif" required>
+                        @if(isset($funcionario)) value="{{$funcionario->fun_comissao}}" @endif required>
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@
                     <div class="form-group">
                         <label for="telefone">Telefone:</label>
                         <input type="text" name="telefone" id="telefone" class="telefone form-control" placeholder="(XX) XXXXXXXX" 
-                        value="@if(isset($funcionario)){{$funcionario->fun_telefone}}@endif" required>
+                        @if(isset($funcionario)) value="{{$funcionario->fun_telefone}}" @endif required>
                     </div>
                 </div>
             </div>
@@ -103,8 +103,8 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label for="data_admissao">Data Admissão:</label>
-                        <input type="date" name="data_admissao" id="data_admissao" class="form-control" placeholder="Escreva..." 
-                        value="@if(isset($funcionario)){{$funcionario->fun_data_admissao}}@endif" required>
+                        <input type="date" name="data_admissao" id="data_admissao" class="form-control" 
+                        @if(isset($funcionario)) value="{{$funcionario->fun_data_admissao}}" @endif required>
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -115,8 +115,7 @@
                             <input type="text" name="senha" id="senha" class="form-control" 
                              required disabled>
                         @else
-                            <input type="text" name="senha" id="senha" class="form-control" placeholder="Escreva..." 
-                             required>
+                            <input type="text" name="senha" id="senha" class="form-control" required>
                         @endif
                     </div>
                 </div>
@@ -124,15 +123,15 @@
                         <!-- text input -->
                         <div class="form-group">
                             <label for="rua">Rua:</label>
-                            <input type="text" name="rua" id="rua" class="form-control" placeholder="Escreva..." 
-                            value="@if(isset($endereco)){{$endereco->end_rua}}@endif" required>
+                            <input type="text" name="rua" id="rua" class="form-control" 
+                            @if(isset($endereco)) value="{{$endereco->end_rua}}" @endif required>
                         </div>
                     </div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label for="numero">Número:</label>
-                        <input type="text" name="numero" id="numero" class="form-control" placeholder="Escreva..." 
-                        value="@if(isset($endereco)){{$endereco->end_numero}}@endif" required>
+                        <input type="text" name="numero" id="numero" class="form-control"  
+                        @if(isset($endereco)) value="{{$endereco->end_numero}}" @endif required>
                     </div>
                 </div>
             </div>
@@ -142,8 +141,8 @@
                         <!-- text input -->
                         <div class="form-group">
                             <label for="bairro">Bairro:</label>
-                            <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Escreva..." 
-                            value="@if(isset($endereco)){{$endereco->end_bairro}}@endif" required>
+                            <input type="text" name="bairro" id="bairro" class="form-control"  
+                            @if(isset($endereco)) value="{{$endereco->end_bairro}}" @endif required>
                         </div>
                     </div>
 
@@ -151,16 +150,17 @@
                         <!-- text input -->
                         <div class="form-group">
                             <label for="cidade">Cidade:</label>
-                            <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Escreva..." 
-                            value="@if(isset($endereco)){{$endereco->end_cidade}}@endif" required>
+                            <input type="text" name="cidade" id="cidade" class="form-control" 
+                            @if(isset($endereco)) value="{{$endereco->end_cidade}}" @endif required>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <!-- text input -->
                         <div class="form-group">
                             <label for="cep">CEP:</label>
-                            <input type="text" name="cep" id="cep" class="form-control" placeholder="Escreva..." 
-                            value="@if(isset($endereco)){{$endereco->end_cep}}@endif" onkeypress="$(this).mask('00000-000');" required>
+                            <input type="text" name="cep" id="cep" class="form-control" 
+                            @if(isset($endereco)) value="{{$endereco->end_cep}}" @endif
+                            onkeypress="$(this).mask('00000-000');" required>
                         </div>
                     </div>
 
@@ -168,8 +168,9 @@
                         <!-- text input -->
                         <div class="form-group">
                             <label for="estado">Estado:</label>
-                            <input type="text" name="estado" id="estado" class="form-control" placeholder="Escreva..." 
-                            value="@if(isset($endereco)){{$endereco->end_estado}}@endif" onkeypress="$(this).mask('AA');" required>
+                            <input type="text" name="estado" id="estado" class="form-control" 
+                            @if(isset($endereco)) value="{{$endereco->end_estado}}" @endif
+                            onkeypress="$(this).mask('AA');" required>
                         </div>
                     </div>
 
@@ -178,13 +179,17 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="observacao">Observação (Funcionário):</label>
-                        <textarea class="form-control" name="observacao" id="observacao" rows="2" placeholder="Escreva...">@if(isset($funcionario)){{$funcionario->fun_observacao}}@endif</textarea>
+                        <textarea class="form-control" name="observacao" id="observacao" rows="2">
+                        @if(isset($funcionario)){{$funcionario->fun_observacao}}@endif
+                        </textarea>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="observacao_end">Observação (Endereço):</label>
-                        <textarea class="form-control" name="observacao_end" id="observacao_end" rows="2" placeholder="Escreva...">@if(isset($endereco)){{$endereco->end_observacao}}@endif</textarea>
+                        <textarea class="form-control" name="observacao_end" id="observacao_end" rows="2">
+                        @if(isset($endereco)){{$endereco->end_observacao}}@endif
+                        </textarea>
                     </div>
                 </div>
             </div>

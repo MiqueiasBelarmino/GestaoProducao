@@ -103,7 +103,8 @@
                             <!-- FIM TABLE PEDIDO -->
                             <br />
                             <!-- INÍCIO TABLE PRODUTOS -->
-                            <table id="table_modal_prod" class="table">
+                            <div class="" id="produtos_detalhes"></div>
+                            <!-- <table id="table_modal_prod" class="table"> -->
                                 <!-- <thead>
                                     <tr class="">
                                         <th class="">Produto</th>
@@ -112,10 +113,10 @@
                                         <th class="">Valor(R$)</th>
                                     </tr>
                                 </thead> -->
-                                <tbody>
-                                    
+                                <!-- <tbody>
+
                                 </tbody>
-                            </table>
+                            </table> -->
                             <!-- FIM TABLE PRODUTOS -->
                         </div>
                         <div class="modal-footer">
@@ -125,7 +126,7 @@
                 </div>
             </div><!-- FIM MODAL PEDIDO-->
 
-
+            
             <div class="col-sm-12">
                 <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                     <div class="row">
@@ -161,12 +162,14 @@
                                         <td>{{$historico->prazo}} dias</td>
                                         <td>{{$historico->proc_nome}}</td>
                                         <td>
-                                            <a @if($historico->proc_nome == "Compra") href="{{url('producao/'.$historico->ped_codigo.'/materiais')}}" enabled @else disabled @endif class="btn btn-primary">
+                                            <a @if($historico->proc_nome == "Compra")
+                                                href="{{url('producao/'.$historico->ped_codigo.'/materiais')}}" enabled
+                                                @else disabled @endif class="btn btn-primary">
                                                 <!-- Editar -->
                                                 <i class="fa fa-cart-plus"></i>
                                             </a>
                                             <a class="btn btn-success view_data" data-toggle="modal"
-                                                data-target="#modalHistorico" id="{{$historico->ped_codigo}}">
+                                                data-target="#modalHistorico" id=" {{$historico->ped_codigo}}">
                                                 <i class="fas fa-history"></i>
                                             </a>
                                             <a href="{{url('producao/'.$historico->his_pro_codigo.'')}}"
@@ -193,4 +196,5 @@
         <!-- </form> -->
     </div>
 </div>
+
 @stop

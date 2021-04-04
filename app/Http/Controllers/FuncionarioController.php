@@ -54,6 +54,8 @@ class FuncionarioController extends Controller
     public function novo($id = null)
     {
         $funcionario = Funcionario::find($id);
+        $endereco = "";
+        $cargos = Cargo::pluck('car_nome', 'car_codigo');
         if ($id != null) {
             //$endereco = Funcionario::find($id)->enderecos()->get();
             $temp = DB::table('enderecos')
@@ -64,10 +66,12 @@ class FuncionarioController extends Controller
                 ->get();
             // dd($endereco);
             $endereco = $temp[0];
+            return view('admin.funcionario.novo', compact('cargos', 'funcionario', 'endereco'));
         }
         //Endereco::where('fun_codigo', $id)->get()->first();
-        $cargos = Cargo::pluck('car_nome', 'car_codigo');
-        return view('admin.funcionario.novo', compact('car_codigo', 'cargos', 'funcionario', 'endereco'));
+        
+        // return view('admin.funcionario.novo', compact('car_codigo', 'cargos', 'funcionario', 'endereco'));
+        return view('admin.funcionario.novo', compact('cargos', 'funcionario'));
     }
 
     public function endereco($id = null)

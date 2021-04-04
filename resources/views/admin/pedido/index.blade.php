@@ -12,6 +12,59 @@
         @include('includes.alerts')
         @include('includes.functions')
         <form method="POST" action="" class="form form-inline">
+        <!-- INÍCIO MODAL PEDIDO-->
+        <div id="modalPedido" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Detalhes do Pedido</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <!-- INÍCIO TABLE PEDIDO -->
+                            <table id="table_modal_pedido" class="table_modal table table-bordered table-hover">
+                                <thead>
+                                    <tr class="tr">
+                                        <th class="th">#</th>
+                                        <th class="th">Cliente</th>
+                                        <th class="th">Total(R$)</th>
+                                        <th class="th">Data Pedido</th>
+                                        <th class="th">Data Aprovação</th>
+                                        <th class="th">Data Entrega</th>
+                                        <th class="th">Status Pagamento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <!-- FIM TABLE PEDIDO -->
+                            <br />
+                            <!-- INÍCIO TABLE PRODUTOS -->
+                            <div class="" id="produtos_detalhes"></div>
+                            <!-- <table id="table_modal_prod" class="table"> -->
+                                <!-- <thead>
+                                    <tr class="">
+                                        <th class="">Produto</th>
+                                        <th class="">Quantidade</th>
+                                        <th class="">Cor</th>
+                                        <th class="">Valor(R$)</th>
+                                    </tr>
+                                </thead> -->
+                                <!-- <tbody>
+
+                                </tbody>
+                            </table> -->
+                            <!-- FIM TABLE PRODUTOS -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- FIM MODAL PEDIDO-->
             {!! csrf_field()!!}
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
@@ -42,10 +95,13 @@
                                     <td>{{dateFormat($pedido->ped_data_aprovacao)}}</td>
                                     <td>{{dateFormat($pedido->ped_data_entrega)}}</td>
                                     <td>
-                                        <a href="{{url('pedido/'.$pedido->ped_codigo.'/historico')}}" class="btn btn-primary">
-                                            <!-- Editar -->
+                                        <!-- <a href="{{url('pedido/'.$pedido->ped_codigo.'/historico')}}" class="btn btn-primary">
                                             <i class="fa fa-bars"></i>
-                                        </a>
+                                        </a> -->
+                                            <a class="btn btn-success view_pedido" data-toggle="modal"
+                                                data-target="#modalPedido" id=" {{$pedido->ped_codigo}}">
+                                                <i class="fas fa-bars"></i>
+                                            </a>
                                         <a href="{{url('pedido/'.$pedido->ped_codigo.'/deletar')}}" class="btn btn-danger">
                                             <!-- Deletar -->
                                             <i class="fa fa-trash"></i>
